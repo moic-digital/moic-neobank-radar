@@ -8,7 +8,7 @@ export function safeJsonLdStringify(data: unknown): string {
 }
 
 export const BASE_URL = "https://neobanksradar.com"
-export const SITE_NAME = "Neobanks Radar"
+export const SITE_NAME = "Neobank Radar"
 export const DEFAULT_DESCRIPTION =
   "Compare fees, cashback, perks and custody models across 40+ crypto debit and credit cards. Find the best neobank card for your needs."
 
