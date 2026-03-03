@@ -17,9 +17,10 @@ const WEBHOOK_URL =
   "https://hook.us2.make.com/9yw7vlvqzgns7c0tcara5pyfjmekekep"
 
 interface FormData {
-  readonly name: string
+  readonly contactName: string
   readonly email: string
   readonly telegram: string
+  readonly neobankName: string
   readonly site: string
   readonly founded: string
   readonly cashbackMax: string
@@ -29,9 +30,10 @@ interface FormData {
 }
 
 const INITIAL_FORM: FormData = {
-  name: "",
+  contactName: "",
   email: "",
   telegram: "",
+  neobankName: "",
   site: "",
   founded: "",
   cashbackMax: "",
@@ -87,6 +89,9 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
 
   const labelClasses = "block text-xs font-medium text-white/50 mb-1.5"
 
+  const sectionHeadingClasses =
+    "text-sm font-semibold text-white/70 tracking-wide uppercase mb-3 w-full"
+
 
   return (
     <div
@@ -112,107 +117,130 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
-          <div>
-            <label className={labelClasses}>Name</label>
-            <input
-              type="text"
-              placeholder="Neobank name"
-              className={inputClasses}
-              value={form.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="px-6 py-5 space-y-6">
+          {/* Section 1: Contact Info */}
+          <fieldset className="space-y-4">
+            <legend className={sectionHeadingClasses}>Contact Info</legend>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className={labelClasses}>E-mail</label>
-              <input
-                type="email"
-                placeholder="contact@example.com"
-                className={inputClasses}
-                value={form.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-              />
-            </div>
-            <div>
-              <label className={labelClasses}>Telegram contact</label>
+              <label className={labelClasses}>Name</label>
               <input
                 type="text"
-                placeholder="@username"
+                placeholder="Your name"
                 className={inputClasses}
-                value={form.telegram}
-                onChange={(e) => handleChange("telegram", e.target.value)}
+                value={form.contactName}
+                onChange={(e) => handleChange("contactName", e.target.value)}
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className={labelClasses}>Site</label>
-              <input
-                type="url"
-                placeholder="https://example.com"
-                className={inputClasses}
-                value={form.site}
-                onChange={(e) => handleChange("site", e.target.value)}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>E-mail</label>
+                <input
+                  type="email"
+                  placeholder="contact@example.com"
+                  className={inputClasses}
+                  value={form.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>Telegram</label>
+                <input
+                  type="text"
+                  placeholder="@username"
+                  className={inputClasses}
+                  value={form.telegram}
+                  onChange={(e) => handleChange("telegram", e.target.value)}
+                />
+              </div>
             </div>
+          </fieldset>
+
+          <div className="border-t border-white/10" />
+
+          {/* Section 2: Neobank Info */}
+          <fieldset className="space-y-4">
+            <legend className={sectionHeadingClasses}>Neobank Info</legend>
+
             <div>
-              <label className={labelClasses}>Founded</label>
+              <label className={labelClasses}>Neobank name</label>
               <input
                 type="text"
-                placeholder="2023"
+                placeholder="Neobank name"
                 className={inputClasses}
-                value={form.founded}
-                onChange={(e) => handleChange("founded", e.target.value)}
+                value={form.neobankName}
+                onChange={(e) => handleChange("neobankName", e.target.value)}
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className={labelClasses}>Custody</label>
-              <FormDropdown
-                value={form.custody}
-                placeholder="Select..."
-                options={CUSTODY_OPTIONS}
-                onChange={(val) => handleChange("custody", val)}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>Site</label>
+                <input
+                  type="text"
+                  placeholder="example.com"
+                  className={inputClasses}
+                  value={form.site}
+                  onChange={(e) => handleChange("site", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>Founded</label>
+                <input
+                  type="text"
+                  placeholder="2023"
+                  className={inputClasses}
+                  value={form.founded}
+                  onChange={(e) => handleChange("founded", e.target.value)}
+                />
+              </div>
             </div>
-            <div>
-              <label className={labelClasses}>KYC</label>
-              <FormDropdown
-                value={form.kyc}
-                placeholder="Select..."
-                options={KYC_OPTIONS}
-                onChange={(val) => handleChange("kyc", val)}
-              />
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className={labelClasses}>Cashback max.</label>
-              <input
-                type="text"
-                placeholder="e.g. 8%"
-                className={inputClasses}
-                value={form.cashbackMax}
-                onChange={(e) => handleChange("cashbackMax", e.target.value)}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>Custody</label>
+                <FormDropdown
+                  value={form.custody}
+                  placeholder="Select..."
+                  options={CUSTODY_OPTIONS}
+                  onChange={(val) => handleChange("custody", val)}
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>KYC</label>
+                <FormDropdown
+                  value={form.kyc}
+                  placeholder="Select..."
+                  options={KYC_OPTIONS}
+                  onChange={(val) => handleChange("kyc", val)}
+                />
+              </div>
             </div>
-            <div>
-              <label className={labelClasses}>Supported currencies</label>
-              <input
-                type="text"
-                placeholder="USD, EUR, BTC..."
-                className={inputClasses}
-                value={form.currencies}
-                onChange={(e) => handleChange("currencies", e.target.value)}
-              />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>Cashback max.</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 8%"
+                  className={inputClasses}
+                  value={form.cashbackMax}
+                  onChange={(e) => handleChange("cashbackMax", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>Supported currencies</label>
+                <input
+                  type="text"
+                  placeholder="USD, EUR, BTC..."
+                  className={inputClasses}
+                  value={form.currencies}
+                  onChange={(e) => handleChange("currencies", e.target.value)}
+                />
+              </div>
             </div>
-          </div>
+          </fieldset>
 
           {/* Submit */}
           <div className="pt-2">
