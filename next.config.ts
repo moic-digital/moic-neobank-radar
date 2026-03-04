@@ -7,3 +7,6 @@ const nextConfig: NextConfig = {
 }
 
 export default nextConfig
+
+// Required for OpenNext Cloudflare dev mode
+import("@opennextjs/cloudflare").then((m) => m.initOpenNextCloudflareForDev())
