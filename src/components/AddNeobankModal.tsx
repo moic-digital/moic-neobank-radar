@@ -45,6 +45,7 @@ const INITIAL_FORM: FormData = {
 export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
   const [form, setForm] = useState<FormData>(INITIAL_FORM)
   const [submitting, setSubmitting] = useState(false)
+  const [showErrors, setShowErrors] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -63,8 +64,16 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
+  function isFormValid(): boolean {
+    return Object.values(form).every((v) => v.trim() !== "")
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!isFormValid()) {
+      setShowErrors(true)
+      return
+    }
     setSubmitting(true)
 
     try {
@@ -126,6 +135,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <label className={labelClasses}>Name</label>
               <input
                 type="text"
+                required
                 placeholder="Your name"
                 className={inputClasses}
                 value={form.contactName}
@@ -137,6 +147,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>E-mail</label>
                 <input
+                  required
                   type="email"
                   placeholder="contact@example.com"
                   className={inputClasses}
@@ -147,6 +158,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>Telegram</label>
                 <input
+                  required
                   type="text"
                   placeholder="@username"
                   className={inputClasses}
@@ -166,6 +178,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
             <div>
               <label className={labelClasses}>Neobank name</label>
               <input
+                required
                 type="text"
                 placeholder="Neobank name"
                 className={inputClasses}
@@ -178,6 +191,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>Site</label>
                 <input
+                  required
                   type="text"
                   placeholder="example.com"
                   className={inputClasses}
@@ -188,6 +202,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>Founded</label>
                 <input
+                  required
                   type="text"
                   placeholder="2023"
                   className={inputClasses}
@@ -205,6 +220,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
                   placeholder="Select..."
                   options={CUSTODY_OPTIONS}
                   onChange={(val) => handleChange("custody", val)}
+                  error={showErrors}
                 />
               </div>
               <div>
@@ -214,6 +230,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
                   placeholder="Select..."
                   options={KYC_OPTIONS}
                   onChange={(val) => handleChange("kyc", val)}
+                  error={showErrors}
                 />
               </div>
             </div>
@@ -222,6 +239,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>Cashback max.</label>
                 <input
+                  required
                   type="text"
                   placeholder="e.g. 8%"
                   className={inputClasses}
@@ -232,6 +250,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               <div>
                 <label className={labelClasses}>Supported currencies</label>
                 <input
+                  required
                   type="text"
                   placeholder="USD, EUR, BTC..."
                   className={inputClasses}
@@ -244,6 +263,11 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
 
           {/* Submit */}
           <div className="pt-2">
+            {showErrors && !isFormValid() && (
+              <p className="text-red-400 text-xs mb-3">
+                Please fill in all fields before submitting.
+              </p>
+            )}
             <button
               type="submit"
               disabled={submitting}

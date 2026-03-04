@@ -8,6 +8,7 @@ interface FormDropdownProps {
   readonly placeholder: string
   readonly options: readonly string[]
   readonly onChange: (value: string) => void
+  readonly error?: boolean
 }
 
 export default function FormDropdown({
@@ -15,6 +16,7 @@ export default function FormDropdown({
   placeholder,
   options,
   onChange,
+  error,
 }: FormDropdownProps) {
   const [open, setOpen] = useState(false)
   const [openUpward, setOpenUpward] = useState(false)
@@ -54,7 +56,9 @@ export default function FormDropdown({
         className={`flex items-center w-full px-4 py-3 bg-white/5 border rounded-xl text-sm transition-all cursor-pointer ${
           open
             ? "border-moic-blue shadow-[0_0_12px_rgba(42,96,251,0.2)]"
-            : "border-white/10"
+            : error && !value
+              ? "border-red-500"
+              : "border-white/10"
         } ${value ? "text-white" : "text-white/30"}`}
       >
         <span className="flex-1 text-left truncate">
