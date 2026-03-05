@@ -1,45 +1,13 @@
 import Image from "next/image"
-import LogoColumn, { getLogoColumns } from "@/components/LogoColumn"
+import LogoRain from "@/components/LogoRain"
 
-const COLUMNS = getLogoColumns(12)
-const LEFT_COLUMNS = COLUMNS.slice(0, 6)
-const RIGHT_COLUMNS = COLUMNS.slice(6)
-
-const LANE_CONFIG: readonly {
-  readonly animation: string
-  readonly delay: string
-}[] = [
-  { animation: "animate-scroll-down-1", delay: "0s" },
-  { animation: "animate-scroll-up-2", delay: "-6s" },
-  { animation: "animate-scroll-down-3", delay: "-3s" },
-  { animation: "animate-scroll-up-1", delay: "-10s" },
-  { animation: "animate-scroll-down-2", delay: "-1s" },
-  { animation: "animate-scroll-up-3", delay: "-8s" },
-  { animation: "animate-scroll-up-1", delay: "-5s" },
-  { animation: "animate-scroll-down-3", delay: "-12s" },
-  { animation: "animate-scroll-up-2", delay: "-2s" },
-  { animation: "animate-scroll-down-1", delay: "-9s" },
-  { animation: "animate-scroll-down-2", delay: "-4s" },
-  { animation: "animate-scroll-up-3", delay: "-11s" },
-]
-
-function LogoPanel({ columns, offset, side }: {
-  readonly columns: readonly { id: string; src: string }[][]
-  readonly offset: number
+function LogoPanel({ seed, side }: {
+  readonly seed: number
   readonly side: "left" | "right"
 }) {
   return (
     <div className="relative overflow-hidden h-full">
-      <div className={`flex h-full gap-2 ${side === "left" ? "justify-end" : "justify-start"}`}>
-        {columns.map((col, i) => (
-          <LogoColumn
-            key={`${side}-${i}`}
-            logos={col}
-            animation={LANE_CONFIG[offset + i].animation}
-            delay={LANE_CONFIG[offset + i].delay}
-          />
-        ))}
-      </div>
+      <LogoRain seed={seed} />
 
       {/* Fade toward center */}
       {side === "left" && (
@@ -61,7 +29,7 @@ export default function HeroSection() {
     <section className="relative grid grid-cols-1 md:grid-cols-[25%_50%_25%] h-auto md:h-[420px] overflow-hidden gap-0">
       {/* Left panel */}
       <div className="hidden md:block h-full overflow-hidden">
-        <LogoPanel columns={LEFT_COLUMNS} offset={0} side="left" />
+        <LogoPanel seed={7919} side="left" />
       </div>
 
       {/* Center content */}
@@ -93,7 +61,7 @@ export default function HeroSection() {
 
       {/* Right panel */}
       <div className="hidden md:block h-full overflow-hidden">
-        <LogoPanel columns={RIGHT_COLUMNS} offset={6} side="right" />
+        <LogoPanel seed={104729} side="right" />
       </div>
     </section>
   )

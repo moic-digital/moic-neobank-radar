@@ -19,7 +19,19 @@
   --animate-scroll-down-1: scroll-down 40s linear infinite;
   --animate-scroll-down-2: scroll-down 50s linear infinite;
   --animate-scroll-down-3: scroll-down 60s linear infinite;
+  --animate-rain-fall: rain-fall linear infinite;
+  --animate-rain-rise: rain-rise linear infinite;
   --animate-slide-up: slide-up 0.3s ease-out;
+
+  @keyframes rain-fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(700px); }
+  }
+
+  @keyframes rain-rise {
+    from { transform: translateY(0); }
+    to { transform: translateY(-700px); }
+  }
 
   @keyframes slide-up {
     from { transform: translateY(100%); opacity: 0; }
@@ -43,7 +55,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [class*="animate-scroll-"] {
+  [class*="animate-scroll-"],
+  [class*="animate-rain-"] {
     animation: none !important;
   }
 }
