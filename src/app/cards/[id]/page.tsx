@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import CardLogo from "@/components/CardLogo"
 import {
   ArrowLeft,
   ExternalLink,
@@ -263,13 +264,12 @@ export default async function CardPage({ params }: CardPageProps) {
       <article className="space-y-8 sm:space-y-10">
         {/* Block 2 - Identity */}
         <section aria-label="Card identity" className="flex items-start gap-4 sm:gap-6">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-            <img
-              src={card.logo}
-              alt={`${card.name} logo - ${card.issuer} ${card.type} card`}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <CardLogo
+            src={card.logo}
+            alt={`${card.name} logo - ${card.issuer} ${card.type} card`}
+            issuer={card.issuer}
+            size="lg"
+          />
           <div className="min-w-0">
             <p className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest">
               {card.issuer}

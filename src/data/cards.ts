@@ -103,7 +103,7 @@ export const cards: readonly CardData[] = [
     airdropFarming: "",
   },
   {
-    id: "Kripicard",
+    id: "kripicard-card",
     name: "Premium",
     issuer: "Kripicard",
     logo: logoUrl("kripicard"),
@@ -1052,7 +1052,7 @@ export const cards: readonly CardData[] = [
     airdropFarming: "",
   },
   {
-    id: "ready-lite",
+    id: "ready-card",
     name: "Ready Lite",
     issuer: "Ready",
     logo: logoUrl("Ready"),

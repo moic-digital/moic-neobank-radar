@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { CardData } from "@/types/card"
+import CardLogo from "@/components/CardLogo"
 
 interface CryptoCardProps {
   readonly card: CardData
@@ -28,17 +29,12 @@ export default function CryptoCard({ card }: CryptoCardProps) {
 
         {/* Top: Logo + Name */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center shrink-0">
-            <img
-              src={card.logo}
-              alt={card.issuer}
-              className="w-full h-full object-cover rounded-full"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                target.style.display = "none"
-              }}
-            />
-          </div>
+          <CardLogo
+            src={card.logo}
+            alt={card.issuer}
+            issuer={card.issuer}
+            size="sm"
+          />
           <div className="flex-1 min-w-0">
             <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
               {card.name}

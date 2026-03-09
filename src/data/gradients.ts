@@ -16,7 +16,7 @@ export const cardStyles: Readonly<Record<string, CardStyle>> = {
     cardGradient: "from-[#F0B90B] to-[#F8D33A]",
     tierColor: "text-black",
   },
-  "Kripicard": {
+  "kripicard-card": {
     cardGradient: "from-[#121214] to-[#1F1F1F]",
     tierColor: "text-orange-400",
   },
@@ -132,7 +132,7 @@ export const cardStyles: Readonly<Record<string, CardStyle>> = {
     cardGradient: "from-red-600 to-red-700",
     tierColor: "text-white",
   },
-  "ready-lite": {
+  "ready-card": {
     cardGradient: "from-[#F36A3D] to-[#FF875B]",
     tierColor: "text-black",
   },

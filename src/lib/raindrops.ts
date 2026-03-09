@@ -36,23 +36,42 @@ function lerp(min: number, max: number, t: number): number {
 
 const ALL_LOGO_SRCS: readonly string[] = Object.values(cardLogos)
 
+function seededShuffle(arr: readonly string[], rng: () => number): string[] {
+  const result = [...arr]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1))
+    const temp = result[i]
+    result[i] = result[j]
+    result[j] = temp
+  }
+  return result
+}
+
 function generateColumn(rng: () => number): readonly ColumnLogo[] {
   const logos: ColumnLogo[] = []
   let cumulativeDelay = 0
   const maxSizeTime = (SIZE_MAX + LOGO_GAP_PX) / SPEED
 
+  let shuffled = seededShuffle(ALL_LOGO_SRCS, rng)
+  let cursor = 0
+
   while (cumulativeDelay + maxSizeTime < RAIN_DURATION) {
-    const logoIndex = Math.floor(rng() * ALL_LOGO_SRCS.length)
+    if (cursor >= shuffled.length) {
+      shuffled = seededShuffle(ALL_LOGO_SRCS, rng)
+      cursor = 0
+    }
+
     const size = Math.round(lerp(SIZE_MIN, SIZE_MAX, rng()))
     const extraDelay = lerp(EXTRA_DELAY_MIN, EXTRA_DELAY_MAX, rng())
     const minTimeToPass = (size + LOGO_GAP_PX) / SPEED
 
     logos.push({
-      src: ALL_LOGO_SRCS[logoIndex],
+      src: shuffled[cursor],
       size,
       delay: parseFloat(cumulativeDelay.toFixed(1)),
     })
 
+    cursor += 1
     cumulativeDelay += minTimeToPass + extraDelay
   }
 

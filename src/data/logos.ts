@@ -2,7 +2,7 @@ export const cardLogos: Readonly<Record<string, string>> = {
   "nexo-card": "/logos/Nexo.jpg",
   "coinbase-card": "/logos/Coinbase.png",
   "binance-card": "/logos/Binance.jpg",
-  "Kripicard": "/logos/Kripicard.jpg",
+  "kripicard-card": "/logos/Kripicard.jpg",
   "cdc-visa": "/logos/cryptocom.jpg",
   "bybit-card": "/logos/ByBit.jpg",
   "kast-card": "/logos/Kast.jpg",
@@ -31,7 +31,7 @@ export const cardLogos: Readonly<Record<string, string>> = {
   "oobit-card": "/logos/oobit.jpg",
   "plutus-card": "/logos/plutus.jpg",
   "deblock-card": "/logos/deblock.jpg",
-  "ready-lite": "/logos/ready.jpg",
+  "ready-card": "/logos/ready.jpg",
   "tapx-card": "/logos/tapx.jpg",
   "fiat24-card": "/logos/fiat24.jpg",
   "thorwallet-card": "/logos/THORWalet.jpg",
@@ -41,6 +41,7 @@ export const cardLogos: Readonly<Record<string, string>> = {
   "imtoken-card": "/logos/imtoken.jpg",
   "tokenpocket-card": "/logos/tokenpocket.jpg",
   "bitgetwallet-card": "/logos/bitgetwallet.jpg",
+  "pexx-card": "/logos/pexx.jpg",
 }
 
 export function getCardLogo(cardId: string): string {
