@@ -3,12 +3,9 @@ import { cardLogos } from "@/data/logos"
 export const RAIN_DURATION = 18
 const RAIN_DISTANCE = 700
 const COLUMN_COUNT = 10
-const LOGO_GAP_PX = 10
-const EXTRA_DELAY_MIN = 0.2
-const EXTRA_DELAY_MAX = 1.0
+const LOGO_SIZE = 44
+const GAP = 4
 const SPEED = RAIN_DISTANCE / RAIN_DURATION
-const SIZE_MIN = 36
-const SIZE_MAX = 50
 
 export interface ColumnLogo {
   readonly src: string
@@ -50,29 +47,25 @@ function seededShuffle(arr: readonly string[], rng: () => number): string[] {
 function generateColumn(rng: () => number): readonly ColumnLogo[] {
   const logos: ColumnLogo[] = []
   let cumulativeDelay = 0
-  const maxSizeTime = (SIZE_MAX + LOGO_GAP_PX) / SPEED
+  const timePerLogo = (LOGO_SIZE + GAP) / SPEED
 
   let shuffled = seededShuffle(ALL_LOGO_SRCS, rng)
   let cursor = 0
 
-  while (cumulativeDelay + maxSizeTime < RAIN_DURATION) {
+  while (cumulativeDelay + timePerLogo < RAIN_DURATION) {
     if (cursor >= shuffled.length) {
       shuffled = seededShuffle(ALL_LOGO_SRCS, rng)
       cursor = 0
     }
 
-    const size = Math.round(lerp(SIZE_MIN, SIZE_MAX, rng()))
-    const extraDelay = lerp(EXTRA_DELAY_MIN, EXTRA_DELAY_MAX, rng())
-    const minTimeToPass = (size + LOGO_GAP_PX) / SPEED
-
     logos.push({
       src: shuffled[cursor],
-      size,
+      size: LOGO_SIZE,
       delay: parseFloat(cumulativeDelay.toFixed(1)),
     })
 
     cursor += 1
-    cumulativeDelay += minTimeToPass + extraDelay
+    cumulativeDelay += timePerLogo
   }
 
   return logos

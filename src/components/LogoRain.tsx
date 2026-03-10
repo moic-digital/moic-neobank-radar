@@ -1,65 +1,98 @@
 "use client"
 
 import { useMemo } from "react"
-import { generateRainColumns, RAIN_DURATION } from "@/lib/raindrops"
-import type { RainColumn } from "@/lib/raindrops"
+import { cardLogos } from "@/data/logos"
 
 interface LogoRainProps {
   readonly seed: number
 }
 
+const ALL_LOGOS = Object.values(cardLogos)
+const COLUMN_COUNT = 10
+
 const COLUMN_VISIBILITY: readonly string[] = [
-  "",                  // 0: always visible
-  "",                  // 1: always visible
-  "",                  // 2: always visible
-  "hidden lg:block",   // 3: lg+
-  "hidden lg:block",   // 4: lg+
-  "hidden xl:block",   // 5: xl+
-  "hidden xl:block",   // 6: xl+
-  "hidden 2xl:block",  // 7: 2xl+
-  "hidden 2xl:block",  // 8: 2xl+
-  "hidden 2xl:block",  // 9: 2xl+
+  "",
+  "",
+  "",
+  "hidden lg:block",
+  "hidden lg:block",
+  "hidden xl:block",
+  "hidden xl:block",
+  "hidden 2xl:block",
+  "hidden 2xl:block",
+  "hidden 2xl:block",
 ]
 
-function RainColumnView({ column, index }: {
-  readonly column: RainColumn
-  readonly index: number
+const SCROLL_SPEEDS: readonly string[] = [
+  "70s", "80s", "76s", "84s", "72s",
+  "88s", "74s", "82s", "78s", "86s",
+]
+
+function seededShuffle(arr: readonly string[], seed: number): string[] {
+  const result = [...arr]
+  let s = seed
+  for (let i = result.length - 1; i > 0; i--) {
+    s = (s * 16807) % 2147483647
+    const j = s % (i + 1)
+    const temp = result[i]
+    result[i] = result[j]
+    result[j] = temp
+  }
+  return result
+}
+
+function ScrollColumn({ logos, direction, speed, visibility }: {
+  readonly logos: readonly string[]
+  readonly direction: "up" | "down"
+  readonly speed: string
+  readonly visibility: string
 }) {
-  const visibility = COLUMN_VISIBILITY[index] ?? ""
+  const items = [...logos, ...logos]
 
   return (
-    <div className={`relative h-full min-w-0 flex-1 overflow-hidden ${visibility}`}>
-      {column.logos.map((logo, i) => (
-        <img
-          key={i}
-          src={logo.src}
-          alt=""
-          width={logo.size}
-          height={logo.size}
-          loading="eager"
-          className={`absolute left-1/2 max-w-full will-change-transform rounded-lg object-cover border border-white/10 ${column.direction === "down" ? "animate-rain-fall" : "animate-rain-rise"}`}
-          style={{
-            width: logo.size,
-            height: logo.size,
-            marginLeft: -logo.size / 2,
-            top: column.direction === "down" ? -logo.size : undefined,
-            bottom: column.direction === "up" ? -logo.size : undefined,
-            animationDuration: `${RAIN_DURATION}s`,
-            animationDelay: `${-(column.initialDelay + logo.delay)}s`,
-          }}
-        />
-      ))}
+    <div className={`flex-1 min-w-0 overflow-hidden ${visibility}`}>
+      <div
+        className={`flex flex-col gap-1 will-change-transform ${
+          direction === "up" ? "animate-scroll-up-1" : "animate-scroll-down-1"
+        }`}
+        style={{
+          animationDuration: speed,
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
+        }}
+      >
+        {items.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            loading="eager"
+            className="w-full aspect-square rounded-md object-cover border border-white/10 shrink-0"
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
 export default function LogoRain({ seed }: LogoRainProps) {
-  const columns = useMemo(() => generateRainColumns(seed), [seed])
+  const columns = useMemo(() =>
+    Array.from({ length: COLUMN_COUNT }, (_, i) =>
+      seededShuffle(ALL_LOGOS, seed + i * 7919)
+    ),
+    [seed]
+  )
 
   return (
     <div className="flex h-full w-full gap-1 overflow-hidden">
-      {columns.map((col, i) => (
-        <RainColumnView key={`${seed}-${i}`} column={col} index={i} />
+      {columns.map((logos, i) => (
+        <ScrollColumn
+          key={`${seed}-${i}`}
+          logos={logos}
+          direction={i % 2 === 0 ? "up" : "down"}
+          speed={SCROLL_SPEEDS[i]}
+          visibility={COLUMN_VISIBILITY[i] ?? ""}
+        />
       ))}
     </div>
   )
