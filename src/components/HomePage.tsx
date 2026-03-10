@@ -6,6 +6,9 @@ import { matchesRegion } from "@/utils/regions"
 import HeroSection from "@/components/HeroSection"
 import CryptoCard from "@/components/CryptoCard"
 import FilterBar from "@/components/FilterBar"
+import FaqSection from "@/components/FaqSection"
+import Footer from "@/components/Footer"
+import { FAQ_CATEGORIES } from "@/data/faq"
 
 interface HomePageProps {
   readonly cards: readonly CardData[]
@@ -91,7 +94,7 @@ export default function HomePage({ cards }: HomePageProps) {
   }, [cards, filters, sort])
 
   return (
-    <div className="min-h-screen bg-moic-navy selection:bg-moic-blue selection:text-white">
+    <div id="top" className="min-h-screen bg-moic-navy selection:bg-moic-blue selection:text-white">
       <HeroSection />
 
       <main className="px-4 sm:px-6 md:px-8 pb-12 bg-moic-navy">
@@ -123,6 +126,10 @@ export default function HomePage({ cards }: HomePageProps) {
           )}
         </div>
       </main>
+
+      <FaqSection categories={FAQ_CATEGORIES} />
+
+      <Footer />
     </div>
   )
 }

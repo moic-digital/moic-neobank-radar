@@ -1,4 +1,5 @@
 import type { CardData } from "@/types/card"
+import type { FaqItem } from "@/types/faq"
 
 export function safeJsonLdStringify(data: unknown): string {
   return JSON.stringify(data)
@@ -141,6 +142,21 @@ export function buildBreadcrumbJsonLd(cardName: string, cardId: string) {
         item: `${BASE_URL}/cards/${cardId}`,
       },
     ],
+  }
+}
+
+export function buildFAQPageJsonLd(items: readonly FaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   }
 }
 

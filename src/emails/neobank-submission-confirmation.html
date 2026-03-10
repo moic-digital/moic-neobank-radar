@@ -23,20 +23,6 @@
     img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
     body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; }
 
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark) {
-      .email-bg { background-color: #040612 !important; }
-      .card-bg { background-color: #0A0E24 !important; }
-      .text-main { color: #FFFFFF !important; }
-      .text-secondary { color: rgba(255,255,255,0.8) !important; }
-      .text-muted { color: rgba(255,255,255,0.75) !important; }
-      .text-footer { color: rgba(255,255,255,0.35) !important; }
-      .text-footer-sub { color: rgba(255,255,255,0.25) !important; }
-      .callout-bg { background-color: rgba(42,96,251,0.08) !important; }
-      .border-footer { border-top-color: rgba(255,255,255,0.06) !important; }
-      .link-footer { color: rgba(255,255,255,0.35) !important; }
-    }
-
     /* Mobile */
     @media only screen and (max-width: 600px) {
       .email-container { width: 100% !important; max-width: 100% !important; }
@@ -67,12 +53,12 @@
               <table role="presentation" cellspacing="0" cellpadding="0" border="0">
                 <tr>
                   <td align="center" style="padding-bottom: 12px;">
-                    <img src="https://neobankradar.xyz/radar-iso.svg" alt="Neobank Radar" width="48" height="48" style="display: block; width: 48px; height: 48px;" />
+                    <img src="https://neobankradar.xyz/radar-iso-96.png" alt="Neobank Radar" width="48" height="48" style="display: block; width: 48px; height: 48px;" />
                   </td>
                 </tr>
                 <tr>
                   <td align="center" style="padding-top: 8px;">
-                    <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1A1A1A; letter-spacing: -0.02em;" class="text-main">
+                    <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1A1A1A; letter-spacing: -0.02em;">
                       Neobank Radar
                     </h1>
                   </td>
@@ -97,13 +83,13 @@
             <td style="padding: 40px 40px 32px; background-color: #FFFFFF;" class="card-bg mobile-padding">
 
               <!-- Greeting -->
-              <h2 style="margin: 0 0 24px; font-size: 20px; font-weight: 600; color: #1A1A1A; text-align: center;" class="text-main">
+              <h2 style="margin: 0 0 24px; font-size: 20px; font-weight: 600; color: #1A1A1A; text-align: center;">
                 Hi, {{name}}!
               </h2>
 
               <!-- Thank you -->
-              <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.7; color: #4A4A4A;" class="text-secondary">
-                Thank you for submitting <strong style="color: #1A1A1A;" class="text-main">{{neobankName}}</strong> to
+              <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.7; color: #4A4A4A;">
+                Thank you for submitting <strong style="color: #1A1A1A;">{{neobankName}}</strong> to
                 <strong style="color: #2A60FB;">Neobank Radar</strong>!
                 We appreciate your contribution to helping the community discover the best card options.
               </p>
@@ -111,13 +97,13 @@
               <!-- What happens next -->
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 24px 0;">
                 <tr>
-                  <td style="padding: 20px 24px; background-color: #F0F4FF; border-left: 3px solid #2A60FB; border-radius: 0 12px 12px 0;" class="callout-bg">
+                  <td style="padding: 20px 24px; background-color: #F0F4FF; border-left: 3px solid #2A60FB; border-radius: 0 12px 12px 0;">
                     <p style="margin: 0 0 4px; font-size: 13px; font-weight: 700; color: #2A60FB; text-transform: uppercase; letter-spacing: 0.05em;">
                       What happens next
                     </p>
-                    <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #555555;" class="text-muted">
+                    <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #555555;">
                       Our team will review and validate the information you provided.
-                      If <strong style="color: #1A1A1A;" class="text-main">{{neobankName}}</strong> meets our criteria, it will be
+                      If <strong style="color: #1A1A1A;">{{neobankName}}</strong> meets our criteria, it will be
                       <strong style="color: #00B33E;">added to the site within 48 to 72 hours</strong>.
                     </p>
                   </td>
@@ -125,7 +111,7 @@
               </table>
 
               <!-- Closing -->
-              <p style="margin: 24px 0 0; font-size: 15px; line-height: 1.7; color: #4A4A4A;" class="text-secondary">
+              <p style="margin: 24px 0 0; font-size: 15px; line-height: 1.7; color: #4A4A4A;">
                 In the meantime, feel free to explore the cards already listed on our platform.
               </p>
 
@@ -153,14 +139,14 @@
           <tr>
             <td style="padding: 24px 40px 32px; background-color: #FFFFFF; border-radius: 0 0 16px 16px; border-top: 1px solid #E5E5E5;" class="card-bg border-footer mobile-padding">
 
-              <p style="margin: 0 0 8px; font-size: 12px; line-height: 1.6; color: #999999; text-align: center;" class="text-footer">
+              <p style="margin: 0 0 8px; font-size: 12px; line-height: 1.6; color: #999999; text-align: center;">
                 Powered by
                 <a href="https://www.moicdigital.com/" target="_blank" style="color: #2A60FB; text-decoration: none;">MOIC</a>
               </p>
 
-              <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #BBBBBB; text-align: center;" class="text-footer-sub">
+              <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #BBBBBB; text-align: center;">
                 You're receiving this email because you submitted a neobank on
-                <a href="https://neobankradar.xyz" style="color: #999999; text-decoration: underline;" class="link-footer">neobankradar.xyz</a>.
+                <a href="https://neobankradar.xyz" style="color: #999999; text-decoration: underline;">neobankradar.xyz</a>.
               </p>
 
             </td>
