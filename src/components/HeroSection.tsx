@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 import LogoRain from "@/components/LogoRain"
 
 function LogoPanel({ seed, side }: {
@@ -34,8 +37,17 @@ export default function HeroSection() {
 
       {/* Center content */}
       <div className="flex flex-col items-center justify-center py-14 sm:py-18 md:py-0 px-4">
+        <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px]">
+          <DotLottieReact
+            src="/radar-iso 2.lottie"
+            loop
+            autoplay
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
+
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight text-center"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight text-center mt-4"
           style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
         >
           Neobank Radar

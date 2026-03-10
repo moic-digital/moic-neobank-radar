@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   keywords: DEFAULT_KEYWORDS,
+  icons: {
+    icon: "/radar-iso.svg",
+    apple: "/radar-iso.svg",
+  },
   openGraph: {
     title: SITE_NAME,
     description: DEFAULT_DESCRIPTION,
