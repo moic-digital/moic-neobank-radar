@@ -45,5 +45,5 @@ export const cardLogos: Readonly<Record<string, string>> = {
 }
 
 export function getCardLogo(cardId: string): string {
-  return cardLogos[cardId] ?? "/logos/default.png"
+  return cardLogos[cardId] ?? ""
 }

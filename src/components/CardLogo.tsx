@@ -14,6 +14,16 @@ export default function CardLogo({ src, alt, issuer, size = "sm" }: CardLogoProp
 
   const textSize = size === "lg" ? "text-base" : "text-xs"
 
+  if (!src) {
+    return (
+      <div className={`${sizeClasses} rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center shrink-0`}>
+        <span className={`${textSize} font-bold text-white/60 uppercase flex items-center justify-center w-full h-full`}>
+          {issuer.slice(0, 2)}
+        </span>
+      </div>
+    )
+  }
+
   return (
     <div className={`${sizeClasses} rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center shrink-0`}>
       <img
