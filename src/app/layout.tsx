@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/banner.png",
-        width: 1200,
-        height: 630,
+        width: 1080,
+        height: 570,
         alt: `${SITE_NAME} - Compare Crypto Cards`,
       },
     ],
