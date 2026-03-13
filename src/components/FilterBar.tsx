@@ -220,7 +220,7 @@ export default function FilterBar({
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base rounded-xl transition-colors cursor-pointer tracking-wide whitespace-nowrap"
+          className="flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 bg-moic-blue hover:bg-moic-blue-light text-white font-semibold text-sm sm:text-base rounded-xl transition-colors cursor-pointer tracking-wide whitespace-nowrap"
         >
           <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
           <span className="hidden sm:inline">Add Neobank</span>

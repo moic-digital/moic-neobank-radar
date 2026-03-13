@@ -39,7 +39,7 @@ export default function HeroSection() {
       <div className="flex flex-col items-center justify-center py-14 sm:py-18 md:py-0 px-4">
         <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px]">
           <DotLottieReact
-            src="/radar-iso.lottie"
+            src="/radar-iso-animation.json"
             loop
             autoplay
             style={{ width: "100%", height: "100%" }}
