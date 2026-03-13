@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/banner.png",
         width: 1200,
         height: 630,
         alt: `${SITE_NAME} - Compare Crypto Cards`,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: DEFAULT_DESCRIPTION,
-    images: ["/og-image.png"],
+    images: ["/banner.png"],
   },
   robots: {
     index: true,
