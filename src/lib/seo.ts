@@ -8,7 +8,7 @@ export function safeJsonLdStringify(data: unknown): string {
     .replace(/&/g, "\\u0026")
 }
 
-export const BASE_URL = "https://neobanksradar.com"
+export const BASE_URL = "https://neobankradar.xyz"
 export const SITE_NAME = "Neobank Radar"
 export const DEFAULT_DESCRIPTION =
   "Compare fees, cashback, perks and custody models across 40+ crypto debit and credit cards. Find the best neobank card for your needs."
