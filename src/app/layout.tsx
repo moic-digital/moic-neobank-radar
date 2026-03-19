@@ -39,9 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/banner.png",
-        width: 1080,
-        height: 570,
+        url: "/neobank-radar-image-rs.png",
         alt: `${SITE_NAME} - Compare Crypto Cards`,
       },
     ],
