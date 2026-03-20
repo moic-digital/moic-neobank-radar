@@ -172,6 +172,10 @@ export const cardStyles: Readonly<Record<string, CardStyle>> = {
     cardGradient: "from-cyan-600 to-blue-700",
     tierColor: "text-white",
   },
+  "lemoncash-card": {
+    cardGradient: "from-[#A8E10C] to-[#7AB800]",
+    tierColor: "text-black",
+  },
 }
 
 const defaultStyle: CardStyle = {

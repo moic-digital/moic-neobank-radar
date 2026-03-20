@@ -79,7 +79,7 @@ export default function CryptoCard({ card }: CryptoCardProps) {
           </div>
         </div>
 
-        {/* Bottom: Network badge */}
+        {/* Bottom: Network badge + View details */}
         <div className="flex items-center justify-between mt-3">
           <span className="text-[10px] text-white/30 uppercase tracking-wider">
             {card.type}
@@ -88,6 +88,11 @@ export default function CryptoCard({ card }: CryptoCardProps) {
             {card.network}
           </span>
         </div>
+
+        {/* View details hint */}
+        <p className="text-[10px] text-white/40 mt-3 text-right opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
+          View details →
+        </p>
       </div>
     </Link>
   )

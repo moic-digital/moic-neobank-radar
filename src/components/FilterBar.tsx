@@ -12,6 +12,7 @@ import {
   Plus,
   CheckCircle,
   XCircle,
+  Sparkles,
 } from "lucide-react"
 import { Filters, SortOption } from "@/types/card"
 import FilterDropdown from "@/components/FilterDropdown"
@@ -149,7 +150,8 @@ export default function FilterBar({
     filters.region !== "" ||
     filters.kyc !== "" ||
     filters.currency !== "" ||
-    filters.custody.length > 0
+    filters.custody.length > 0 ||
+    filters.airdrop !== ""
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     onFilterChange({ ...filters, search: e.target.value })
@@ -184,6 +186,18 @@ export default function FilterBar({
     onFilterChange({ ...filters, custody: newCustody })
   }
 
+  function getAirdropState(): TriState {
+    if (filters.airdrop === "") return "none"
+    if (filters.airdrop === "with") return "with"
+    return "without"
+  }
+
+  function cycleAirdrop() {
+    const state = getAirdropState()
+    const newAirdrop = state === "none" ? "with" : state === "with" ? "without" : ""
+    onFilterChange({ ...filters, airdrop: newAirdrop })
+  }
+
   function clearFilters() {
     onFilterChange({
       search: filters.search,
@@ -196,11 +210,13 @@ export default function FilterBar({
       region: "",
       kyc: "",
       currency: "",
+      airdrop: "",
     })
   }
 
   const kycState = getKycState()
   const selfCustodyState = getSelfCustodyState()
+  const airdropState = getAirdropState()
 
   return (
     <div className="w-full mb-6 sm:mb-8 py-4 sm:py-6 space-y-4">
@@ -264,8 +280,8 @@ export default function FilterBar({
         </div>
       )}
 
-      {/* Row 2: KYC + Self-Custody (prominent tri-state) + other filters */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+      {/* Row 2: KYC + Self-Custody + Airdrop (prominent tri-state) + other filters */}
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
         {/* KYC tri-state */}
         <button
           onClick={cycleKyc}
@@ -292,6 +308,20 @@ export default function FilterBar({
             {selfCustodyState === "without" && "Custodial"}
           </span>
           <TriStateDots state={selfCustodyState} />
+        </button>
+
+        {/* Airdrop tri-state */}
+        <button
+          onClick={cycleAirdrop}
+          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all border rounded-xl cursor-pointer ${getTriStateClasses(airdropState)}`}
+        >
+          <Sparkles className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(airdropState)}`} />
+          <span>
+            {airdropState === "none" && "Airdrop"}
+            {airdropState === "with" && "With Airdrop"}
+            {airdropState === "without" && "No Airdrop"}
+          </span>
+          <TriStateDots state={airdropState} />
         </button>
 
         {/* Region */}

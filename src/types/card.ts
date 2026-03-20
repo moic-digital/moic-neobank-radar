@@ -36,6 +36,7 @@ export interface Filters {
   readonly region: string
   readonly kyc: string
   readonly currency: string
+  readonly airdrop: string
 }
 
 export type SortOption = "featured" | "cashbackHigh" | "nameAZ" | "newest"

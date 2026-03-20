@@ -25,6 +25,7 @@ const DEFAULT_FILTERS: Filters = {
   region: "",
   kyc: "",
   currency: "",
+  airdrop: "",
 }
 
 export default function HomePage({ cards }: HomePageProps) {
@@ -66,6 +67,13 @@ export default function HomePage({ cards }: HomePageProps) {
         card.supportedCurrencies.includes(filters.currency) ||
         card.supportedCurrencies.includes("Global")
 
+      const matchesAirdrop =
+        filters.airdrop === ""
+          ? true
+          : filters.airdrop === "with"
+            ? card.airdropFarming.toLowerCase() === "true"
+            : card.airdropFarming.toLowerCase() !== "true"
+
       return (
         matchesSearch &&
         matchesNetwork &&
@@ -73,7 +81,8 @@ export default function HomePage({ cards }: HomePageProps) {
         matchesCashback &&
         matchesRegionFilter &&
         matchesKyc &&
-        matchesCurrency
+        matchesCurrency &&
+        matchesAirdrop
       )
     })
 

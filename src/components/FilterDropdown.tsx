@@ -85,7 +85,7 @@ export default function FilterDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto no-scrollbar">
+        <div className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto custom-scrollbar">
           {/* Reset option */}
           <button
             onClick={() => handleSelect("")}
