@@ -122,12 +122,10 @@ export default function CryptoCard({
         </span>
       </div>
 
-      {/* View details — always visible, brighter on hover */}
-      {!compareMode && (
-        <p className="text-[10px] text-white/25 group-hover:text-white/60 mt-3 text-right transition-colors duration-300">
-          View details →
-        </p>
-      )}
+      {/* View details — hidden in compare mode but preserves space */}
+      <p className={`text-[10px] text-white/25 group-hover:text-white/60 mt-3 text-right transition-colors duration-300 ${compareMode ? "invisible" : ""}`}>
+        View details →
+      </p>
     </div>
   )
 
