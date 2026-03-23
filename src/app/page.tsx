@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { fetchCards } from "@/lib/sheets"
 import HomePage from "@/components/HomePage"
 import {
@@ -24,7 +25,9 @@ export default async function Page() {
           __html: safeJsonLdStringify(itemListJsonLd),
         }}
       />
-      <HomePage cards={cards} />
+      <Suspense>
+        <HomePage cards={cards} />
+      </Suspense>
     </>
   )
 }

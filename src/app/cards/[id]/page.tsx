@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import CardLogo from "@/components/CardLogo"
+import { isAirdropFarming } from "@/utils/card"
 import {
   ArrowLeft,
   ExternalLink,
@@ -83,9 +84,6 @@ interface Insight {
   readonly description: string
 }
 
-function isAirdropFarming(value: string): boolean {
-  return value.toLowerCase() === "true"
-}
 
 function buildInsights(card: CardData): readonly Insight[] {
   const insights: Insight[] = []

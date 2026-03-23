@@ -4,15 +4,18 @@ interface CardLogoProps {
   readonly src: string
   readonly alt: string
   readonly issuer: string
-  readonly size?: "sm" | "lg"
+  readonly size?: "xs" | "sm" | "lg"
 }
 
-export default function CardLogo({ src, alt, issuer, size = "sm" }: CardLogoProps) {
-  const sizeClasses = size === "lg"
-    ? "w-14 h-14 sm:w-16 sm:h-16"
-    : "w-10 h-10 sm:w-11 sm:h-11"
+const SIZE_MAP = {
+  xs: { container: "w-7 h-7", text: "text-[9px]" },
+  sm: { container: "w-10 h-10 sm:w-11 sm:h-11", text: "text-xs" },
+  lg: { container: "w-14 h-14 sm:w-16 sm:h-16", text: "text-base" },
+} as const
 
-  const textSize = size === "lg" ? "text-base" : "text-xs"
+export default function CardLogo({ src, alt, issuer, size = "sm" }: CardLogoProps) {
+  const sizeClasses = SIZE_MAP[size].container
+  const textSize = SIZE_MAP[size].text
 
   if (!src) {
     return (

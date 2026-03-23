@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronDown } from "lucide-react"
 
 interface DropdownOption {
@@ -25,6 +25,7 @@ interface FilterDropdownProps {
   readonly placeholder: string
   readonly items: readonly DropdownItem[]
   readonly onChange: (value: string) => void
+  readonly scrollHint?: boolean
 }
 
 export default function FilterDropdown({
@@ -33,9 +34,32 @@ export default function FilterDropdown({
   placeholder,
   items,
   onChange,
+  scrollHint = false,
 }: FilterDropdownProps) {
   const [open, setOpen] = useState(false)
+  const [showScrollHint, setShowScrollHint] = useState(true)
   const ref = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
+
+  const checkScrollEnd = useCallback(() => {
+    const el = listRef.current
+    if (!el) return
+    const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 10
+    if (isAtBottom) setShowScrollHint(false)
+  }, [])
+
+  useEffect(() => {
+    if (open) {
+      setShowScrollHint(true)
+      // Check if content overflows at all
+      requestAnimationFrame(() => {
+        const el = listRef.current
+        if (el && el.scrollHeight <= el.clientHeight) {
+          setShowScrollHint(false)
+        }
+      })
+    }
+  }, [open])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -85,7 +109,7 @@ export default function FilterDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto custom-scrollbar">
+        <div ref={listRef} onScroll={checkScrollEnd} className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto custom-scrollbar">
           {/* Reset option */}
           <button
             onClick={() => handleSelect("")}
@@ -138,6 +162,13 @@ export default function FilterDropdown({
               </button>
             )
           })}
+
+          {/* Scroll hint — only when enabled */}
+          {scrollHint && showScrollHint && (
+            <div className="sticky bottom-0 left-0 right-0 text-center py-1.5 bg-gradient-to-t from-moic-surface via-moic-surface to-transparent">
+              <span className="text-[9px] text-white/30 tracking-wide">Scroll to see more ↓</span>
+            </div>
+          )}
         </div>
       )}
     </div>

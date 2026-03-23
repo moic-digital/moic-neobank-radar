@@ -331,6 +331,7 @@ export default function FilterBar({
           placeholder="Region"
           items={REGION_ITEMS}
           onChange={(val) => onFilterChange({ ...filters, region: val })}
+          scrollHint
         />
 
         {/* Currency */}
