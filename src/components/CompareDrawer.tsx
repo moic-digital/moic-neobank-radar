@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useCallback, useState, useRef } from "react"
+import { useEffect, useCallback, useState, useRef, Fragment } from "react"
 import { X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming } from "@/utils/card"
@@ -127,7 +127,8 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
   }, [hasScrolled])
 
   const totalCols = MOBILE_STAT_ROWS.length + 1
-  const gridCols = `100px repeat(${MOBILE_STAT_ROWS.length}, 90px)`
+  const gridCols = `120px repeat(${MOBILE_STAT_ROWS.length}, 100px)`
+  const rowHeight = "calc((100dvh - 120px) * 0.25)"
 
   return (
     <div className="flex flex-col h-full relative">
@@ -141,12 +142,12 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
       )}
 
       <div className="flex-1 overflow-auto custom-scrollbar" onScroll={handleScroll}>
-        <div className="grid" style={{ gridTemplateColumns: gridCols, width: `${100 + MOBILE_STAT_ROWS.length * 90}px` }}>
+        <div className="grid" style={{ gridTemplateColumns: gridCols, width: `${120 + MOBILE_STAT_ROWS.length * 100}px` }}>
           {/* Header row */}
-          <div className="sticky left-0 z-20 bg-moic-navy h-[44px] border-b border-white/10 border-r border-r-white/10" />
+          <div className="sticky left-0 z-20 bg-moic-navy h-[40px] border-b border-white/10 border-r border-r-white/10" />
           {MOBILE_STAT_ROWS.map((row) => (
-            <div key={row.label} className="h-[44px] flex items-center justify-center px-1 border-b border-white/10">
-              <span className="text-[9px] text-white/40 font-semibold uppercase tracking-wider text-center leading-tight">
+            <div key={row.label} className="h-[40px] flex items-center justify-center px-2 border-b border-white/10">
+              <span className="text-[10px] text-white/40 font-semibold uppercase tracking-wider text-center leading-tight">
                 {row.label}
               </span>
             </div>
@@ -154,21 +155,23 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
 
           {/* Card rows */}
           {cards.map((card) => (
-            <>
-              {/* Sticky card name cell */}
-              <div key={`${card.id}-name`} className="sticky left-0 z-20 bg-moic-navy flex items-center gap-2 px-2.5 h-[44px] border-b border-white/[0.06] border-r border-r-white/10">
-                <CardLogo src={card.logo} alt={card.issuer} issuer={card.issuer} size="xs" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-bold text-white truncate">{card.issuer}</p>
-                  <a
-                    href={card.officialLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[9px] text-moic-blue"
-                  >
-                    Visit →
-                  </a>
-                </div>
+            <Fragment key={card.id}>
+              {/* Sticky card name cell — logo on top, name below */}
+              <div
+                key={`${card.id}-name`}
+                className="sticky left-0 z-20 bg-moic-navy flex flex-col items-center justify-center gap-1.5 px-2 border-b border-white/[0.06] border-r border-r-white/10"
+                style={{ height: rowHeight }}
+              >
+                <CardLogo src={card.logo} alt={card.issuer} issuer={card.issuer} size="sm" />
+                <p className="text-xs font-bold text-white text-center leading-tight">{card.issuer}</p>
+                <a
+                  href={card.officialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] text-moic-blue"
+                >
+                  Visit →
+                </a>
               </div>
 
               {/* Stat cells */}
@@ -178,15 +181,16 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
                 return (
                   <div
                     key={`${card.id}-${row.label}`}
-                    className="flex items-center justify-center px-1.5 h-[44px] border-b border-white/[0.06]"
+                    className="flex items-center justify-center px-2 border-b border-white/[0.06]"
+                    style={{ height: rowHeight }}
                   >
-                    <span className={`text-[11px] text-center leading-tight ${colorClass}`}>
+                    <span className={`text-sm text-center leading-tight font-medium ${colorClass}`}>
                       {value}
                     </span>
                   </div>
                 )
               })}
-            </>
+            </Fragment>
           ))}
         </div>
       </div>
