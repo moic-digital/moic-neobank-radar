@@ -19,8 +19,10 @@ import FilterDropdown from "@/components/FilterDropdown"
 import AddNeobankModal from "@/components/AddNeobankModal"
 
 const REGION_ITEMS = [
+  { value: "Global", label: "Global" },
   {
     groupLabel: "Americas",
+    groupValue: "Americas",
     options: [
       { value: "United States", label: "US" },
       { value: "Canada", label: "Canada" },
@@ -32,29 +34,33 @@ const REGION_ITEMS = [
   },
   {
     groupLabel: "Europe",
+    groupValue: "Europe",
     options: [
       { value: "United Kingdom", label: "UK" },
       { value: "Germany", label: "Germany" },
       { value: "France", label: "France" },
-      { value: "EEA", label: "Europe" },
+      { value: "EEA", label: "EEA" },
     ],
   },
   {
     groupLabel: "Asia Pacific",
+    groupValue: "APAC",
     options: [
       { value: "India", label: "India" },
       { value: "Japan", label: "Japan" },
       { value: "Singapore", label: "Singapore" },
       { value: "Australia", label: "Australia" },
-      { value: "APAC", label: "APAC" },
+      { value: "South Korea", label: "South Korea" },
     ],
   },
   {
-    groupLabel: "Other",
+    groupLabel: "Middle East & Africa",
+    groupValue: "Middle East & Africa",
     options: [
       { value: "Nigeria", label: "Nigeria" },
       { value: "UAE", label: "UAE" },
-      { value: "Global", label: "Global" },
+      { value: "South Africa", label: "South Africa" },
+      { value: "Middle East", label: "Middle East" },
     ],
   },
 ] as const
@@ -329,6 +335,7 @@ export default function FilterBar({
           icon={<Globe className="w-4 h-4 text-moic-blue shrink-0" />}
           value={filters.region}
           placeholder="Region"
+          resetLabel="No filter"
           items={REGION_ITEMS}
           onChange={(val) => onFilterChange({ ...filters, region: val })}
           scrollHint

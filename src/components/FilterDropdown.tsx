@@ -10,6 +10,7 @@ interface DropdownOption {
 
 interface DropdownGroup {
   readonly groupLabel: string
+  readonly groupValue?: string
   readonly options: readonly DropdownOption[]
 }
 
@@ -23,6 +24,7 @@ interface FilterDropdownProps {
   readonly icon?: React.ReactNode
   readonly value: string
   readonly placeholder: string
+  readonly resetLabel?: string
   readonly items: readonly DropdownItem[]
   readonly onChange: (value: string) => void
   readonly scrollHint?: boolean
@@ -32,6 +34,7 @@ export default function FilterDropdown({
   icon,
   value,
   placeholder,
+  resetLabel,
   items,
   onChange,
   scrollHint = false,
@@ -51,7 +54,6 @@ export default function FilterDropdown({
   useEffect(() => {
     if (open) {
       setShowScrollHint(true)
-      // Check if content overflows at all
       requestAnimationFrame(() => {
         const el = listRef.current
         if (el && el.scrollHeight <= el.clientHeight) {
@@ -74,6 +76,7 @@ export default function FilterDropdown({
   function findLabel(): string {
     for (const item of items) {
       if (isGroup(item)) {
+        if (item.groupValue && item.groupValue === value) return item.groupLabel
         const match = item.options.find((o) => o.value === value)
         if (match) return match.label
       } else if (item.value === value) {
@@ -90,6 +93,7 @@ export default function FilterDropdown({
 
   const selectedLabel = findLabel()
   const isActive = value !== ""
+  const displayResetLabel = resetLabel ?? placeholder
 
   return (
     <div ref={ref} className="relative">
@@ -119,26 +123,47 @@ export default function FilterDropdown({
                 : "text-white/50 hover:bg-white/5 hover:text-white"
             }`}
           >
-            {placeholder}
+            {displayResetLabel}
           </button>
+
+          {/* Fixed scroll hint */}
+          {scrollHint && (
+            <span className="block px-3 py-1 text-[9px] text-white/20 tracking-wide">
+              Swipe down to see more
+            </span>
+          )}
 
           <div className="h-px bg-white/5 mx-2 my-1" />
 
           {items.map((item) => {
             if (isGroup(item)) {
+              const isGroupSelected = item.groupValue !== undefined && value === item.groupValue
               return (
                 <div key={item.groupLabel}>
-                  <span className="block px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wider text-white/30">
-                    {item.groupLabel}
-                  </span>
+                  {item.groupValue ? (
+                    <button
+                      onClick={() => handleSelect(item.groupValue!)}
+                      className={`w-full text-left px-3 pt-3 pb-1 text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                        isGroupSelected
+                          ? "text-moic-blue"
+                          : "text-white/50 hover:text-white"
+                      }`}
+                    >
+                      {item.groupLabel}
+                    </button>
+                  ) : (
+                    <span className="block px-3 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-wider text-white/30">
+                      {item.groupLabel}
+                    </span>
+                  )}
                   {item.options.map((opt) => (
                     <button
                       key={opt.value}
                       onClick={() => handleSelect(opt.value)}
-                      className={`w-full text-left px-3 py-2 text-xs sm:text-sm transition-colors ${
+                      className={`w-full text-left pl-5 pr-3 py-1.5 text-xs sm:text-sm transition-colors ${
                         value === opt.value
                           ? "text-moic-blue bg-moic-blue/10"
-                          : "text-white/70 hover:bg-white/5 hover:text-white"
+                          : "text-white/60 hover:bg-white/5 hover:text-white"
                       }`}
                     >
                       {opt.label}
@@ -152,23 +177,16 @@ export default function FilterDropdown({
               <button
                 key={item.value}
                 onClick={() => handleSelect(item.value)}
-                className={`w-full text-left px-3 py-2 text-xs sm:text-sm transition-colors ${
+                className={`w-full text-left px-3 py-2 text-xs sm:text-sm font-bold transition-colors ${
                   value === item.value
                     ? "text-moic-blue bg-moic-blue/10"
-                    : "text-white/70 hover:bg-white/5 hover:text-white"
+                    : "text-white/50 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 {item.label}
               </button>
             )
           })}
-
-          {/* Scroll hint — only when enabled */}
-          {scrollHint && showScrollHint && (
-            <div className="sticky bottom-0 left-0 right-0 text-center py-1.5 bg-gradient-to-t from-moic-surface via-moic-surface to-transparent">
-              <span className="text-[9px] text-white/30 tracking-wide">Scroll to see more ↓</span>
-            </div>
-          )}
         </div>
       )}
     </div>
