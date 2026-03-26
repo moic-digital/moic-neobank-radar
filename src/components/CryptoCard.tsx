@@ -119,12 +119,12 @@ export default function CryptoCard({
           </p>
           <p
             className={`text-xs font-semibold ${
-              card.kyc === "Required"
-                ? "text-amber-400"
-                : "text-moic-green"
+              card.kyc === "None"
+                ? "text-moic-green"
+                : "text-amber-400"
             }`}
           >
-            {card.kyc === "Required" ? "YES" : "NO"}
+            {card.kyc === "Required" ? "YES" : card.kyc === "Light" ? "LIGHT" : "NO"}
           </p>
         </div>
       </div>
