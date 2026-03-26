@@ -21,7 +21,7 @@ import {
   Gift,
   type LucideIcon,
 } from "lucide-react"
-import { fetchCards } from "@/lib/sheets"
+import { cards } from "@/data/cards"
 import type { CardData } from "@/types/card"
 import {
   BASE_URL,
@@ -37,8 +37,7 @@ interface CardPageProps {
   readonly params: Promise<{ id: string }>
 }
 
-export async function generateStaticParams() {
-  const cards = await fetchCards()
+export function generateStaticParams() {
   return cards.map((card) => ({ id: card.id }))
 }
 
@@ -46,7 +45,6 @@ export async function generateMetadata({
   params,
 }: CardPageProps): Promise<Metadata> {
   const { id } = await params
-  const cards = await fetchCards()
   const card = cards.find((c) => c.id === id)
 
   if (!card) {
@@ -165,7 +163,6 @@ function buildInsights(card: CardData): readonly Insight[] {
 
 export default async function CardPage({ params }: CardPageProps) {
   const { id } = await params
-  const cards = await fetchCards()
   const card = cards.find((c) => c.id === id)
 
   if (!card) {

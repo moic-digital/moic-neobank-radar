@@ -9,7 +9,6 @@ export {
   matchesRegion,
   getNodesByType,
 } from "./regionUtils"
-export { SPREADSHEET_NAMES, SPREADSHEET_REGIONS } from "./spreadsheetGuide"
 export type {
   RegionNodeType,
   CountryNode,

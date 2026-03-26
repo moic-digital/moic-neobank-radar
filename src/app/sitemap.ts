@@ -1,9 +1,8 @@
 import type { MetadataRoute } from "next"
-import { fetchCards } from "@/lib/sheets"
+import { cards } from "@/data/cards"
 import { BASE_URL } from "@/lib/seo"
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const cards = await fetchCards()
+export default function sitemap(): MetadataRoute.Sitemap {
 
   const cardEntries: MetadataRoute.Sitemap = cards.map((card) => ({
     url: `${BASE_URL}/cards/${card.id}`,

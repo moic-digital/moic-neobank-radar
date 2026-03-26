@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { fetchCards } from "@/lib/sheets"
+import { cards } from "@/data/cards"
 import HomePage from "@/components/HomePage"
 import {
   buildWebSiteJsonLd,
@@ -7,9 +7,7 @@ import {
   safeJsonLdStringify,
 } from "@/lib/seo"
 
-export default async function Page() {
-  const cards = await fetchCards()
-
+export default function Page() {
   const webSiteJsonLd = buildWebSiteJsonLd()
   const itemListJsonLd = buildItemListJsonLd(cards)
 
