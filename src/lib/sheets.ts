@@ -129,6 +129,8 @@ function parsePerks(
     )
 }
 
+const RECOMMENDED_IDS = new Set(["coca-card", "ready-card"])
+
 function rowToCard(row: Record<string, string>): CardData {
   const id = row["id"] ?? ""
   const style = getCardStyle(id)
@@ -161,6 +163,7 @@ function rowToCard(row: Record<string, string>): CardData {
     supportedCurrencies: parseCurrencies(row["supportedCurrencies"] ?? ""),
     age: row["Age"] ?? "",
     airdropFarming: row["Airdrop Farming"] ?? "",
+    recommended: RECOMMENDED_IDS.has(id),
   }
 }
 

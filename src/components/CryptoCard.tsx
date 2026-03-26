@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Check, Flame } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming } from "@/utils/card"
 import CardLogo from "@/components/CardLogo"
@@ -8,6 +8,7 @@ interface CryptoCardProps {
   readonly card: CardData
   readonly compareMode?: boolean
   readonly isSelected?: boolean
+  readonly highlightRecommended?: boolean
   readonly onToggleCompare?: (id: string) => void
 }
 
@@ -15,8 +16,10 @@ export default function CryptoCard({
   card,
   compareMode = false,
   isSelected = false,
+  highlightRecommended = false,
   onToggleCompare,
 }: CryptoCardProps) {
+  const isNeonActive = card.recommended && highlightRecommended
   const cashbackLabel =
     typeof card.cashbackMax === "number"
       ? `${card.cashbackMax}%`
@@ -32,12 +35,21 @@ export default function CryptoCard({
 
   const cardContent = (
     <div
-      className={`relative bg-moic-surface border rounded-xl p-4 sm:p-5 hover:-translate-y-1 hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)] transition-all duration-300 cursor-pointer ${
-        isSelected
-          ? "border-moic-blue/60 shadow-[0_0_24px_rgba(42,96,251,0.25)] -translate-y-1"
-          : "border-white/[0.08]"
+      className={`relative bg-moic-surface border rounded-xl p-4 sm:p-5 hover:-translate-y-1 transition-all duration-300 cursor-pointer ${
+        isNeonActive
+          ? "border-orange-400/60 shadow-[0_0_20px_rgba(255,140,0,0.3),0_0_40px_rgba(255,140,0,0.15)] animate-neon-pulse-orange hover:border-orange-400 hover:shadow-[0_0_28px_rgba(255,140,0,0.45),0_0_56px_rgba(255,140,0,0.2)]"
+          : isSelected
+            ? "border-moic-blue/60 shadow-[0_0_24px_rgba(42,96,251,0.25)] -translate-y-1"
+            : "border-white/[0.08] hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)]"
       }`}
     >
+      {/* Recommended fire badge */}
+      {isNeonActive && (
+        <div className="absolute -top-2 -left-2 z-10 w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center shadow-[0_0_12px_rgba(255,140,0,0.6)] border border-orange-400/80">
+          <Flame className="w-3.5 h-3.5 text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.6)]" />
+        </div>
+      )}
+
       {/* Compare checkbox */}
       {compareMode && (
         <button

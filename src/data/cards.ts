@@ -427,6 +427,7 @@ export const cards: readonly CardData[] = [
     cashbackMin: "",
     age: "",
     airdropFarming: "",
+    recommended: true,
   },
   {
     id: "brighty-card",
@@ -1081,6 +1082,7 @@ export const cards: readonly CardData[] = [
     cashbackMin: "",
     age: "",
     airdropFarming: "",
+    recommended: true,
   },
   {
     id: "tapx-card",
