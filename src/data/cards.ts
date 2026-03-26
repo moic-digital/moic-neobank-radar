@@ -927,6 +927,7 @@ export const cards: readonly CardData[] = [
   {
     id: "avici-card",
     name: "Avici Card",
+    addedDate: "2026-03-22",
     issuer: "Avici",
     logo: logoUrl("AviciMoney"),
     type: "Debit",

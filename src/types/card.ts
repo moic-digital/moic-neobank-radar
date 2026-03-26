@@ -24,6 +24,7 @@ export interface CardData {
   readonly airdropFarming: string
   readonly rank?: number
   readonly recommended?: boolean
+  readonly addedDate?: string
 }
 
 export interface Filters {

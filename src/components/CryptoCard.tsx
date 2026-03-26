@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { Check, Flame } from "lucide-react"
 import { CardData } from "@/types/card"
-import { isAirdropFarming } from "@/utils/card"
+import { isAirdropFarming, isNewCard } from "@/utils/card"
 import CardLogo from "@/components/CardLogo"
+import NewBadge from "@/components/NewBadge"
 
 interface CryptoCardProps {
   readonly card: CardData
@@ -20,6 +21,7 @@ export default function CryptoCard({
   onToggleCompare,
 }: CryptoCardProps) {
   const isNeonActive = card.recommended && highlightRecommended
+  const showNew = isNewCard(card.addedDate)
   const cashbackLabel =
     typeof card.cashbackMax === "number"
       ? `${card.cashbackMax}%`
@@ -43,6 +45,9 @@ export default function CryptoCard({
             : "border-white/[0.08] hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)]"
       }`}
     >
+      {/* New badge */}
+      {showNew && <NewBadge isRecommended={!!isNeonActive} />}
+
       {/* Recommended fire badge */}
       {isNeonActive && (
         <div className="absolute -top-2 -left-2 z-10 w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center shadow-[0_0_12px_rgba(255,140,0,0.6)] border border-orange-400/80">

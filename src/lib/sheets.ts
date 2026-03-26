@@ -131,6 +131,10 @@ function parsePerks(
 
 const RECOMMENDED_IDS = new Set(["coca-card", "ready-card"])
 
+const ADDED_DATES: Record<string, string> = {
+  "avici-card": "2026-03-22",
+}
+
 function rowToCard(row: Record<string, string>): CardData {
   const id = row["id"] ?? ""
   const style = getCardStyle(id)
@@ -164,6 +168,7 @@ function rowToCard(row: Record<string, string>): CardData {
     age: row["Age"] ?? "",
     airdropFarming: row["Airdrop Farming"] ?? "",
     recommended: RECOMMENDED_IDS.has(id),
+    addedDate: row["addedDate"] || ADDED_DATES[id],
   }
 }
 
