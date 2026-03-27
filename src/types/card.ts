@@ -3,8 +3,8 @@ export interface CardData {
   readonly name: string
   readonly issuer: string
   readonly logo: string
-  readonly type: "Credit" | "Debit" | "Prepaid"
-  readonly network: "Visa" | "Mastercard" | "Visa/Mastercard"
+  readonly type: "Credit" | "Debit" | "Prepaid" | "Virtual Account"
+  readonly network: "Visa" | "Mastercard" | "Visa/Mastercard" | "Local Rails"
   readonly cashbackMax: number | string
   readonly cashbackMin: string
   readonly annualFee: string
@@ -23,6 +23,8 @@ export interface CardData {
   readonly age: string
   readonly airdropFarming: string
   readonly rank?: number
+  readonly recommended?: boolean
+  readonly addedDate?: string
 }
 
 export interface Filters {

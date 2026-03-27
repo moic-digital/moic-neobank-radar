@@ -2,16 +2,12 @@
 
 import { useEffect, useRef, useState } from "react"
 import { X, Loader2 } from "lucide-react"
-import FormDropdown from "@/components/FormDropdown"
 
 type SubmitResult = "success" | "error"
 
 interface AddNeobankModalProps {
   readonly onClose: (result?: SubmitResult) => void
 }
-
-const KYC_OPTIONS = ["Yes", "No"] as const
-const CUSTODY_OPTIONS = ["Custodial", "Non-Custodial"] as const
 
 const WEBHOOK_URL =
   "https://hook.us2.make.com/9yw7vlvqzgns7c0tcara5pyfjmekekep"
@@ -20,26 +16,14 @@ interface FormData {
   readonly contactName: string
   readonly email: string
   readonly telegram: string
-  readonly neobankName: string
-  readonly site: string
-  readonly founded: string
-  readonly cashbackMax: string
-  readonly kyc: string
-  readonly custody: string
-  readonly currencies: string
+  readonly message: string
 }
 
 const INITIAL_FORM: FormData = {
   contactName: "",
   email: "",
   telegram: "",
-  neobankName: "",
-  site: "",
-  founded: "",
-  cashbackMax: "",
-  kyc: "",
-  custody: "",
-  currencies: "",
+  message: "",
 }
 
 export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
@@ -65,7 +49,11 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
   }
 
   function isFormValid(): boolean {
-    return Object.values(form).every((v) => v.trim() !== "")
+    return (
+      form.contactName.trim() !== "" &&
+      form.email.trim() !== "" &&
+      form.message.trim() !== ""
+    )
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -156,9 +144,8 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
                 />
               </div>
               <div>
-                <label className={labelClasses}>Telegram</label>
+                <label className={labelClasses}>Telegram (optional)</label>
                 <input
-                  required
                   type="text"
                   placeholder="@username"
                   className={inputClasses}
@@ -167,97 +154,17 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
                 />
               </div>
             </div>
-          </fieldset>
-
-          <div className="border-t border-white/10" />
-
-          {/* Section 2: Neobank Info */}
-          <fieldset className="space-y-4">
-            <legend className={sectionHeadingClasses}>Neobank Info</legend>
 
             <div>
-              <label className={labelClasses}>Neobank name</label>
-              <input
+              <label className={labelClasses}>Message</label>
+              <textarea
                 required
-                type="text"
-                placeholder="Neobank name"
-                className={inputClasses}
-                value={form.neobankName}
-                onChange={(e) => handleChange("neobankName", e.target.value)}
+                placeholder="Your message..."
+                rows={4}
+                className={inputClasses + " resize-none"}
+                value={form.message}
+                onChange={(e) => handleChange("message", e.target.value)}
               />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClasses}>Site</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="example.com"
-                  className={inputClasses}
-                  value={form.site}
-                  onChange={(e) => handleChange("site", e.target.value)}
-                />
-              </div>
-              <div>
-                <label className={labelClasses}>Founded</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="2023"
-                  className={inputClasses}
-                  value={form.founded}
-                  onChange={(e) => handleChange("founded", e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClasses}>Custody</label>
-                <FormDropdown
-                  value={form.custody}
-                  placeholder="Select..."
-                  options={CUSTODY_OPTIONS}
-                  onChange={(val) => handleChange("custody", val)}
-                  error={showErrors}
-                />
-              </div>
-              <div>
-                <label className={labelClasses}>KYC</label>
-                <FormDropdown
-                  value={form.kyc}
-                  placeholder="Select..."
-                  options={KYC_OPTIONS}
-                  onChange={(val) => handleChange("kyc", val)}
-                  error={showErrors}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClasses}>Cashback max.</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="e.g. 8%"
-                  className={inputClasses}
-                  value={form.cashbackMax}
-                  onChange={(e) => handleChange("cashbackMax", e.target.value)}
-                />
-              </div>
-              <div>
-                <label className={labelClasses}>Supported currencies</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="USD, EUR, BTC..."
-                  className={inputClasses}
-                  value={form.currencies}
-                  onChange={(e) => handleChange("currencies", e.target.value)}
-                />
-              </div>
             </div>
           </fieldset>
 

@@ -74,7 +74,7 @@ export default function RootLayout({
   const organizationJsonLd = buildOrganizationJsonLd()
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${sora.variable} bg-moic-navy text-white antialiased`}
       >

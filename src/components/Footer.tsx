@@ -46,6 +46,7 @@ const NAV_LINKS = [
   { label: "Radar", href: "#top" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "https://www.moicdigital.com/forms-pre-schedule", external: true },
+  { label: "Neobanks Latam Report", href: "https://www.moicdigital.com/neobanks-latam-report", external: true },
 ] as const
 
 export default function Footer() {
