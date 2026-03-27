@@ -1222,7 +1222,7 @@ export const cards: readonly CardData[] = [
     fxFee: "0.1% to 0.45%",
     perks: [
       "LIL Rewards",
-      "Displayed as Yield, Interest, or APY depending on the currency",
+      "APY depending on the currency",
       "Live the digital nomad lifestyle",
     ],
     signupBonus: "None",
