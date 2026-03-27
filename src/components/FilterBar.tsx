@@ -233,27 +233,7 @@ export default function FilterBar({
     <div className="w-full mb-6 sm:mb-8 py-4 sm:py-6 space-y-4">
       {/* Row 1: Recommended Switch + Search + Add Neobank */}
       <div className="flex gap-3">
-        <button
-          onClick={onToggleRecommended}
-          className={`flex items-center gap-2.5 px-3.5 sm:px-4 py-3.5 sm:py-4 rounded-xl transition-all duration-300 cursor-pointer border ${
-            showRecommended
-              ? "bg-gradient-to-r from-orange-600 to-orange-400 border-orange-400 shadow-[0_0_16px_rgba(255,140,0,0.4),0_0_32px_rgba(255,140,0,0.15)] animate-neon-pulse-orange"
-              : "bg-gradient-to-r from-orange-900/30 to-orange-700/20 border-white/10 hover:border-orange-400/40"
-          }`}
-          aria-label="Show recommended cards first"
-          aria-pressed={showRecommended}
-        >
-          <Flame className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 ${showRecommended ? "text-white animate-flame-glow" : "text-white/40"}`} />
-          <span className={`text-[10px] sm:text-xs font-semibold tracking-wide whitespace-nowrap transition-colors ${showRecommended ? "text-white" : "text-white/40"}`}>Our Picks</span>
-          {/* Toggle track — hidden on mobile */}
-          <div className={`relative w-9 h-5 rounded-full transition-all duration-300 shrink-0 hidden sm:block ${showRecommended ? "bg-white/25 shadow-[0_0_8px_rgba(255,255,255,0.2)]" : "bg-white/10"}`}>
-            <div className={`absolute top-0.5 w-4 h-4 rounded-full transition-all duration-300 ${
-              showRecommended
-                ? "left-[18px] bg-white shadow-[0_0_6px_rgba(255,255,255,0.6)]"
-                : "left-0.5 bg-white/30"
-            }`} />
-          </div>
-        </button>
+        {/* Our Picks button — hidden until recommendations are configured */}
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none">
             <Search className="h-4 w-4 sm:h-5 sm:w-5 text-white/30" />

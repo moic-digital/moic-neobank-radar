@@ -371,7 +371,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["EUR", "USD", "GBP"],
     age: "3 years",
     airdropFarming: "False",
-    recommended: true,
   },
   {
     id: "brighty-card",
@@ -808,7 +807,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["EUR", "USD"],
     age: "2 years",
     airdropFarming: "False",
-    addedDate: "2026-03-22",
   },
   {
     id: "oobit-card",
@@ -917,8 +915,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD"],
     age: "9 years",
     airdropFarming: "False",
-    recommended: true,
-    addedDate: "2026-03-22",
   },
   {
     id: "tapx-card",
