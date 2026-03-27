@@ -170,7 +170,9 @@ export default async function CardPage({ params }: CardPageProps) {
   }
 
   const insights = buildInsights(card)
-  const ageLabel = card.age || "N/A"
+  const ageLabel = card.age
+    ? `${new Date().getFullYear() - parseInt(card.age)} years`
+    : "N/A"
   const cashbackLabel =
     typeof card.cashbackMax === "number"
       ? `${card.cashbackMax}%`

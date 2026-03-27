@@ -11,7 +11,7 @@ export default function NewBadge({ isRecommended }: NewBadgeProps) {
           : "bg-gradient-to-r from-moic-blue to-moic-blue-light"
       }`}
     >
-      New
+      Recently Added
     </div>
   )
 }

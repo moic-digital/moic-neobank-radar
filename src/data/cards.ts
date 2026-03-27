@@ -28,7 +28,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "60+ Assets",
     kyc: "Required",
     supportedCurrencies: ["EUR", "GBP", "USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -55,7 +55,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "All Coinbase Assets",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "14 years",
+    age: "2012",
     airdropFarming: "False",
   },
   {
@@ -85,7 +85,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, USDC, FDUSD, BNB, BTC, ETH, SOL, ADA, LINK, XRP",
     kyc: "Required",
     supportedCurrencies: ["BRL", "ARS", "COP"],
-    age: "9 years",
+    age: "2017",
     airdropFarming: "False",
   },
   {
@@ -112,7 +112,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Bitcoin, ETH, USDT, XMR, LTC, TON , ETH, SOL , BNB , DOGE , TRON",
     kyc: "None",
     supportedCurrencies: ["USD", "HKD"],
-    age: "2 years",
+    age: "2024",
     airdropFarming: "False",
   },
   {
@@ -142,7 +142,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Fiat/CRO",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "GBP", "AUD", "CAD", "BRL", "SGD", "AED", "TRY"],
-    age: "10 years",
+    age: "2016",
     airdropFarming: "False",
   },
   {
@@ -169,7 +169,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, XRP, TON, USDT, USDC, etc.",
     kyc: "Required",
     supportedCurrencies: ["EUR", "USD", "GBP"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -198,7 +198,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC, SOL, ETH, BTC",
     kyc: "Light",
     supportedCurrencies: ["USD", "EUR", "Global"],
-    age: "2 years",
+    age: "2024",
     airdropFarming: "True",
   },
   {
@@ -227,7 +227,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "50+",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -255,7 +255,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC, USDT, ETH/wETH, aUSDC, EURe, GBPe (9+ assets)",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "GBP etc."],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -288,7 +288,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC (Yielding)",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "4 years",
+    age: "2022",
     airdropFarming: "False",
   },
   {
@@ -315,7 +315,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "150+ Cryptos",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "GBP", "SGD", "AUD", "HKD", "INR"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -341,7 +341,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "15+ Top Caps",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "15 years",
+    age: "2011",
     airdropFarming: "False",
   },
   {
@@ -369,7 +369,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, USDC, EURC, EURS (15+ chains)",
     kyc: "Required",
     supportedCurrencies: ["EUR", "USD", "GBP"],
-    age: "3 years",
+    age: "2023",
     airdropFarming: "False",
   },
   {
@@ -398,7 +398,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, EURT, USDC",
     kyc: "Required",
     supportedCurrencies: ["EUR", "USDT"],
-    age: "5 years",
+    age: "2021",
     airdropFarming: "False",
   },
   {
@@ -424,7 +424,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "1000+ tokens across 15 chains",
     kyc: "Required",
     supportedCurrencies: ["USD", "Global"],
-    age: "5 years",
+    age: "2021",
     airdropFarming: "False",
   },
   {
@@ -450,7 +450,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, LTC, BCH",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "17 years",
+    age: "2009",
     airdropFarming: "False",
   },
   {
@@ -477,7 +477,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, BNB, POL, SOL, USDC (multi‑chain)",
     kyc: "Required",
     supportedCurrencies: ["EUR"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -505,7 +505,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, XRP, SOL, NEAR, ADA, AVAX, WBT, DOGE, USDC",
     kyc: "Required",
     supportedCurrencies: ["EUR (global spend in local currencies via Visa)"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -532,7 +532,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC, USDT, DAI, PYUSD",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -559,7 +559,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "GBPe, EURe, USDC.e",
     kyc: "Required",
     supportedCurrencies: ["EUR", "GBP"],
-    age: "3 years",
+    age: "2023",
     airdropFarming: "False",
   },
   {
@@ -588,7 +588,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Bitcoin Only",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -615,7 +615,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC, USDT, ETH, BTC, SOL, USDe, EURC/EURA/EURe",
     kyc: "Required",
     supportedCurrencies: ["EUR"],
-    age: "3 years",
+    age: "2023",
     airdropFarming: "False",
   },
   {
@@ -642,7 +642,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "All Bitpanda Assets (600+ cryptocurrencies, metals and stocks)",
     kyc: "Required",
     supportedCurrencies: ["EUR"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -670,7 +670,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "100+ cryptocurrencies",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "Global"],
-    age: "3 years",
+    age: "2023",
     airdropFarming: "False",
   },
   {
@@ -697,7 +697,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, USDT, USDC (and more via Ledger ecosystem)",
     kyc: "Required",
     supportedCurrencies: ["EUR", "GBP", "USD"],
-    age: "12 years",
+    age: "2014",
     airdropFarming: "False",
   },
   {
@@ -724,7 +724,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDC (on Base); USDT, EURC, BTC, ETH and other supported coins via app (must convert to USDC on Base for card use)",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "MXN"],
-    age: "2 years",
+    age: "2024",
     airdropFarming: "False",
   },
   {
@@ -751,7 +751,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, USDC, BTC, ETH",
     kyc: "Required",
     supportedCurrencies: ["USD", "HKD", "Global"],
-    age: "3 years",
+    age: "2023",
     airdropFarming: "False",
   },
   {
@@ -779,7 +779,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, SOL, ETH, BNB, USDC and 1000+ coins",
     kyc: "Required",
     supportedCurrencies: ["USD", "Global"],
-    age: "4 years",
+    age: "2022",
     airdropFarming: "True",
   },
   {
@@ -805,7 +805,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "ERC-20 Tokens and Solana SPL Tokens",
     kyc: "Required",
     supportedCurrencies: ["EUR", "USD"],
-    age: "2 years",
+    age: "2024",
     airdropFarming: "False",
   },
   {
@@ -832,7 +832,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, OBT, USDT",
     kyc: "Required",
     supportedCurrencies: ["EUR", "USD", "BRL"],
-    age: "7 years",
+    age: "2019",
     airdropFarming: "False",
   },
   {
@@ -859,7 +859,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "PLU, ETH, and other ERC‑20 tokens",
     kyc: "Required",
     supportedCurrencies: ["EUR", "GBP"],
-    age: "11 years",
+    age: "2015",
     airdropFarming: "False",
   },
   {
@@ -886,7 +886,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, USDT, USDC, SOL, BNB, TON, and 100+ coins",
     kyc: "Required",
     supportedCurrencies: ["EUR"],
-    age: "4 years",
+    age: "2022",
     airdropFarming: "False",
   },
   {
@@ -913,7 +913,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Bitcoin, ETH, USDC",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "9 years",
+    age: "2017",
     airdropFarming: "False",
   },
   {
@@ -940,7 +940,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC | USDT and 70+ cryptocurrencies",
     kyc: "Required",
     supportedCurrencies: ["USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -967,7 +967,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "EUR | CHF | RMB | USD (tokenized and fiat; via EUR24, CHF24, CNH24, USD24 on Arbitrum)",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -994,7 +994,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Over 20,000 crypto tokens including ETH, USDC, USDT, BTC",
     kyc: "Required",
     supportedCurrencies: ["CHF", "EUR", "USD", "RMB"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -1021,7 +1021,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Crypto across 40+ blockchains including ETH, USDC, USDT, BTC",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -1048,7 +1048,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "ETH, USDT, USDC, USDe, WBTC, WETH, MNT, ENA, AAVE, LDO, PENDLE, ARB, POL, ENS, crvUSD, PAXG, XAUt, plus fiat‑24 tokens (EUR24, CHF24, USD24, CNH24, JPY24, SGD24, HKD24) on Arbitrum.",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD", "SGD", "HKD", "JPY"],
-    age: "1 year",
+    age: "2025",
     airdropFarming: "False",
   },
   {
@@ -1074,7 +1074,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "ETH, USDC, USDC.e, USDT, ARB, LON, plus fiat‑24 tokens (EUR24, CHF24, USD24, CNH24) on Arbitrum.",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -1100,7 +1100,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "ETH, USDC, USDT, WBTC (Arbitrum/ERC‑20), plus fiat‑24 tokens (EUR24, CHF24, USD24, CNH24)",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD"],
-    age: "10 years",
+    age: "2016",
     airdropFarming: "False",
   },
   {
@@ -1126,7 +1126,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "Any tokens on Arbitrum (including ETH, USDC, USDT)",
     kyc: "Required",
     supportedCurrencies: ["EUR", "CHF", "RMB", "USD"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -1152,7 +1152,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, USDC",
     kyc: "Required",
     supportedCurrencies: ["USD", "Global"],
-    age: "8 years",
+    age: "2018",
     airdropFarming: "False",
   },
   {
@@ -1179,7 +1179,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "USDT, USDC",
     kyc: "Required",
     supportedCurrencies: ["USD", "20+ currencies"],
-    age: "2 years",
+    age: "2024",
     airdropFarming: "False",
   },
   {
@@ -1206,7 +1206,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, ETH, USDT, USDC, DAI",
     kyc: "Required",
     supportedCurrencies: ["ARS"],
-    age: "7 years",
+    age: "2019",
     airdropFarming: "False",
   },
   {
@@ -1235,7 +1235,7 @@ export const cards: readonly CardData[] = [
     supportedAssets: "250+ tokenised US equities",
     kyc: "Required",
     supportedCurrencies: ["USD", "EUR", "GBP", "BRL"],
-    age: "1 year",
+    age: "2025",
     airdropFarming: "False",
     addedDate: "2026-03-27",
   },

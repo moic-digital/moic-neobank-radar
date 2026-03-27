@@ -102,7 +102,7 @@ export default function CryptoCard({
             Age
           </p>
           <p className="text-xs font-semibold text-white/80">
-            {card.age || "N/A"}
+            {card.age ? `${new Date().getFullYear() - parseInt(card.age)} yr` : "N/A"}
           </p>
         </div>
         <div className="text-center border-x border-white/[0.06]">
