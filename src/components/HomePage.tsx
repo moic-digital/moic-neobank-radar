@@ -40,7 +40,7 @@ export default function HomePage({ cards }: HomePageProps) {
 
   const [sort, setSort] = useState<SortOption>("nameAZ")
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS)
-  const [showRecommended, setShowRecommended] = useState(true)
+
   const [compareMode, setCompareMode] = useState(false)
   const [selectedIds, setSelectedIds] = useState<readonly string[]>([])
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -114,11 +114,9 @@ export default function HomePage({ cards }: HomePageProps) {
     })
 
     return [...result].sort((a, b) => {
-      if (showRecommended) {
-        const aRec = a.recommended ? 0 : 1
-        const bRec = b.recommended ? 0 : 1
-        if (aRec !== bRec) return aRec - bRec
-      }
+      const aRec = a.recommended ? 0 : 1
+      const bRec = b.recommended ? 0 : 1
+      if (aRec !== bRec) return aRec - bRec
 
       if (sort === "featured") {
         return (a.rank ?? 999) - (b.rank ?? 999)
@@ -133,7 +131,7 @@ export default function HomePage({ cards }: HomePageProps) {
       }
       return 0
     })
-  }, [cards, filters, sort, showRecommended])
+  }, [cards, filters, sort])
 
   const selectedCards = useMemo(
     () => cards.filter((c) => selectedIds.includes(c.id)),
@@ -197,10 +195,8 @@ export default function HomePage({ cards }: HomePageProps) {
         <FilterBar
           filters={filters}
           sort={sort}
-          showRecommended={showRecommended}
           onFilterChange={setFilters}
           onSortChange={setSort}
-          onToggleRecommended={() => setShowRecommended((prev) => !prev)}
           resultsCount={filteredCards.length}
         />
 
@@ -212,7 +208,7 @@ export default function HomePage({ cards }: HomePageProps) {
                 card={card}
                 compareMode={compareMode}
                 isSelected={selectedIds.includes(card.id)}
-                highlightRecommended={showRecommended}
+                highlightRecommended
                 onToggleCompare={toggleCompare}
               />
             ))

@@ -4,7 +4,7 @@ import { CardData } from "@/types/card"
 export const cards: readonly CardData[] = [
   {
     id: "nexo-card",
-    name: "Nexo Card",
+    name: "Nexo",
     issuer: "Nexo",
     logo: getCardLogo("nexo-card"),
     type: "Credit",
@@ -33,7 +33,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "coinbase-card",
-    name: "Coinbase Card",
+    name: "Coinbase",
     issuer: "Coinbase",
     logo: getCardLogo("coinbase-card"),
     type: "Debit",
@@ -60,7 +60,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "binance-card",
-    name: "Binance Card",
+    name: "Binance",
     issuer: "Binance",
     logo: getCardLogo("binance-card"),
     type: "Debit",
@@ -147,7 +147,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bybit-card",
-    name: "Bybit Card",
+    name: "Bybit",
     issuer: "Bybit",
     logo: getCardLogo("bybit-card"),
     type: "Debit",
@@ -174,7 +174,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "kast-card",
-    name: "KAST Card",
+    name: "KAST",
     issuer: "KAST",
     logo: getCardLogo("kast-card"),
     type: "Debit",
@@ -232,7 +232,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "metamask-card",
-    name: "MetaMask Card",
+    name: "MetaMask",
     issuer: "ConsenSys",
     logo: getCardLogo("metamask-card"),
     type: "Debit",
@@ -293,7 +293,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "wirex-card",
-    name: "Wirex Card",
+    name: "Wirex",
     issuer: "Wirex",
     logo: getCardLogo("wirex-card"),
     type: "Debit",
@@ -320,7 +320,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bitpay-card",
-    name: "BitPay Card",
+    name: "BitPay",
     issuer: "BitPay",
     logo: getCardLogo("bitpay-card"),
     type: "Prepaid",
@@ -346,7 +346,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "coca-card",
-    name: "Coca Card",
+    name: "Coca",
     issuer: "COCA",
     logo: getCardLogo("coca-card"),
     type: "Debit",
@@ -371,10 +371,11 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["EUR", "USD", "GBP"],
     age: "2023",
     airdropFarming: "False",
+    recommended: true,
   },
   {
     id: "brighty-card",
-    name: "Brighty Card",
+    name: "Brighty",
     issuer: "Brighty",
     logo: getCardLogo("brighty-card"),
     type: "Debit",
@@ -403,7 +404,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "cypher-card",
-    name: "Cypher Card",
+    name: "Cypher",
     issuer: "Cypher",
     logo: getCardLogo("cypher-card"),
     type: "Debit",
@@ -455,17 +456,18 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bitrefill-card",
-    name: "Bitrefill Card",
+    name: "Bitrefill",
     issuer: "Bitrefill",
     logo: getCardLogo("bitrefill-card"),
     type: "Prepaid",
     network: "Visa",
-    cashbackMax: 0,
+    cashbackMax: 1,
     cashbackMin: "0%",
     annualFee: "Free",
     fxFee: "0%",
     perks: [
       "1% Bitrefill Store Credit on crypto deposits + 1% on spending (can only be used for gift cards/refills, not cash withdrawal).",
+      "Deposit over €500 of crypto each month and receive a free eSIM for up to 20GB of data anywhere you travel.",
     ],
     signupBonus: "-",
     custody: "Custodial",
@@ -482,7 +484,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "whitebit-card",
-    name: "WhiteBIT Card",
+    name: "WhiteBIT",
     issuer: "WhiteBIT",
     logo: getCardLogo("whitebit-card"),
     type: "Debit",
@@ -510,7 +512,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "wayex-card",
-    name: "Wayex Card",
+    name: "Wayex",
     issuer: "Wayex",
     logo: getCardLogo("wayex-card"),
     type: "Prepaid",
@@ -564,7 +566,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "fold-card",
-    name: "Fold Card",
+    name: "Fold",
     issuer: "Fold",
     logo: getCardLogo("fold-card"),
     type: "Debit",
@@ -593,7 +595,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bleap-card",
-    name: "Bleap Card",
+    name: "Bleap",
     issuer: "Bleap",
     logo: getCardLogo("bleap-card"),
     type: "Debit",
@@ -620,7 +622,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bitpanda-card",
-    name: "Bitpanda Card",
+    name: "Bitpanda",
     issuer: "Bitpanda",
     logo: getCardLogo("bitpanda-card"),
     type: "Debit",
@@ -647,7 +649,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "zypto-card",
-    name: "Zypto Card",
+    name: "Zypto",
     issuer: "Zypto",
     logo: getCardLogo("zypto-card"),
     type: "Prepaid",
@@ -702,7 +704,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "tuyo-card",
-    name: "Tuyo Card",
+    name: "Tuyo",
     issuer: "Tuyo",
     logo: getCardLogo("tuyo-card"),
     type: "Debit",
@@ -729,7 +731,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "redotpay-card",
-    name: "RedotPay Card",
+    name: "RedotPay",
     issuer: "RedotPay",
     logo: getCardLogo("redotpay-card"),
     type: "Prepaid",
@@ -756,7 +758,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "tria-card",
-    name: "Tria Card",
+    name: "Tria",
     issuer: "Tria",
     logo: getCardLogo("tria-card"),
     type: "Debit",
@@ -767,7 +769,7 @@ export const cards: readonly CardData[] = [
     fxFee: "0-3%",
     perks: [
       "Up to 6% cashback in TRIA tokens",
-      "Activate higher yields and exclusive opportunities when you hold and use a Tria Card",
+      "Activate higher yields and exclusive opportunities when you hold and use a Tria",
     ],
     signupBonus: "None",
     custody: "Non-Custodial",
@@ -779,12 +781,12 @@ export const cards: readonly CardData[] = [
     supportedAssets: "BTC, SOL, ETH, BNB, USDC and 1000+ coins",
     kyc: "Required",
     supportedCurrencies: ["USD", "Global"],
-    age: "2022",
+    age: "2025",
     airdropFarming: "True",
   },
   {
     id: "avici-card",
-    name: "Avici Card",
+    name: "Avici",
     issuer: "Avici",
     logo: getCardLogo("avici-card"),
     type: "Debit",
@@ -810,7 +812,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "oobit-card",
-    name: "Oobit Card",
+    name: "Oobit",
     issuer: "Oobit",
     logo: getCardLogo("oobit-card"),
     type: "Debit",
@@ -837,7 +839,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "plutus-card",
-    name: "Plutus Card",
+    name: "Plutus",
     issuer: "Plutus",
     logo: getCardLogo("plutus-card"),
     type: "Debit",
@@ -864,7 +866,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "deblock-card",
-    name: "Deblock Card",
+    name: "Deblock",
     issuer: "Deblock",
     logo: getCardLogo("deblock-card"),
     type: "Debit",
@@ -918,7 +920,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "tapx-card",
-    name: "TapX Card",
+    name: "TapX",
     issuer: "TapX",
     logo: getCardLogo("tapx-card"),
     type: "Debit",
@@ -945,7 +947,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "fiat24-card",
-    name: "Fiat24 Card",
+    name: "Fiat24",
     issuer: "Fiat24",
     logo: getCardLogo("fiat24-card"),
     type: "Debit",
@@ -972,7 +974,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "thorwallet-card",
-    name: "THORWallet Card",
+    name: "THORWallet",
     issuer: "THORWallet",
     logo: getCardLogo("thorwallet-card"),
     type: "Debit",
@@ -999,7 +1001,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "safepal-card",
-    name: "SafePal Card",
+    name: "SafePal",
     issuer: "SafePal",
     logo: getCardLogo("safepal-card"),
     type: "Debit",
@@ -1026,7 +1028,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "ur-card",
-    name: "UR Card",
+    name: "UR",
     issuer: "UR",
     logo: getCardLogo("ur-card"),
     type: "Debit",
@@ -1053,7 +1055,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "savepay-card",
-    name: "SavePay Card",
+    name: "SavePay",
     issuer: "SavePay",
     logo: getCardLogo("savepay-card"),
     type: "Debit",
@@ -1079,7 +1081,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "imtoken-card",
-    name: "imToken Card",
+    name: "imToken",
     issuer: "imToken",
     logo: getCardLogo("imtoken-card"),
     type: "Debit",
@@ -1105,7 +1107,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "tokenpocket-card",
-    name: "TokenPocket Card",
+    name: "TokenPocket",
     issuer: "TokenPocket",
     logo: getCardLogo("tokenpocket-card"),
     type: "Debit",
@@ -1131,7 +1133,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "bitgetwallet-card",
-    name: "Bitget Wallet Card",
+    name: "Bitget Wallet",
     issuer: "Bitget Wallet",
     logo: getCardLogo("bitgetwallet-card"),
     type: "Debit",
@@ -1157,7 +1159,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "pexx-card",
-    name: "Pexx Card",
+    name: "Pexx",
     issuer: "Pexx",
     logo: getCardLogo("pexx-card"),
     type: "Debit",
@@ -1184,7 +1186,7 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "lemoncash-card",
-    name: "Lemon Card",
+    name: "Lemon",
     issuer: "Lemon Cash",
     logo: getCardLogo("lemoncash-card"),
     type: "Debit",

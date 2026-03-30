@@ -84,10 +84,8 @@ const SORT_ITEMS = [
 interface FilterBarProps {
   readonly filters: Filters
   readonly sort: SortOption
-  readonly showRecommended: boolean
   readonly onFilterChange: (filters: Filters) => void
   readonly onSortChange: (sort: SortOption) => void
-  readonly onToggleRecommended: () => void
   readonly resultsCount: number
 }
 
@@ -137,10 +135,8 @@ function TriStateDots({ state }: { readonly state: TriState }) {
 export default function FilterBar({
   filters,
   sort,
-  showRecommended,
   onFilterChange,
   onSortChange,
-  onToggleRecommended,
   resultsCount,
 }: FilterBarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -233,7 +229,10 @@ export default function FilterBar({
     <div className="w-full mb-6 sm:mb-8 py-4 sm:py-6 space-y-4">
       {/* Row 1: Recommended Switch + Search + Add Neobank */}
       <div className="flex gap-3">
-        {/* Our Picks button — hidden until recommendations are configured */}
+        <div className="flex items-center gap-2 px-3 sm:px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide border rounded-xl whitespace-nowrap bg-gradient-to-r from-orange-600 to-amber-500 border-orange-400/60 text-white shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_40px_rgba(251,146,60,0.15)]">
+          <Flame className="w-4 h-4 shrink-0 text-white" />
+          <span>Our Picks</span>
+        </div>
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none">
             <Search className="h-4 w-4 sm:h-5 sm:w-5 text-white/30" />
