@@ -81,21 +81,26 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
+          {/* Compare Cards — primary with shimmer + glow pulse */}
           <button
             onClick={onCompare}
-            className="flex items-center gap-2 px-6 py-3 bg-moic-blue hover:bg-moic-blue/80 text-white font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer shadow-[0_0_20px_rgba(42,96,251,0.4)] hover:shadow-[0_0_28px_rgba(42,96,251,0.55)]"
+            className="relative flex items-center gap-2 px-6 py-3 bg-moic-blue hover:bg-moic-blue/80 text-white font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer animate-glow-pulse overflow-hidden"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
-            <Scale className="w-4 h-4" />
-            Compare Cards
+            <span className="absolute inset-0 animate-shimmer pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <Scale className="w-4 h-4 relative" />
+            <span className="relative">Compare Cards</span>
           </button>
+
+          {/* Add Your Neobank — outline with border glow */}
           <button
             onClick={handleAddNeobank}
-            className="flex items-center gap-2 px-6 py-3 border border-moic-blue/60 text-moic-blue hover:bg-moic-blue/10 font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer"
+            className="relative flex items-center gap-2 px-6 py-3 border border-moic-blue/50 text-moic-blue hover:bg-moic-blue/10 font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer animate-border-glow overflow-hidden"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
-            <Plus className="w-4 h-4" />
-            Add Your Neobank
+            <span className="absolute inset-0 animate-shimmer pointer-events-none bg-gradient-to-r from-transparent via-moic-blue/15 to-transparent" />
+            <Plus className="w-4 h-4 relative" />
+            <span className="relative">Add Your Neobank</span>
           </button>
         </div>
       </div>
