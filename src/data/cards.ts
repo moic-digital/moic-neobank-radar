@@ -1227,6 +1227,10 @@ export const cards: readonly CardData[] = [
       "LIL Rewards",
       "APY depending on the currency",
       "Live the digital nomad lifestyle",
+      "Your balance earns 3-15% automatically through institutional-grade DeFi protocols",
+      "Buy fractional shares of US stocks with live market data, limit orders, and a real portfolio",
+      "Nim - Your AI personal agent",
+      "Simple and transparent pricing, fees and subscription costs are published in the app"
     ],
     signupBonus: "None",
     custody: "Non-Custodial",
