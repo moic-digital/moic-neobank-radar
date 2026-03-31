@@ -10,6 +10,7 @@ import CryptoCard from "@/components/CryptoCard"
 import FilterBar from "@/components/FilterBar"
 import CompareBar from "@/components/CompareBar"
 import CompareDrawer from "@/components/CompareDrawer"
+import AddNeobankSection from "@/components/AddNeobankSection"
 import FaqSection from "@/components/FaqSection"
 import Footer from "@/components/Footer"
 import { FAQ_CATEGORIES } from "@/data/faq"
@@ -289,6 +290,8 @@ export default function HomePage({ cards }: HomePageProps) {
           onClose={handleCloseDrawer}
         />
       )}
+
+      <AddNeobankSection />
 
       <FaqSection categories={FAQ_CATEGORIES} />
 

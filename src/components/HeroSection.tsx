@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Lottie from "lottie-react"
-import { Search, Scale } from "lucide-react"
+import { Plus, Scale } from "lucide-react"
 import animationData from "../../public/radar-iso-animation.json"
 import LogoRain from "@/components/LogoRain"
 
@@ -34,8 +34,8 @@ function LogoPanel({ seed, side }: {
 }
 
 export default function HeroSection({ onCompare }: HeroSectionProps) {
-  function handleExplore() {
-    document.getElementById("cards")?.scrollIntoView({ behavior: "smooth" })
+  function handleAddNeobank() {
+    document.getElementById("add-neobank")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
@@ -90,12 +90,12 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
             Compare Cards
           </button>
           <button
-            onClick={handleExplore}
+            onClick={handleAddNeobank}
             className="flex items-center gap-2 px-6 py-3 border border-moic-blue/60 text-moic-blue hover:bg-moic-blue/10 font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
-            <Search className="w-4 h-4" />
-            Explore Cards
+            <Plus className="w-4 h-4" />
+            Add Your Neobank
           </button>
         </div>
       </div>
