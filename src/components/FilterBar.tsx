@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
 import {
   Search,
   X,
@@ -9,15 +8,11 @@ import {
   Shield,
   KeyRound,
   ArrowDownAZ,
-  Plus,
-  CheckCircle,
-  XCircle,
   Sparkles,
   Flame,
 } from "lucide-react"
 import { Filters, SortOption } from "@/types/card"
 import FilterDropdown from "@/components/FilterDropdown"
-import AddNeobankModal from "@/components/AddNeobankModal"
 
 const REGION_ITEMS = [
   { value: "Global", label: "Global" },
@@ -139,20 +134,6 @@ export default function FilterBar({
   onSortChange,
   resultsCount,
 }: FilterBarProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [toast, setToast] = useState<"success" | "error" | null>(null)
-
-  useEffect(() => {
-    if (!toast) return
-    const timer = setTimeout(() => setToast(null), 5000)
-    return () => clearTimeout(timer)
-  }, [toast])
-
-  const handleModalClose = useCallback((result?: "success" | "error") => {
-    setIsModalOpen(false)
-    if (result) setToast(result)
-  }, [])
-
   const hasActiveFilters =
     filters.region !== "" ||
     filters.kyc !== "" ||
@@ -227,7 +208,7 @@ export default function FilterBar({
 
   return (
     <div className="w-full mb-6 sm:mb-8 py-4 sm:py-6 space-y-4">
-      {/* Row 1: Recommended Switch + Search + Add Neobank */}
+      {/* Row 1: Recommended Switch + Search */}
       <div className="flex gap-3">
         <div className="flex items-center gap-2 px-3 sm:px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide border rounded-xl whitespace-nowrap bg-gradient-to-r from-orange-600 to-amber-500 border-orange-400/60 text-white shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_40px_rgba(251,146,60,0.15)]">
           <Flame className="w-4 h-4 shrink-0 text-white" />
@@ -245,51 +226,7 @@ export default function FilterBar({
             onChange={handleSearch}
           />
         </div>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 bg-moic-blue hover:bg-moic-blue-light text-white font-semibold text-sm sm:text-base rounded-xl transition-colors cursor-pointer tracking-wide whitespace-nowrap"
-        >
-          <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
-          <span className="hidden sm:inline">Add Neobank</span>
-        </button>
       </div>
-
-      {isModalOpen && <AddNeobankModal onClose={handleModalClose} />}
-
-      {/* Toast notification */}
-      {toast && (
-        <div
-          className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl border shadow-2xl backdrop-blur-sm transition-all ${
-            toast === "success"
-              ? "bg-emerald-600/90 border-emerald-400/30"
-              : "bg-red-600/90 border-red-400/30"
-          }`}
-        >
-          {toast === "success" ? (
-            <CheckCircle className="w-5 h-5 text-white shrink-0" />
-          ) : (
-            <XCircle className="w-5 h-5 text-white shrink-0" />
-          )}
-          <div>
-            <p className="text-white text-sm font-semibold">
-              {toast === "success"
-                ? "Thank you for your submission!"
-                : "Something went wrong"}
-            </p>
-            <p className="text-white/70 text-xs mt-0.5">
-              {toast === "success"
-                ? "We will be in touch soon."
-                : "Please try again later."}
-            </p>
-          </div>
-          <button
-            onClick={() => setToast(null)}
-            className="ml-2 p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
-          >
-            <X className="w-4 h-4 text-white/50" />
-          </button>
-        </div>
-      )}
 
       {/* Row 2: KYC + Self-Custody + Airdrop (prominent tri-state) + other filters */}
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">

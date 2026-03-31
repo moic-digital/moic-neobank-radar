@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback, useEffect } from "react"
+import { useState, useMemo, useCallback, useEffect, useRef } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Scale } from "lucide-react"
 import { Filters, SortOption, CardData } from "@/types/card"
@@ -44,6 +44,8 @@ export default function HomePage({ cards }: HomePageProps) {
   const [compareMode, setCompareMode] = useState(false)
   const [selectedIds, setSelectedIds] = useState<readonly string[]>([])
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [heroVisible, setHeroVisible] = useState(true)
+  const heroRef = useRef<HTMLDivElement>(null)
 
   // Hydrate compare state from URL on mount (intentionally run once)
   useEffect(() => {
@@ -58,6 +60,17 @@ export default function HomePage({ cards }: HomePageProps) {
       }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    function handleScroll() {
+      const el = heroRef.current
+      if (!el) return
+      setHeroVisible(el.getBoundingClientRect().bottom > 0)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const filteredCards = useMemo(() => {
     const result = cards.filter((card) => {
@@ -186,9 +199,14 @@ export default function HomePage({ cards }: HomePageProps) {
 
   return (
     <div id="top" className="min-h-screen bg-moic-navy selection:bg-moic-blue selection:text-white">
-      <HeroSection />
+      <div ref={heroRef}>
+        <HeroSection onCompare={() => {
+          setCompareMode(true)
+          document.getElementById("cards")?.scrollIntoView({ behavior: "smooth" })
+        }} />
+      </div>
 
-      <main className="px-4 sm:px-6 md:px-8 pb-12 bg-moic-navy">
+      <main id="cards" className="px-4 sm:px-6 md:px-8 pb-12 bg-moic-navy">
         <FilterBar
           filters={filters}
           sort={sort}
@@ -225,7 +243,7 @@ export default function HomePage({ cards }: HomePageProps) {
         </div>
       </main>
 
-      {/* FAB — Compare toggle */}
+      {/* FAB — Compare toggle (slides in from right when hero is out of view) */}
       <button
         onClick={() => {
           if (compareMode) {
@@ -234,11 +252,15 @@ export default function HomePage({ cards }: HomePageProps) {
             setCompareMode(true)
           }
         }}
-        className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer bg-moic-blue text-white hover:bg-moic-blue/90 flex items-center justify-center overflow-hidden transition-[width,padding,gap,box-shadow] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer bg-moic-blue text-white hover:bg-moic-blue/90 flex items-center justify-center overflow-hidden ${
           compareMode
             ? "w-12 px-0 gap-0 shadow-[0_0_20px_rgba(42,96,251,0.4)]"
             : "w-[140px] px-4 gap-2"
         }`}
+        style={{
+          transform: heroVisible ? "translateX(calc(100% + 24px))" : "translateX(0)",
+          transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1), width 500ms cubic-bezier(0.4, 0, 0.2, 1), padding 500ms cubic-bezier(0.4, 0, 0.2, 1), gap 500ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
         aria-label={compareMode ? "Exit compare mode" : "Compare cards"}
       >
         <Scale className="w-5 h-5 shrink-0" />

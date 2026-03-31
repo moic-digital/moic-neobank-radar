@@ -1,4 +1,9 @@
+"use client"
+
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
+import { Plus, CheckCircle, XCircle, X } from "lucide-react"
+import AddNeobankModal from "@/components/AddNeobankModal"
 
 function XIcon({ className }: { readonly className?: string }) {
   return (
@@ -50,6 +55,20 @@ const NAV_LINKS = [
 ] as const
 
 export default function Footer() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [toast, setToast] = useState<"success" | "error" | null>(null)
+
+  useEffect(() => {
+    if (!toast) return
+    const timer = setTimeout(() => setToast(null), 5000)
+    return () => clearTimeout(timer)
+  }, [toast])
+
+  const handleModalClose = useCallback((result?: "success" | "error") => {
+    setIsModalOpen(false)
+    if (result) setToast(result)
+  }, [])
+
   return (
     <footer className="bg-moic-surface border-t border-white/6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16">
@@ -94,6 +113,15 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="flex items-center gap-1.5 text-sm text-moic-blue hover:text-moic-blue/80 transition-colors cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  Add Your Neobank
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -142,6 +170,41 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      {isModalOpen && <AddNeobankModal onClose={handleModalClose} />}
+
+      {toast && (
+        <div
+          className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl border shadow-2xl backdrop-blur-sm transition-all ${
+            toast === "success"
+              ? "bg-emerald-600/90 border-emerald-400/30"
+              : "bg-red-600/90 border-red-400/30"
+          }`}
+        >
+          {toast === "success" ? (
+            <CheckCircle className="w-5 h-5 text-white shrink-0" />
+          ) : (
+            <XCircle className="w-5 h-5 text-white shrink-0" />
+          )}
+          <div>
+            <p className="text-white text-sm font-semibold">
+              {toast === "success"
+                ? "Thank you for your submission!"
+                : "Something went wrong"}
+            </p>
+            <p className="text-white/70 text-xs mt-0.5">
+              {toast === "success"
+                ? "We will be in touch soon."
+                : "Please try again later."}
+            </p>
+          </div>
+          <button
+            onClick={() => setToast(null)}
+            className="ml-2 p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+          >
+            <X className="w-4 h-4 text-white/50" />
+          </button>
+        </div>
+      )}
     </footer>
   )
 }

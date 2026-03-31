@@ -2,8 +2,13 @@
 
 import Image from "next/image"
 import Lottie from "lottie-react"
+import { Search, Scale } from "lucide-react"
 import animationData from "../../public/radar-iso-animation.json"
 import LogoRain from "@/components/LogoRain"
+
+interface HeroSectionProps {
+  readonly onCompare: () => void
+}
 
 function LogoPanel({ seed, side }: {
   readonly seed: number
@@ -28,9 +33,13 @@ function LogoPanel({ seed, side }: {
   )
 }
 
-export default function HeroSection() {
+export default function HeroSection({ onCompare }: HeroSectionProps) {
+  function handleExplore() {
+    document.getElementById("cards")?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
-    <section className="relative grid grid-cols-1 md:grid-cols-[25%_50%_25%] h-auto md:h-[420px] overflow-hidden gap-0">
+    <section className="relative grid grid-cols-1 md:grid-cols-[25%_50%_25%] h-auto md:h-[500px] overflow-hidden gap-0">
       {/* Left panel */}
       <div className="hidden md:block h-full overflow-hidden">
         <LogoPanel seed={7919} side="left" />
@@ -70,6 +79,25 @@ export default function HeroSection() {
         <p className="text-white/40 text-sm sm:text-base text-center max-w-xl mx-auto mt-4 leading-relaxed">
           Compare fees, perks and find the perfect digital bank for your financial moment.
         </p>
+
+        <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
+          <button
+            onClick={onCompare}
+            className="flex items-center gap-2 px-6 py-3 bg-moic-blue hover:bg-moic-blue/80 text-white font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer shadow-[0_0_20px_rgba(42,96,251,0.4)] hover:shadow-[0_0_28px_rgba(42,96,251,0.55)]"
+            style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+          >
+            <Scale className="w-4 h-4" />
+            Compare Cards
+          </button>
+          <button
+            onClick={handleExplore}
+            className="flex items-center gap-2 px-6 py-3 border border-moic-blue/60 text-moic-blue hover:bg-moic-blue/10 font-semibold rounded-xl transition-colors text-sm sm:text-base cursor-pointer"
+            style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
+          >
+            <Search className="w-4 h-4" />
+            Explore Cards
+          </button>
+        </div>
       </div>
 
       {/* Right panel */}
