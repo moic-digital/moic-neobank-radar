@@ -58,21 +58,16 @@ export default function CryptoCard({
           onClick={handleCompareClick}
           aria-label={isSelected ? `Remove ${card.name} from comparison` : `Add ${card.name} to comparison`}
           aria-pressed={isSelected}
-          className={`absolute top-3 left-3 z-10 w-5 h-5 rounded border-2 flex items-center justify-center transition-all cursor-pointer ${
+          className={`absolute top-3 right-3 z-10 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer ${
             isSelected
-              ? "bg-moic-blue border-moic-blue"
-              : "border-white/30 hover:border-moic-blue/60 bg-white/5"
+              ? "bg-moic-blue border-2 border-moic-blue shadow-[0_0_10px_rgba(42,96,251,0.5)] scale-110"
+              : "border-2 border-white/30 hover:border-moic-blue/60 hover:scale-105 bg-white/5 backdrop-blur-sm"
           }`}
         >
-          {isSelected && <Check className="w-3 h-3 text-white" />}
+          {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
         </button>
       )}
 
-      {showAirdrop && (
-        <span className="absolute top-3 right-3 text-[9px] font-semibold uppercase tracking-wider bg-moic-green text-black px-2 py-0.5 rounded-sm">
-          Airdrop
-        </span>
-      )}
 
       {/* Top: Logo + Name */}
       <div className="flex items-center gap-3 mb-4">
@@ -136,10 +131,17 @@ export default function CryptoCard({
         </span>
       </div>
 
-      {/* View details — hidden in compare mode but preserves space */}
-      <p className={`text-[10px] text-white/25 group-hover:text-white/60 mt-3 text-right transition-colors duration-300 ${compareMode ? "invisible" : ""}`}>
-        View details →
-      </p>
+      {/* Airdrop tag + View details */}
+      <div className={`flex items-center mt-3 ${compareMode ? "invisible" : ""}`}>
+        {showAirdrop && (
+          <span className="text-[9px] font-semibold uppercase tracking-wider bg-moic-green text-black px-2 py-0.5 rounded-sm">
+            Airdrop
+          </span>
+        )}
+        <p className="text-[10px] text-white/25 group-hover:text-white/60 text-right transition-colors duration-300 ml-auto">
+          View details →
+        </p>
+      </div>
     </div>
   )
 

@@ -234,14 +234,19 @@ export default function HomePage({ cards }: HomePageProps) {
             setCompareMode(true)
           }
         }}
-        className={`fixed bottom-6 right-6 z-30 p-3.5 rounded-full shadow-lg transition-all cursor-pointer ${
+        className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer bg-moic-blue text-white hover:bg-moic-blue/90 flex items-center justify-center overflow-hidden transition-[width,padding,gap,box-shadow] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           compareMode
-            ? "bg-moic-blue text-white shadow-[0_0_20px_rgba(42,96,251,0.4)]"
-            : "bg-moic-surface/90 backdrop-blur-sm border border-white/10 text-white/50 hover:text-white hover:border-white/20"
-        } ${selectedIds.length > 0 ? "bottom-24 sm:bottom-28" : ""}`}
+            ? "w-12 px-0 gap-0 shadow-[0_0_20px_rgba(42,96,251,0.4)]"
+            : "w-[140px] px-4 gap-2"
+        }`}
         aria-label={compareMode ? "Exit compare mode" : "Compare cards"}
       >
-        <Scale className="w-5 h-5" />
+        <Scale className="w-5 h-5 shrink-0" />
+        <span className={`text-sm font-medium whitespace-nowrap transition-[max-width,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${
+          compareMode ? "max-w-0 opacity-0" : "max-w-24 opacity-100"
+        }`}>
+          Compare
+        </span>
       </button>
 
       {/* Compare bottom bar */}
