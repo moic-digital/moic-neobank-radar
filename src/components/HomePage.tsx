@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { Scale } from "lucide-react"
+import { Scale, X } from "lucide-react"
 import { Filters, SortOption, CardData } from "@/types/card"
 import { matchesRegion } from "@/utils/regions/regionUtils"
 import HeroSection from "@/components/HeroSection"
@@ -253,18 +253,18 @@ export default function HomePage({ cards }: HomePageProps) {
             setCompareMode(true)
           }
         }}
-        className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer bg-moic-blue text-white hover:bg-moic-blue/90 flex items-center justify-center overflow-hidden ${
+        className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer text-white flex items-center justify-center overflow-hidden ${
           compareMode
-            ? "w-12 px-0 gap-0 shadow-[0_0_20px_rgba(42,96,251,0.4)]"
-            : "w-[140px] px-4 gap-2"
+            ? "w-12 px-0 gap-0 bg-red-500/80 hover:bg-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+            : "w-[140px] px-4 gap-2 bg-moic-blue hover:bg-moic-blue/90"
         }`}
         style={{
           transform: heroVisible ? "translateX(calc(100% + 24px))" : "translateX(0)",
-          transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1), width 500ms cubic-bezier(0.4, 0, 0.2, 1), padding 500ms cubic-bezier(0.4, 0, 0.2, 1), gap 500ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1), width 500ms cubic-bezier(0.4, 0, 0.2, 1), padding 500ms cubic-bezier(0.4, 0, 0.2, 1), gap 500ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms ease",
         }}
         aria-label={compareMode ? "Exit compare mode" : "Compare cards"}
       >
-        <Scale className="w-5 h-5 shrink-0" />
+        {compareMode ? <X className="w-5 h-5 shrink-0" /> : <Scale className="w-5 h-5 shrink-0" />}
         <span className={`text-sm font-medium whitespace-nowrap transition-[max-width,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${
           compareMode ? "max-w-0 opacity-0" : "max-w-24 opacity-100"
         }`}>
