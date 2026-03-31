@@ -290,6 +290,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD"],
     age: "2022",
     airdropFarming: "False",
+    recommended: true,
   },
   {
     id: "wirex-card",
