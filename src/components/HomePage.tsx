@@ -75,10 +75,7 @@ export default function HomePage({ cards }: HomePageProps) {
         filters.custody.length === 0 ||
         filters.custody.includes(card.custody)
 
-      const matchesCashback =
-        typeof card.cashbackMax === "number"
-          ? card.cashbackMax >= filters.minCashback
-          : filters.minCashback === 0
+      const matchesCashback = card.cashbackMax >= filters.minCashback
 
       const matchesRegionFilter = matchesRegion(card.regions, filters.region)
 
@@ -122,8 +119,8 @@ export default function HomePage({ cards }: HomePageProps) {
         return (a.rank ?? 999) - (b.rank ?? 999)
       }
       if (sort === "cashbackHigh") {
-        const aVal = typeof a.cashbackMax === "number" ? a.cashbackMax : 0
-        const bVal = typeof b.cashbackMax === "number" ? b.cashbackMax : 0
+        const aVal = a.cashbackMax
+        const bVal = b.cashbackMax
         return bVal - aVal
       }
       if (sort === "nameAZ") {

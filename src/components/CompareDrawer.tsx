@@ -24,7 +24,7 @@ const STAT_ROWS: readonly StatRow[] = [
   {
     label: "Cashback",
     getValue: (c) =>
-      typeof c.cashbackMax === "number" ? `${c.cashbackMax}%` : c.cashbackMax || "N/A",
+      c.cashbackMax > 0 ? `${c.cashbackMax}%` : "N/A",
     highlight: (v) => {
       const num = parseFloat(v)
       if (isNaN(num)) return "text-white/60"

@@ -86,32 +86,30 @@ interface Insight {
 function buildInsights(card: CardData): readonly Insight[] {
   const insights: Insight[] = []
 
-  if (typeof card.cashbackMax === "number") {
-    if (card.cashbackMax >= 10) {
-      insights.push({
-        icon: TrendingUp,
-        label: "Elite Cashback",
-        description: "Extremely high cashback - best suited for heavy spenders who can maximize rewards.",
-      })
-    } else if (card.cashbackMax >= 5) {
-      insights.push({
-        icon: TrendingUp,
-        label: "Strong Cashback",
-        description: "Strong cashback profile for everyday spending across multiple categories.",
-      })
-    } else if (card.cashbackMax > 0) {
-      insights.push({
-        icon: TrendingUp,
-        label: "Moderate Cashback",
-        description: "Moderate cashback - interesting as a secondary card or niche use case.",
-      })
-    } else {
-      insights.push({
-        icon: TrendingUp,
-        label: "No Direct Cashback",
-        description: "No direct cashback - evaluate mainly for features, regions and custody model.",
-      })
-    }
+  if (card.cashbackMax >= 10) {
+    insights.push({
+      icon: TrendingUp,
+      label: "Elite Cashback",
+      description: "Extremely high cashback - best suited for heavy spenders who can maximize rewards.",
+    })
+  } else if (card.cashbackMax >= 5) {
+    insights.push({
+      icon: TrendingUp,
+      label: "Strong Cashback",
+      description: "Strong cashback profile for everyday spending across multiple categories.",
+    })
+  } else if (card.cashbackMax > 0) {
+    insights.push({
+      icon: TrendingUp,
+      label: "Moderate Cashback",
+      description: "Moderate cashback - interesting as a secondary card or niche use case.",
+    })
+  } else {
+    insights.push({
+      icon: TrendingUp,
+      label: "No Direct Cashback",
+      description: "No direct cashback - evaluate mainly for features, regions and custody model.",
+    })
   }
 
   if (card.custody === "Self-Custody" || card.custody === "Non-Custodial") {
@@ -173,10 +171,7 @@ export default async function CardPage({ params }: CardPageProps) {
   const ageLabel = card.age
     ? `${new Date().getFullYear() - parseInt(card.age)} years`
     : "N/A"
-  const cashbackLabel =
-    typeof card.cashbackMax === "number"
-      ? `${card.cashbackMax}%`
-      : card.cashbackMax || "N/A"
+  const cashbackLabel = card.cashbackMax > 0 ? `${card.cashbackMax}%` : "N/A"
   const kycLabel = card.kyc === "Required" ? "Required" : card.kyc === "Light" ? "Light" : "None"
   const showAirdrop = card.airdropFarming && isAirdropFarming(card.airdropFarming)
 

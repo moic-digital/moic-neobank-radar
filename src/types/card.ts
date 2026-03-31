@@ -5,8 +5,8 @@ export interface CardData {
   readonly logo: string
   readonly type: "Credit" | "Debit" | "Prepaid" | "Virtual Account"
   readonly network: "Visa" | "Mastercard" | "Visa/Mastercard" | "Local Rails"
-  readonly cashbackMax: number | string
-  readonly cashbackMin: string
+  readonly cashbackMax: number
+  readonly cashbackMin: number
   readonly annualFee: string
   readonly fxFee: string
   readonly perks: readonly string[]

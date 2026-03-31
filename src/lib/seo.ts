@@ -70,10 +70,7 @@ export function buildItemListJsonLd(cards: readonly CardData[]) {
 }
 
 function formatCashback(card: CardData): string {
-  if (typeof card.cashbackMax === "number") {
-    return card.cashbackMax > 0 ? `Up to ${card.cashbackMax}%` : "No cashback"
-  }
-  return card.cashbackMax || "N/A"
+  return card.cashbackMax > 0 ? `Up to ${card.cashbackMax}%` : "No cashback"
 }
 
 export function buildCardDescription(card: CardData): string {
@@ -171,7 +168,7 @@ export function buildFAQJsonLd(card: CardData) {
     {
       question: `What cashback does ${card.name} offer?`,
       answer:
-        typeof card.cashbackMax === "number" && card.cashbackMax > 0
+        card.cashbackMax > 0
           ? `${card.name} offers up to ${card.cashbackMax}% cashback on spending.`
           : `${card.name} does not offer direct cashback rewards.`,
     },

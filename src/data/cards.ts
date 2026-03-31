@@ -10,7 +10,7 @@ export const cards: readonly CardData[] = [
     type: "Credit",
     network: "Mastercard",
     cashbackMax: 2,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "0.2%-2.5%",
     perks: [
@@ -39,7 +39,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 4,
-    cashbackMin: "2%",
+    cashbackMin: 2,
     annualFee: "Free",
     fxFee: "Not specified",
     perks: [
@@ -66,7 +66,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 3,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "1-2%",
     perks: [
@@ -96,7 +96,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "$0-$18",
     fxFee: "Zero FX fees",
     perks: [
@@ -123,7 +123,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 8,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Staking",
     fxFee: "ATM withdrawal fees, interbank exchange rates, top-up fees, and other charges may apply depending on your jurisdiction and card tier",
     perks: [
@@ -153,7 +153,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 10,
-    cashbackMin: "2%",
+    cashbackMin: 2,
     annualFee: "Free",
     fxFee: "0.50%",
     perks: [
@@ -180,7 +180,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 8,
-    cashbackMin: "2%",
+    cashbackMin: 2,
     annualFee: "Free - $10,000 (depending on tier)",
     fxFee: "0%–1.75%",
     perks: [
@@ -209,7 +209,7 @@ export const cards: readonly CardData[] = [
     type: "Credit",
     network: "Mastercard",
     cashbackMax: 4,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -238,7 +238,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 3,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free (Virtual), $199 (Premium)",
     fxFee: "0%",
     perks: [
@@ -266,7 +266,7 @@ export const cards: readonly CardData[] = [
     type: "Credit",
     network: "Visa",
     cashbackMax: 3,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "1%",
     perks: [
@@ -299,7 +299,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 8,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -326,7 +326,7 @@ export const cards: readonly CardData[] = [
     type: "Prepaid",
     network: "Mastercard",
     cashbackMax: 15,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "3%",
     perks: [
@@ -352,7 +352,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 8,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0% (direct pairs) / 1% (indirect pairs)",
     perks: [
@@ -371,7 +371,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["EUR", "USD", "GBP"],
     age: "2023",
     airdropFarming: "False",
-    recommended: true,
   },
   {
     id: "brighty-card",
@@ -381,7 +380,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 1.75,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "€0-€216",
     fxFee: "0%",
     perks: [
@@ -410,7 +409,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 35,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "$0 (Basic), $199 (Premium)",
     fxFee: "0.75%-1.75%",
     perks: [
@@ -436,7 +435,7 @@ export const cards: readonly CardData[] = [
     type: "Credit",
     network: "Visa",
     cashbackMax: 3,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -462,7 +461,7 @@ export const cards: readonly CardData[] = [
     type: "Prepaid",
     network: "Visa",
     cashbackMax: 1,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -490,7 +489,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 10,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -518,7 +517,7 @@ export const cards: readonly CardData[] = [
     type: "Prepaid",
     network: "Visa",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0% on USD spend; 1.5% on non‑USD spend",
     perks: [
@@ -545,7 +544,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 5,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -572,7 +571,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 15,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -601,7 +600,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 2,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -628,7 +627,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 1,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -655,7 +654,7 @@ export const cards: readonly CardData[] = [
     type: "Prepaid",
     network: "Visa",
     cashbackMax: 1,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "1.75-2.75%",
     perks: [
@@ -683,7 +682,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 1,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "1.75%",
     perks: [
@@ -710,7 +709,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "up to 1% for non-USD",
     perks: [
@@ -737,7 +736,7 @@ export const cards: readonly CardData[] = [
     type: "Prepaid",
     network: "Visa",
     cashbackMax: 3,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "1.20%",
     perks: [
@@ -764,7 +763,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 6,
-    cashbackMin: "1.5%",
+    cashbackMin: 1.5,
     annualFee: "Free",
     fxFee: "0-3%",
     perks: [
@@ -792,7 +791,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free-$10",
     fxFee: "0%",
     perks: [
@@ -818,7 +817,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 10,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free",
     fxFee: "1%",
     perks: [
@@ -845,7 +844,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 9,
-    cashbackMin: "3%",
+    cashbackMin: 3,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -872,7 +871,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 1,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free | ~€10/month",
     fxFee: "0%",
     perks: [
@@ -893,13 +892,13 @@ export const cards: readonly CardData[] = [
   },
   {
     id: "ready-card",
-    name: "Ready Lite",
+    name: "Ready",
     issuer: "Ready",
     logo: getCardLogo("ready-card"),
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 3,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "0-1%",
     perks: [
@@ -917,6 +916,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD"],
     age: "2017",
     airdropFarming: "False",
+    recommended: true,
   },
   {
     id: "tapx-card",
@@ -926,7 +926,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa/Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -953,7 +953,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0%",
     perks: [
@@ -980,7 +980,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0-1%",
     perks: [
@@ -1007,7 +1007,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "1%",
     perks: [
@@ -1034,7 +1034,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "0% | ~$24/month",
     fxFee: "Not specified",
     perks: [
@@ -1061,7 +1061,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "0% | ~$40",
     fxFee: "Standard FX/crypto‑to‑fiat marks",
     perks: [
@@ -1087,7 +1087,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "Usually 0%",
     perks: [
@@ -1113,7 +1113,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "Low",
     perks: [
@@ -1139,7 +1139,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa/Mastercard",
     cashbackMax: 0,
-    cashbackMin: "0%",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0% | 1.70%",
     perks: [
@@ -1165,7 +1165,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa/Mastercard",
     cashbackMax: 1,
-    cashbackMin: "1%",
+    cashbackMin: 1,
     annualFee: "Free",
     fxFee: "2.6%",
     perks: [
@@ -1183,6 +1183,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD", "20+ currencies"],
     age: "2024",
     airdropFarming: "False",
+    recommended: true,
   },
   {
     id: "lemoncash-card",
@@ -1192,7 +1193,7 @@ export const cards: readonly CardData[] = [
     type: "Debit",
     network: "Visa",
     cashbackMax: 2,
-    cashbackMin: "0.5%",
+    cashbackMin: 0.5,
     annualFee: "Free",
     fxFee: "Not specified",
     perks: [
@@ -1219,7 +1220,7 @@ export const cards: readonly CardData[] = [
     type: "Virtual Account",
     network: "Local Rails",
     cashbackMax: 0,
-    cashbackMin: "N/A",
+    cashbackMin: 0,
     annualFee: "Free",
     fxFee: "0.1% to 0.45%",
     perks: [

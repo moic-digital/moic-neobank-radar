@@ -22,10 +22,7 @@ export default function CryptoCard({
 }: CryptoCardProps) {
   const isNeonActive = card.recommended && highlightRecommended
   const showNew = isNewCard(card.addedDate)
-  const cashbackLabel =
-    typeof card.cashbackMax === "number"
-      ? `${card.cashbackMax}%`
-      : card.cashbackMax || "N/A"
+  const cashbackLabel = card.cashbackMax > 0 ? `${card.cashbackMax}%` : "N/A"
 
   const showAirdrop = card.airdropFarming && isAirdropFarming(card.airdropFarming)
 
