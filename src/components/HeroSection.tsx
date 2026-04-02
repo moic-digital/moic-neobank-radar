@@ -5,6 +5,8 @@ import Lottie from "lottie-react"
 import { Plus, Scale } from "lucide-react"
 import animationData from "../../public/radar-iso-animation.json"
 import LogoRain from "@/components/LogoRain"
+import LanguageSwitcher from "@/components/LanguageSwitcher"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 interface HeroSectionProps {
   readonly onCompare: () => void
@@ -34,12 +36,19 @@ function LogoPanel({ seed, side }: {
 }
 
 export default function HeroSection({ onCompare }: HeroSectionProps) {
+  const { t } = useDictionary()
+
   function handleAddNeobank() {
     document.getElementById("add-neobank")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
     <section className="relative grid grid-cols-1 md:grid-cols-[25%_50%_25%] h-auto md:h-[500px] overflow-hidden gap-0">
+      {/* Language Switcher */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher />
+      </div>
+
       {/* Left panel */}
       <div className="hidden md:block h-full overflow-hidden">
         <LogoPanel seed={7919} side="left" />
@@ -60,11 +69,11 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight text-center mt-4"
           style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
         >
-          Neobank Radar
+          {t.hero.title}
         </h1>
 
         <div className="flex items-center gap-2.5 mt-3">
-          <span className="text-white/50 text-xs sm:text-sm">Powered by</span>
+          <span className="text-white/50 text-xs sm:text-sm">{t.hero.poweredBy}</span>
           <a href="https://www.moicdigital.com/" target="_blank" rel="noopener noreferrer">
             <Image
               src="/logos/moic-logo.png"
@@ -77,7 +86,7 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
         </div>
 
         <p className="text-white/40 text-sm sm:text-base text-center max-w-xl mx-auto mt-4 leading-relaxed">
-          Compare fees, perks and find the perfect digital bank for your financial moment.
+          {t.hero.subtitle}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-6">
@@ -89,7 +98,7 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
           >
             <span className="absolute inset-0 animate-shimmer pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             <Scale className="w-4 h-4 relative" />
-            <span className="relative">Compare Cards</span>
+            <span className="relative">{t.hero.compareCards}</span>
           </button>
 
           {/* Add Your Neobank — outline with border glow */}
@@ -100,7 +109,7 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
           >
             <span className="absolute inset-0 animate-shimmer pointer-events-none bg-gradient-to-r from-transparent via-moic-blue/15 to-transparent" />
             <Plus className="w-4 h-4 relative" />
-            <span className="relative">Add Your Neobank</span>
+            <span className="relative">{t.hero.addYourNeobank}</span>
           </button>
         </div>
       </div>

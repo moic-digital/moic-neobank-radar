@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Scale, X } from "lucide-react"
 import { Filters, SortOption, CardData } from "@/types/card"
 import { matchesRegion } from "@/utils/regions/regionUtils"
+import { useDictionary } from "@/i18n/use-dictionary"
 import HeroSection from "@/components/HeroSection"
 import CryptoCard from "@/components/CryptoCard"
 import FilterBar from "@/components/FilterBar"
@@ -13,7 +14,7 @@ import CompareDrawer from "@/components/CompareDrawer"
 import AddNeobankSection from "@/components/AddNeobankSection"
 import FaqSection from "@/components/FaqSection"
 import Footer from "@/components/Footer"
-import { FAQ_CATEGORIES } from "@/data/faq"
+import { getFaqCategories } from "@/data/faq"
 
 interface HomePageProps {
   readonly cards: readonly CardData[]
@@ -36,6 +37,7 @@ const DEFAULT_FILTERS: Filters = {
 const MAX_COMPARE = 4
 
 export default function HomePage({ cards }: HomePageProps) {
+  const { t, locale } = useDictionary()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -164,9 +166,9 @@ export default function HomePage({ cards }: HomePageProps) {
 
   function updateCompareUrl(ids: readonly string[]) {
     if (ids.length >= 2) {
-      router.replace(`?compare=${ids.join(",")}`, { scroll: false })
+      router.replace(`/${locale}?compare=${ids.join(",")}`, { scroll: false })
     } else {
-      router.replace("/", { scroll: false })
+      router.replace(`/${locale}`, { scroll: false })
     }
   }
 
@@ -177,14 +179,14 @@ export default function HomePage({ cards }: HomePageProps) {
 
   function handleCloseDrawer() {
     setDrawerOpen(false)
-    router.replace("/", { scroll: false })
+    router.replace(`/${locale}`, { scroll: false })
   }
 
   function handleExitCompareMode() {
     setCompareMode(false)
     setSelectedIds([])
     setDrawerOpen(false)
-    router.replace("/", { scroll: false })
+    router.replace(`/${locale}`, { scroll: false })
   }
 
   function handleRemoveFromCompare(id: string) {
@@ -192,7 +194,7 @@ export default function HomePage({ cards }: HomePageProps) {
     setSelectedIds(newIds)
     if (newIds.length < 2 && drawerOpen) {
       setDrawerOpen(false)
-      router.replace("/", { scroll: false })
+      router.replace(`/${locale}`, { scroll: false })
     } else if (drawerOpen) {
       updateCompareUrl(newIds)
     }
@@ -231,13 +233,13 @@ export default function HomePage({ cards }: HomePageProps) {
           ) : (
             <div className="col-span-full py-12 sm:py-20 text-center border border-white/10 rounded-xl">
               <p className="text-white/50 text-sm sm:text-base">
-                No cards match your filters
+                {t.noResults.title}
               </p>
               <button
                 onClick={() => setFilters(DEFAULT_FILTERS)}
                 className="mt-4 text-moic-blue font-semibold hover:underline text-sm sm:text-base"
               >
-                Clear all filters
+                {t.noResults.clearAll}
               </button>
             </div>
           )}
@@ -262,13 +264,13 @@ export default function HomePage({ cards }: HomePageProps) {
           transform: heroVisible ? "translateX(calc(100% + 24px))" : "translateX(0)",
           transition: "transform 500ms cubic-bezier(0.4, 0, 0.2, 1), width 500ms cubic-bezier(0.4, 0, 0.2, 1), padding 500ms cubic-bezier(0.4, 0, 0.2, 1), gap 500ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms ease",
         }}
-        aria-label={compareMode ? "Exit compare mode" : "Compare cards"}
+        aria-label={compareMode ? "Exit compare mode" : t.compare.compare}
       >
         {compareMode ? <X className="w-5 h-5 shrink-0" /> : <Scale className="w-5 h-5 shrink-0" />}
         <span className={`text-sm font-medium whitespace-nowrap transition-[max-width,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${
           compareMode ? "max-w-0 opacity-0" : "max-w-24 opacity-100"
         }`}>
-          Compare
+          {t.compare.compare}
         </span>
       </button>
 
@@ -293,7 +295,7 @@ export default function HomePage({ cards }: HomePageProps) {
 
       <AddNeobankSection />
 
-      <FaqSection categories={FAQ_CATEGORIES} />
+      <FaqSection categories={getFaqCategories(locale)} />
 
       <Footer />
     </div>

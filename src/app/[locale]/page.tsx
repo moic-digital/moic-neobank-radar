@@ -1,13 +1,19 @@
 import { Suspense } from "react"
 import { cards } from "@/data/cards"
 import HomePage from "@/components/HomePage"
+import StaticCardGrid from "@/components/StaticCardGrid"
 import {
   buildWebSiteJsonLd,
   buildItemListJsonLd,
   safeJsonLdStringify,
 } from "@/lib/seo"
 
-export default function Page() {
+interface PageProps {
+  readonly params: Promise<{ locale: string }>
+}
+
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params
   const webSiteJsonLd = buildWebSiteJsonLd()
   const itemListJsonLd = buildItemListJsonLd(cards)
 
@@ -23,7 +29,7 @@ export default function Page() {
           __html: safeJsonLdStringify(itemListJsonLd),
         }}
       />
-      <Suspense>
+      <Suspense fallback={<StaticCardGrid cards={cards} locale={locale} />}>
         <HomePage cards={cards} />
       </Suspense>
     </>

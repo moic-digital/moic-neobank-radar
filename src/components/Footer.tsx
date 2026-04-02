@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 function XIcon({ className }: { readonly className?: string }) {
   return (
@@ -44,14 +45,16 @@ const SOCIAL_LINKS = [
   },
 ] as const
 
-const NAV_LINKS = [
-  { label: "Radar", href: "#top" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "https://www.moicdigital.com/forms-pre-schedule", external: true },
-  { label: "Neobanks Latam Report", href: "https://www.moicdigital.com/neobanks-latam-report", external: true },
-] as const
-
 export default function Footer() {
+  const { t } = useDictionary()
+
+  const navLinks = [
+    { label: t.footer.navRadar, href: "#top" },
+    { label: t.footer.navFaq, href: "#faq" },
+    { label: t.footer.navContact, href: "https://www.moicdigital.com/forms-pre-schedule", external: true },
+    { label: t.footer.navReport, href: "https://www.moicdigital.com/neobanks-latam-report", external: true },
+  ]
+
   return (
     <footer className="bg-moic-surface border-t border-white/6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16">
@@ -71,19 +74,17 @@ export default function Footer() {
               </h3>
             </div>
             <p className="text-sm leading-relaxed text-white/40 max-w-xs">
-              Compare fees, cashback, perks and custody models across 40+ crypto
-              debit and credit cards. Find the best digital banking product for
-              your needs.
+              {t.footer.description}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <h4 className="text-xs font-semibold text-white/60 uppercase tracking-widest mb-4">
-              Navigation
+              {t.footer.navigation}
             </h4>
             <ul className="space-y-3">
-              {NAV_LINKS.map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -102,7 +103,7 @@ export default function Footer() {
           {/* Connect */}
           <div>
             <h4 className="text-xs font-semibold text-white/60 uppercase tracking-widest mb-4">
-              Connect
+              {t.footer.connect}
             </h4>
             <div className="flex items-center gap-4">
               {SOCIAL_LINKS.map((social) => (
@@ -126,7 +127,7 @@ export default function Footer() {
       <div className="border-t border-white/6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/25">
-            &copy; {new Date().getFullYear()} Neobank Radar. All rights reserved.
+            &copy; {new Date().getFullYear()} Neobank Radar. {t.footer.allRightsReserved}
           </p>
           <a
             href="https://www.moicdigital.com/"
@@ -134,7 +135,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity"
           >
-            <span className="text-xs text-white/25">Powered by</span>
+            <span className="text-xs text-white/25">{t.footer.poweredBy}</span>
             <Image
               src="/logos/moic-logo.png"
               alt="MOIC"

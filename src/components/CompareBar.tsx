@@ -3,6 +3,7 @@
 import { X, ArrowRight } from "lucide-react"
 import { CardData } from "@/types/card"
 import CardLogo from "@/components/CardLogo"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 interface CompareBarProps {
   readonly cards: readonly CardData[]
@@ -19,6 +20,8 @@ export default function CompareBar({
   onCompare,
   onClear,
 }: CompareBarProps) {
+  const { t } = useDictionary()
+
   if (cards.length === 0) return null
 
   return (
@@ -80,7 +83,7 @@ export default function CompareBar({
                 disabled={cards.length < 2}
                 className="flex items-center gap-1.5 px-4 py-2 bg-moic-blue hover:bg-moic-blue-light disabled:opacity-30 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer"
               >
-                Compare
+                {t.compare.compare}
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

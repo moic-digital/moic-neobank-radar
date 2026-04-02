@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react"
 import { ChevronDown } from "lucide-react"
 import type { FaqCategory } from "@/types/faq"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 function toSlug(text: string) {
   return text
@@ -135,6 +136,7 @@ interface FaqSectionProps {
 }
 
 export default function FaqSection({ categories }: FaqSectionProps) {
+  const { t } = useDictionary()
   const [openCategories, setOpenCategories] = useState<ReadonlySet<string>>(new Set())
   const [openItems, setOpenItems] = useState<ReadonlySet<string>>(new Set())
 
@@ -166,10 +168,10 @@ export default function FaqSection({ categories }: FaqSectionProps) {
     <section id="faq" className="px-4 sm:px-6 md:px-8 py-16 sm:py-20 bg-moic-navy">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight text-center mb-3 font-[family-name:var(--font-display)]">
-          Frequently Asked Questions
+          {t.faq.title}
         </h2>
         <p className="text-white/40 text-sm sm:text-base text-center mb-12 max-w-lg mx-auto">
-          Everything you need to know about neobanks, crypto cards, and Neobank Radar.
+          {t.faq.subtitle}
         </p>
 
         <div className="space-y-3">

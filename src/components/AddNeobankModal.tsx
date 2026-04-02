@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { X, Loader2 } from "lucide-react"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 type SubmitResult = "success" | "error"
 
@@ -27,6 +28,7 @@ const INITIAL_FORM: FormData = {
 }
 
 export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
+  const { t } = useDictionary()
   const [form, setForm] = useState<FormData>(INITIAL_FORM)
   const [submitting, setSubmitting] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
@@ -103,7 +105,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
             className="text-lg font-bold text-white tracking-tight"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
-            Add Neobank
+            {t.addNeobank.modalTitle}
           </h2>
           <button
             onClick={() => onClose()}
@@ -117,14 +119,14 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
         <form onSubmit={handleSubmit} className="px-6 py-5 space-y-6">
           {/* Section 1: Contact Info */}
           <fieldset className="space-y-4">
-            <legend className={sectionHeadingClasses}>Contact Info</legend>
+            <legend className={sectionHeadingClasses}>{t.addNeobank.contactInfo}</legend>
 
             <div>
-              <label className={labelClasses}>Name</label>
+              <label className={labelClasses}>{t.addNeobank.name}</label>
               <input
                 type="text"
                 required
-                placeholder="Your name"
+                placeholder={t.addNeobank.namePlaceholder}
                 className={inputClasses}
                 value={form.contactName}
                 onChange={(e) => handleChange("contactName", e.target.value)}
@@ -133,21 +135,21 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className={labelClasses}>E-mail</label>
+                <label className={labelClasses}>{t.addNeobank.email}</label>
                 <input
                   required
                   type="email"
-                  placeholder="contact@example.com"
+                  placeholder={t.addNeobank.emailPlaceholder}
                   className={inputClasses}
                   value={form.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                 />
               </div>
               <div>
-                <label className={labelClasses}>Telegram (optional)</label>
+                <label className={labelClasses}>{t.addNeobank.telegram}</label>
                 <input
                   type="text"
-                  placeholder="@username"
+                  placeholder={t.addNeobank.telegramPlaceholder}
                   className={inputClasses}
                   value={form.telegram}
                   onChange={(e) => handleChange("telegram", e.target.value)}
@@ -156,10 +158,10 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
             </div>
 
             <div>
-              <label className={labelClasses}>Message</label>
+              <label className={labelClasses}>{t.addNeobank.message}</label>
               <textarea
                 required
-                placeholder="Your message..."
+                placeholder={t.addNeobank.messagePlaceholder}
                 rows={4}
                 className={inputClasses + " resize-none"}
                 value={form.message}
@@ -172,7 +174,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
           <div className="pt-2">
             {showErrors && !isFormValid() && (
               <p className="text-red-400 text-xs mb-3">
-                Please fill in all fields before submitting.
+                {t.addNeobank.validationError}
               </p>
             )}
             <button
@@ -181,7 +183,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
               className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer tracking-wide flex items-center justify-center gap-2"
             >
               {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-              {submitting ? "Submitting..." : "Submit Neobank"}
+              {submitting ? t.addNeobank.submitting : t.addNeobank.submitNeobank}
             </button>
           </div>
         </form>

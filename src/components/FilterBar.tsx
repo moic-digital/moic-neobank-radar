@@ -13,6 +13,8 @@ import {
 } from "lucide-react"
 import { Filters, SortOption } from "@/types/card"
 import FilterDropdown from "@/components/FilterDropdown"
+import { useDictionary } from "@/i18n/use-dictionary"
+import { interpolate } from "@/i18n/interpolate"
 
 const REGION_ITEMS = [
   { value: "Global", label: "Global" },
@@ -67,13 +69,6 @@ const CURRENCY_ITEMS = [
   { value: "GBP", label: "GBP" },
   { value: "INR", label: "INR" },
   { value: "BRL", label: "BRL (R$)" },
-] as const
-
-const SORT_ITEMS = [
-  { value: "nameAZ", label: "A-Z" },
-  { value: "featured", label: "All" },
-  { value: "cashbackHigh", label: "Top Cashback" },
-  { value: "newest", label: "Newest" },
 ] as const
 
 interface FilterBarProps {
@@ -134,6 +129,15 @@ export default function FilterBar({
   onSortChange,
   resultsCount,
 }: FilterBarProps) {
+  const { t } = useDictionary()
+
+  const sortItems = [
+    { value: "nameAZ", label: t.filter.sortAZ },
+    { value: "featured", label: t.filter.sortAll },
+    { value: "cashbackHigh", label: t.filter.sortTopCashback },
+    { value: "newest", label: t.filter.sortNewest },
+  ] as const
+
   const hasActiveFilters =
     filters.region !== "" ||
     filters.kyc !== "" ||
@@ -212,7 +216,7 @@ export default function FilterBar({
       <div className="flex gap-3">
         <div className="flex items-center gap-2 px-3 sm:px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide border rounded-xl whitespace-nowrap bg-gradient-to-r from-orange-600 to-amber-500 border-orange-400/60 text-white shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_40px_rgba(251,146,60,0.15)]">
           <Flame className="w-4 h-4 shrink-0 text-white" />
-          <span>Our Picks</span>
+          <span>{t.filter.ourPicks}</span>
         </div>
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none">
@@ -220,7 +224,7 @@ export default function FilterBar({
           </div>
           <input
             type="text"
-            placeholder="Search neobanks..."
+            placeholder={t.filter.searchPlaceholder}
             className="block w-full pl-11 sm:pl-13 pr-4 py-3.5 sm:py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-moic-blue focus:shadow-[0_0_12px_rgba(42,96,251,0.2)] text-sm sm:text-base tracking-wide transition-all"
             value={filters.search}
             onChange={handleSearch}
@@ -237,9 +241,9 @@ export default function FilterBar({
         >
           <Shield className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(kycState)}`} />
           <span>
-            {kycState === "none" && "KYC"}
-            {kycState === "with" && "With KYC"}
-            {kycState === "without" && "No KYC"}
+            {kycState === "none" && t.filter.kyc}
+            {kycState === "with" && t.filter.withKyc}
+            {kycState === "without" && t.filter.noKyc}
           </span>
           <TriStateDots state={kycState} />
         </button>
@@ -251,9 +255,9 @@ export default function FilterBar({
         >
           <KeyRound className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(selfCustodyState)}`} />
           <span>
-            {selfCustodyState === "none" && "Custody"}
-            {selfCustodyState === "with" && "Self-Custody"}
-            {selfCustodyState === "without" && "Custodial"}
+            {selfCustodyState === "none" && t.filter.custody}
+            {selfCustodyState === "with" && t.filter.selfCustody}
+            {selfCustodyState === "without" && t.filter.custodial}
           </span>
           <TriStateDots state={selfCustodyState} />
         </button>
@@ -265,9 +269,9 @@ export default function FilterBar({
         >
           <Sparkles className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(airdropState)}`} />
           <span>
-            {airdropState === "none" && "Airdrop"}
-            {airdropState === "with" && "With Airdrop"}
-            {airdropState === "without" && "No Airdrop"}
+            {airdropState === "none" && t.filter.airdrop}
+            {airdropState === "with" && t.filter.withAirdrop}
+            {airdropState === "without" && t.filter.noAirdrop}
           </span>
           <TriStateDots state={airdropState} />
         </button>
@@ -276,8 +280,8 @@ export default function FilterBar({
         <FilterDropdown
           icon={<Globe className="w-4 h-4 text-moic-blue shrink-0" />}
           value={filters.region}
-          placeholder="Region"
-          resetLabel="No filter"
+          placeholder={t.filter.region}
+          resetLabel={t.filter.noFilter}
           items={REGION_ITEMS}
           onChange={(val) => onFilterChange({ ...filters, region: val })}
           scrollHint
@@ -287,7 +291,7 @@ export default function FilterBar({
         <FilterDropdown
           icon={<DollarSign className="w-4 h-4 text-moic-blue shrink-0" />}
           value={filters.currency}
-          placeholder="Currency"
+          placeholder={t.filter.currency}
           items={CURRENCY_ITEMS}
           onChange={(val) => onFilterChange({ ...filters, currency: val })}
         />
@@ -296,8 +300,8 @@ export default function FilterBar({
         <FilterDropdown
           icon={<ArrowDownAZ className="w-4 h-4 text-moic-blue shrink-0" />}
           value={sort}
-          placeholder="Sort"
-          items={SORT_ITEMS}
+          placeholder={t.filter.sort}
+          items={sortItems}
           onChange={(val) => onSortChange(val as SortOption)}
         />
       </div>
@@ -306,8 +310,8 @@ export default function FilterBar({
       <div className="flex items-center justify-between">
         <span className="text-[10px] sm:text-[11px] text-white/30">
           {hasActiveFilters
-            ? `Filtered: ${resultsCount} cards`
-            : `Showing all ${resultsCount} cards`}
+            ? interpolate(t.filter.filtered, { count: resultsCount })
+            : interpolate(t.filter.showingAll, { count: resultsCount })}
         </span>
         {hasActiveFilters && (
           <button
@@ -315,7 +319,7 @@ export default function FilterBar({
             className="flex items-center gap-1 text-xs font-medium text-white/50 hover:text-moic-blue transition-colors"
           >
             <X className="w-3 h-3" />
-            Clear
+            {t.filter.clear}
           </button>
         )}
       </div>
