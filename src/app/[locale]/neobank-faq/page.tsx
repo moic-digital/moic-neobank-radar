@@ -5,7 +5,12 @@ import {
   buildFAQPageJsonLd,
   safeJsonLdStringify,
 } from "@/lib/seo"
-import { FAQ_CATEGORIES, getAllFaqItems } from "@/data/faq"
+import { getFaqCategories, getAllFaqItems } from "@/data/faq"
+import { type Locale } from "@/i18n/config"
+
+interface FaqPageProps {
+  readonly params: Promise<{ locale: string }>
+}
 
 export const metadata: Metadata = {
   title: "FAQ — Neobank Radar",
@@ -31,7 +36,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function NeoFaqPage() {
+export default async function NeoFaqPage({ params }: FaqPageProps) {
+  const { locale } = await params
+  const categories = getFaqCategories(locale as Locale)
   const faqJsonLd = buildFAQPageJsonLd(getAllFaqItems())
 
   return (
@@ -41,7 +48,7 @@ export default function NeoFaqPage() {
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqJsonLd) }}
       />
       <div className="min-h-screen bg-moic-navy">
-        <FaqSection categories={FAQ_CATEGORIES} />
+        <FaqSection categories={categories} />
       </div>
     </>
   )

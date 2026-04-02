@@ -9,7 +9,6 @@ import {
   buildOrganizationJsonLd,
   safeJsonLdStringify,
 } from "@/lib/seo"
-import CookieConsentProvider from "@/components/CookieConsentProvider"
 
 const sora = Sora({
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -66,15 +65,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+interface RootLayoutProps {
+  readonly children: React.ReactNode
+  readonly params: Promise<{ locale?: string }>
+}
+
+export default async function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+  params,
+}: RootLayoutProps) {
+  const { locale } = await params
+  const lang = locale ?? "en"
   const organizationJsonLd = buildOrganizationJsonLd()
 
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang={lang} className="dark" suppressHydrationWarning>
       <body
         className={`${sora.variable} bg-moic-navy text-white antialiased`}
       >
@@ -84,9 +89,7 @@ export default function RootLayout({
             __html: safeJsonLdStringify(organizationJsonLd),
           }}
         />
-        <CookieConsentProvider>
-          {children}
-        </CookieConsentProvider>
+        {children}
       </body>
     </html>
   )

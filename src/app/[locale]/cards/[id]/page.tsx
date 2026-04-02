@@ -23,6 +23,9 @@ import {
 } from "lucide-react"
 import { cards } from "@/data/cards"
 import type { CardData } from "@/types/card"
+import { LOCALES, type Locale } from "@/i18n/config"
+import { getDictionary } from "@/i18n/get-dictionary"
+import type { Dictionary } from "@/i18n/types"
 import {
   BASE_URL,
   SITE_NAME,
@@ -32,13 +35,16 @@ import {
   buildFAQJsonLd,
   safeJsonLdStringify,
 } from "@/lib/seo"
+import { getCardPerks } from "@/data/perks"
 
 interface CardPageProps {
-  readonly params: Promise<{ id: string }>
+  readonly params: Promise<{ id: string; locale: string }>
 }
 
 export function generateStaticParams() {
-  return cards.map((card) => ({ id: card.id }))
+  return LOCALES.flatMap((locale) =>
+    cards.map((card) => ({ locale, id: card.id }))
+  )
 }
 
 export async function generateMetadata({
@@ -82,77 +88,76 @@ interface Insight {
   readonly description: string
 }
 
-
-function buildInsights(card: CardData): readonly Insight[] {
+function buildInsights(card: CardData, t: Dictionary): readonly Insight[] {
   const insights: Insight[] = []
 
   if (card.cashbackMax >= 10) {
     insights.push({
       icon: TrendingUp,
-      label: "Elite Cashback",
-      description: "Extremely high cashback - best suited for heavy spenders who can maximize rewards.",
+      label: t.cardDetail.eliteCashback,
+      description: t.cardDetail.eliteCashbackDesc,
     })
   } else if (card.cashbackMax >= 5) {
     insights.push({
       icon: TrendingUp,
-      label: "Strong Cashback",
-      description: "Strong cashback profile for everyday spending across multiple categories.",
+      label: t.cardDetail.strongCashback,
+      description: t.cardDetail.strongCashbackDesc,
     })
   } else if (card.cashbackMax > 0) {
     insights.push({
       icon: TrendingUp,
-      label: "Moderate Cashback",
-      description: "Moderate cashback - interesting as a secondary card or niche use case.",
+      label: t.cardDetail.moderateCashback,
+      description: t.cardDetail.moderateCashbackDesc,
     })
   } else {
     insights.push({
       icon: TrendingUp,
-      label: "No Direct Cashback",
-      description: "No direct cashback - evaluate mainly for features, regions and custody model.",
+      label: t.cardDetail.noDirectCashback,
+      description: t.cardDetail.noDirectCashbackDesc,
     })
   }
 
   if (card.custody === "Self-Custody" || card.custody === "Non-Custodial") {
     insights.push({
       icon: Shield,
-      label: "Self-Custody",
-      description: "Non-custodial design - better for power users who prefer holding their own keys.",
+      label: t.cardDetail.selfCustodyInsight,
+      description: t.cardDetail.selfCustodyInsightDesc,
     })
   } else {
     insights.push({
       icon: Shield,
-      label: "Custodial Model",
-      description: "Custodial model - closer to a traditional fintech experience with simpler UX.",
+      label: t.cardDetail.custodialModel,
+      description: t.cardDetail.custodialModelDesc,
     })
   }
 
   if (card.kyc === "None" || card.kyc === "Light") {
     insights.push({
       icon: Eye,
-      label: "Privacy-Friendly",
-      description: "Reduced KYC requirements - attractive for privacy-focused users, may come with lower limits.",
+      label: t.cardDetail.privacyFriendly,
+      description: t.cardDetail.privacyFriendlyDesc,
     })
   } else {
     insights.push({
       icon: Eye,
-      label: "Full KYC Required",
-      description: "Full KYC - typical for regulated neobanks, usually enabling higher limits and broader coverage.",
+      label: t.cardDetail.fullKycRequired,
+      description: t.cardDetail.fullKycRequiredDesc,
     })
   }
 
   if (card.airdropFarming && isAirdropFarming(card.airdropFarming)) {
     insights.push({
       icon: Sparkles,
-      label: "Airdrop Farming",
-      description: "Marked for airdrop farming - interesting for users farming ecosystem or protocol rewards.",
+      label: t.cardDetail.airdropFarming,
+      description: t.cardDetail.airdropFarmingDesc,
     })
   }
 
   if (!card.age) {
     insights.push({
       icon: Clock,
-      label: "Newer Product",
-      description: "Newer product - monitor stability and community feedback before routing large volumes.",
+      label: t.cardDetail.newerProduct,
+      description: t.cardDetail.newerProductDesc,
     })
   }
 
@@ -160,30 +165,32 @@ function buildInsights(card: CardData): readonly Insight[] {
 }
 
 export default async function CardPage({ params }: CardPageProps) {
-  const { id } = await params
+  const { id, locale } = await params
   const card = cards.find((c) => c.id === id)
 
   if (!card) {
     notFound()
   }
 
-  const insights = buildInsights(card)
+  const t = await getDictionary(locale as Locale)
+  const translatedPerks = getCardPerks(card.id, locale as Locale, card.perks)
+  const insights = buildInsights(card, t)
   const ageLabel = card.age
-    ? `${new Date().getFullYear() - parseInt(card.age)} years`
+    ? `${new Date().getFullYear() - parseInt(card.age)} ${t.cardDetail.years}`
     : "N/A"
   const cashbackLabel = card.cashbackMax > 0 ? `${card.cashbackMax}%` : "N/A"
   const kycLabel = card.kyc === "Required" ? "Required" : card.kyc === "Light" ? "Light" : "None"
   const showAirdrop = card.airdropFarming && isAirdropFarming(card.airdropFarming)
 
   const keyFacts = [
-    { label: "Annual Fee", value: card.annualFee, icon: DollarSign },
-    { label: "FX Fees", value: card.fxFee, icon: Repeat },
-    { label: "Network", value: card.network, icon: CreditCard },
-    { label: "Custody", value: card.custody, icon: Wallet },
-    { label: "Regions", value: card.regions || "N/A", icon: Globe },
-    { label: "Assets", value: card.supportedAssets || "N/A", icon: Coins },
-    { label: "Metal", value: card.metal ? "Yes" : "No", icon: CreditCard },
-    { label: "Signup Bonus", value: card.signupBonus || "None", icon: Gift },
+    { label: t.cardDetail.annualFee, value: card.annualFee, icon: DollarSign },
+    { label: t.cardDetail.fxFees, value: card.fxFee, icon: Repeat },
+    { label: t.cardDetail.network, value: card.network, icon: CreditCard },
+    { label: t.cardDetail.custodyLabel, value: card.custody, icon: Wallet },
+    { label: t.cardDetail.regionsLabel, value: card.regions || "N/A", icon: Globe },
+    { label: t.cardDetail.assetsLabel, value: card.supportedAssets || "N/A", icon: Coins },
+    { label: t.cardDetail.metalLabel, value: card.metal ? "Yes" : "No", icon: CreditCard },
+    { label: t.cardDetail.signupBonus, value: card.signupBonus || "None", icon: Gift },
   ]
 
   const financialProductJsonLd = buildFinancialProductJsonLd(card)
@@ -215,8 +222,8 @@ export default async function CardPage({ params }: CardPageProps) {
       <nav aria-label="Breadcrumb" className="px-4 sm:px-8 pt-3 pb-0">
         <ol className="flex items-center gap-1.5 text-[10px] sm:text-xs text-white/40">
           <li>
-            <Link href="/" className="hover:text-white/60 transition-colors">
-              Home
+            <Link href={`/${locale}`} className="hover:text-white/60 transition-colors">
+              {t.cardDetail.home}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
@@ -230,11 +237,11 @@ export default async function CardPage({ params }: CardPageProps) {
       <header className="border-b border-white/10 px-4 sm:px-8 py-4 sm:py-5 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <Link
-            href="/"
+            href={`/${locale}`}
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold border border-white/20 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors shrink-0"
           >
             <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
-            Back
+            {t.cardDetail.back}
           </Link>
           <h1 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight truncate" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
             {card.name}
@@ -247,7 +254,7 @@ export default async function CardPage({ params }: CardPageProps) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 bg-moic-blue text-white text-xs font-semibold rounded-lg hover:bg-moic-blue-light transition-colors shrink-0"
         >
-          <span className="hidden sm:inline">Official page</span>
+          <span className="hidden sm:inline">{t.cardDetail.officialPage}</span>
           <ExternalLink className="w-4 h-4" />
         </a>
       </header>
@@ -292,7 +299,7 @@ export default async function CardPage({ params }: CardPageProps) {
         <section aria-label="Key metrics" className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div className="border border-amber-400/40 bg-moic-surface rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_0_24px_rgba(251,191,36,0.15),0_0_48px_rgba(251,191,36,0.06)] hover:-translate-y-1 hover:border-amber-400/70 hover:shadow-[0_0_24px_rgba(251,191,36,0.3),0_0_48px_rgba(251,191,36,0.12)] transition-all duration-300">
             <span className="text-amber-400 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1">
-              Max Cashback
+              {t.cardDetail.maxCashback}
             </span>
             <span className="text-amber-400 font-bold text-xl sm:text-2xl">
               {cashbackLabel}
@@ -300,7 +307,7 @@ export default async function CardPage({ params }: CardPageProps) {
           </div>
           <div className="border border-white/[0.08] bg-moic-surface rounded-xl p-4 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)] transition-all duration-300">
             <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1">
-              Annual Fee
+              {t.cardDetail.annualFee}
             </span>
             <span className="text-white font-bold text-sm sm:text-base">
               {card.annualFee}
@@ -308,7 +315,7 @@ export default async function CardPage({ params }: CardPageProps) {
           </div>
           <div className="border border-white/[0.08] bg-moic-surface rounded-xl p-4 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)] transition-all duration-300">
             <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1">
-              Time in Market
+              {t.cardDetail.timeInMarket}
             </span>
             <span className="text-white font-bold text-sm sm:text-base">
               {ageLabel}
@@ -316,7 +323,7 @@ export default async function CardPage({ params }: CardPageProps) {
           </div>
           <div className="border border-white/[0.08] bg-moic-surface rounded-xl p-4 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:border-moic-blue/60 hover:shadow-[0_0_24px_rgba(42,96,251,0.25),0_0_48px_rgba(42,96,251,0.1)] transition-all duration-300">
             <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1">
-              KYC
+              {t.cardDetail.kyc}
             </span>
             <span
               className={`font-bold text-sm sm:text-base ${
@@ -332,7 +339,7 @@ export default async function CardPage({ params }: CardPageProps) {
         {insights.length > 0 && (
           <section aria-label="Card insights" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
             <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4 sm:mb-6" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-              Insights
+              {t.cardDetail.insights}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {insights.map((insight, idx) => {
@@ -360,7 +367,7 @@ export default async function CardPage({ params }: CardPageProps) {
         {/* Block 5 - Key Facts */}
         <section aria-label="Key facts" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
           <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-            Key Facts
+            {t.cardDetail.keyFacts}
           </h2>
           <div className="space-y-3">
             {keyFacts.map((fact) => {
@@ -386,13 +393,13 @@ export default async function CardPage({ params }: CardPageProps) {
         </section>
 
         {/* Block 6 - Highlights */}
-        {card.perks.length > 0 && (
+        {translatedPerks.length > 0 && (
           <section aria-label="Card highlights" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
             <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-              Highlights
+              {t.cardDetail.highlights}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {card.perks.map((perk, idx) => (
+              {translatedPerks.map((perk, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-moic-green mt-0.5 shrink-0" />
                   <span className="text-[11px] sm:text-xs text-white/70 leading-relaxed">

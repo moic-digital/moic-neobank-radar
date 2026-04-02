@@ -1,4 +1,7 @@
 import type { FaqCategory } from "@/types/faq"
+import type { Locale } from "@/i18n/config"
+import { FAQ_CATEGORIES_PT } from "./faq-pt"
+import { FAQ_CATEGORIES_ES } from "./faq-es"
 
 export const FAQ_CATEGORIES: readonly FaqCategory[] = [
   {
@@ -117,6 +120,16 @@ export const FAQ_CATEGORIES: readonly FaqCategory[] = [
     ],
   },
 ]
+
+const FAQ_BY_LOCALE: Record<Locale, readonly FaqCategory[]> = {
+  en: FAQ_CATEGORIES,
+  pt: FAQ_CATEGORIES_PT,
+  es: FAQ_CATEGORIES_ES,
+}
+
+export function getFaqCategories(locale: Locale): readonly FaqCategory[] {
+  return FAQ_BY_LOCALE[locale]
+}
 
 export function getAllFaqItems() {
   return FAQ_CATEGORIES.flatMap((category) => category.items)

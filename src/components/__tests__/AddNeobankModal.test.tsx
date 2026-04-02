@@ -1,11 +1,12 @@
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import AddNeobankModal from "../AddNeobankModal"
+import { renderWithI18n } from "@/test-utils"
 
 const mockOnClose = jest.fn()
 
 function renderModal() {
-  return render(<AddNeobankModal onClose={mockOnClose} />)
+  return renderWithI18n(<AddNeobankModal onClose={mockOnClose} />)
 }
 
 beforeEach(() => {
@@ -18,13 +19,6 @@ describe("AddNeobankModal - Form Sections", () => {
       renderModal()
       expect(
         screen.getByText("Contact Info")
-      ).toBeInTheDocument()
-    })
-
-    it("should render 'Neobank Info' section heading", () => {
-      renderModal()
-      expect(
-        screen.getByText("Neobank Info")
       ).toBeInTheDocument()
     })
   })
@@ -50,43 +44,12 @@ describe("AddNeobankModal - Form Sections", () => {
         screen.getByPlaceholderText("@username")
       ).toBeInTheDocument()
     })
-  })
 
-  describe("Neobank Info section fields", () => {
-    it("should have a neobank name input", () => {
+    it("should have a message textarea", () => {
       renderModal()
       expect(
-        screen.getByPlaceholderText("Neobank name")
+        screen.getByPlaceholderText("Your message...")
       ).toBeInTheDocument()
-    })
-
-    it("should have a site input that accepts URLs without protocol", () => {
-      renderModal()
-      const siteInput = screen.getByPlaceholderText("example.com")
-      expect(siteInput).toBeInTheDocument()
-      expect(siteInput).toHaveAttribute("type", "text")
-    })
-
-    it("should have founded, cashback max, and currencies inputs", () => {
-      renderModal()
-      expect(screen.getByPlaceholderText("2023")).toBeInTheDocument()
-      expect(screen.getByPlaceholderText("e.g. 8%")).toBeInTheDocument()
-      expect(
-        screen.getByPlaceholderText("USD, EUR, BTC...")
-      ).toBeInTheDocument()
-    })
-  })
-
-  describe("Section ordering", () => {
-    it("should render Contact Info section before Neobank Info section", () => {
-      renderModal()
-      const contactHeading = screen.getByText("Contact Info")
-      const neobankHeading = screen.getByText("Neobank Info")
-
-      const contactPosition =
-        contactHeading.compareDocumentPosition(neobankHeading)
-      // Node.DOCUMENT_POSITION_FOLLOWING = 4
-      expect(contactPosition & 4).toBe(4)
     })
   })
 
@@ -99,7 +62,7 @@ describe("AddNeobankModal - Form Sections", () => {
   })
 
   describe("Form submission", () => {
-    it("should submit all fields from both sections", async () => {
+    it("should submit all fields", async () => {
       const user = userEvent.setup()
       const mockFetch = jest.fn().mockResolvedValue({ ok: true })
       global.fetch = mockFetch
@@ -112,30 +75,14 @@ describe("AddNeobankModal - Form Sections", () => {
         "john@test.com"
       )
       await user.type(screen.getByPlaceholderText("@username"), "@johndoe")
-      await user.type(
-        screen.getByPlaceholderText("Neobank name"),
-        "TestBank"
-      )
-      await user.type(screen.getByPlaceholderText("example.com"), "testbank.io")
-      await user.type(screen.getByPlaceholderText("2023"), "2024")
-      await user.type(screen.getByPlaceholderText("e.g. 8%"), "5%")
-      await user.type(
-        screen.getByPlaceholderText("USD, EUR, BTC..."),
-        "USD, BTC"
-      )
+      await user.type(screen.getByPlaceholderText("Your message..."), "Hello")
 
-      await user.click(screen.getByRole("button", { name: /submit/i }))
+      await user.click(screen.getByRole("button", { name: /submit neobank/i }))
 
       expect(mockFetch).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           body: expect.stringContaining('"contactName":"John Doe"'),
-        })
-      )
-      expect(mockFetch).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          body: expect.stringContaining('"neobankName":"TestBank"'),
         })
       )
     })

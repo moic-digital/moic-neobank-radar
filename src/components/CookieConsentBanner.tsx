@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { Cookie, Shield, BarChart3, Megaphone } from "lucide-react"
 import type { ConsentCategories } from "@/types/consent"
 import { buildDefaultCategories } from "@/lib/consent"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 interface CookieConsentBannerProps {
   readonly initialCategories?: ConsentCategories
@@ -18,6 +19,7 @@ export default function CookieConsentBanner({
   onRejectAll,
   onSavePreferences,
 }: CookieConsentBannerProps) {
+  const { t } = useDictionary()
   const [showDetails, setShowDetails] = useState(false)
   const [categories, setCategories] = useState<ConsentCategories>(
     initialCategories ?? buildDefaultCategories()
@@ -60,15 +62,13 @@ export default function CookieConsentBanner({
             </div>
             <div className="flex-1">
               <h2 className="text-sm font-semibold text-white sm:text-base">
-                We value your privacy
+                {t.cookie.title}
               </h2>
               <p
                 id="cookie-consent-description"
                 className="mt-1 text-xs leading-relaxed text-white/60 sm:text-sm"
               >
-                We use cookies to enhance your browsing experience, analyze site
-                traffic, and personalize content. You can choose which cookies to
-                accept.
+                {t.cookie.description}
               </p>
             </div>
           </div>
@@ -78,22 +78,22 @@ export default function CookieConsentBanner({
             <div className="mt-4 space-y-3 border-t border-white/10 pt-4">
               <CategoryToggle
                 icon={<Shield className="h-4 w-4" />}
-                label="Necessary"
-                description="Required for the site to function properly. Cannot be disabled."
+                label={t.cookie.necessary}
+                description={t.cookie.necessaryDesc}
                 checked={true}
                 disabled={true}
               />
               <CategoryToggle
                 icon={<BarChart3 className="h-4 w-4" />}
-                label="Analytics"
-                description="Help us understand how visitors interact with our site via Google Analytics."
+                label={t.cookie.analytics}
+                description={t.cookie.analyticsDesc}
                 checked={categories.analytics}
                 onChange={() => handleToggle("analytics")}
               />
               <CategoryToggle
                 icon={<Megaphone className="h-4 w-4" />}
-                label="Marketing"
-                description="Used for targeted advertising and tracking across websites."
+                label={t.cookie.marketing}
+                description={t.cookie.marketingDesc}
                 checked={categories.marketing}
                 onChange={() => handleToggle("marketing")}
               />
@@ -106,7 +106,7 @@ export default function CookieConsentBanner({
               onClick={() => setShowDetails((prev) => !prev)}
               className="order-3 rounded-lg px-4 py-2 text-xs font-medium text-white/60 transition-colors hover:text-white sm:order-1 sm:mr-auto sm:text-sm"
             >
-              {showDetails ? "Hide details" : "Customize"}
+              {showDetails ? t.cookie.hideDetails : t.cookie.customize}
             </button>
 
             {showDetails ? (
@@ -114,7 +114,7 @@ export default function CookieConsentBanner({
                 onClick={handleSave}
                 className="order-1 rounded-lg bg-moic-blue px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-moic-blue-light sm:order-3 sm:text-sm"
               >
-                Save preferences
+                {t.cookie.savePreferences}
               </button>
             ) : (
               <>
@@ -122,13 +122,13 @@ export default function CookieConsentBanner({
                   onClick={onRejectAll}
                   className="order-2 rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-medium text-white transition-all hover:bg-white/10 sm:text-sm"
                 >
-                  Reject all
+                  {t.cookie.rejectAll}
                 </button>
                 <button
                   onClick={onAcceptAll}
                   className="order-1 rounded-lg bg-moic-blue px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-moic-blue-light sm:order-3 sm:text-sm"
                 >
-                  Accept all
+                  {t.cookie.acceptAll}
                 </button>
               </>
             )}

@@ -5,6 +5,8 @@ import { X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming } from "@/utils/card"
 import CardLogo from "@/components/CardLogo"
+import { useDictionary } from "@/i18n/use-dictionary"
+import type { Dictionary } from "@/i18n/types"
 
 interface CompareDrawerProps {
   readonly cards: readonly CardData[]
@@ -18,53 +20,55 @@ interface StatRow {
   readonly desktopOnly?: boolean
 }
 
-const STAT_ROWS: readonly StatRow[] = [
-  { label: "Type", getValue: (c) => c.type },
-  { label: "Network", getValue: (c) => c.network },
-  {
-    label: "Cashback",
-    getValue: (c) =>
-      c.cashbackMax > 0 ? `${c.cashbackMax}%` : "N/A",
-    highlight: (v) => {
-      const num = parseFloat(v)
-      if (isNaN(num)) return "text-white/60"
-      if (num >= 4) return "text-moic-green font-bold"
-      if (num >= 2) return "text-moic-blue font-bold"
-      return "text-white"
+function buildStatRows(t: Dictionary): readonly StatRow[] {
+  return [
+    { label: t.compare.type, getValue: (c) => c.type },
+    { label: t.compare.network, getValue: (c) => c.network },
+    {
+      label: t.compare.cashback,
+      getValue: (c) =>
+        c.cashbackMax > 0 ? `${c.cashbackMax}%` : "N/A",
+      highlight: (v) => {
+        const num = parseFloat(v)
+        if (isNaN(num)) return "text-white/60"
+        if (num >= 4) return "text-moic-green font-bold"
+        if (num >= 2) return "text-moic-blue font-bold"
+        return "text-white"
+      },
     },
-  },
-  { label: "Annual Fee", getValue: (c) => c.annualFee },
-  { label: "FX Fee", getValue: (c) => c.fxFee },
-  {
-    label: "KYC",
-    getValue: (c) => c.kyc,
-    highlight: (v) =>
-      v === "None" ? "text-moic-green" : v === "Required" ? "text-amber-400" : "text-white",
-  },
-  { label: "Custody", getValue: (c) => c.custody },
-  {
-    label: "Metal",
-    getValue: (c) => (c.metal ? "Yes" : "No"),
-    highlight: (v) => (v === "Yes" ? "text-moic-blue" : "text-white/40"),
-  },
-  { label: "Bonus", getValue: (c) => c.signupBonus || "None" },
-  {
-    label: "Airdrop",
-    getValue: (c) => (isAirdropFarming(c.airdropFarming) ? "Yes" : "No"),
-    highlight: (v) => (v === "Yes" ? "text-moic-green" : "text-white/40"),
-  },
-  { label: "Regions", getValue: (c) => c.regions, desktopOnly: true },
-  { label: "Assets", getValue: (c) => c.supportedAssets || "N/A", desktopOnly: true },
-  {
-    label: "Currencies",
-    getValue: (c) => c.supportedCurrencies.join(", ") || "N/A",
-  },
-  { label: "Age", getValue: (c) => c.age || "N/A" },
-]
+    { label: t.compare.annualFee, getValue: (c) => c.annualFee },
+    { label: t.compare.fxFee, getValue: (c) => c.fxFee },
+    {
+      label: t.compare.kyc,
+      getValue: (c) => c.kyc,
+      highlight: (v) =>
+        v === "None" ? "text-moic-green" : v === "Required" ? "text-amber-400" : "text-white",
+    },
+    { label: t.compare.custodyLabel, getValue: (c) => c.custody },
+    {
+      label: t.compare.metal,
+      getValue: (c) => (c.metal ? t.compare.yes : t.compare.no),
+      highlight: (v) => (v === t.compare.yes ? "text-moic-blue" : "text-white/40"),
+    },
+    { label: t.compare.bonus, getValue: (c) => c.signupBonus || t.compare.none },
+    {
+      label: t.compare.airdrop,
+      getValue: (c) => (isAirdropFarming(c.airdropFarming) ? t.compare.yes : t.compare.no),
+      highlight: (v) => (v === t.compare.yes ? "text-moic-green" : "text-white/40"),
+    },
+    { label: t.compare.regions, getValue: (c) => c.regions, desktopOnly: true },
+    { label: t.compare.assets, getValue: (c) => c.supportedAssets || "N/A", desktopOnly: true },
+    {
+      label: t.compare.currencies,
+      getValue: (c) => c.supportedCurrencies.join(", ") || "N/A",
+    },
+    { label: t.compare.age, getValue: (c) => c.age || "N/A" },
+  ]
+}
 
-const MOBILE_STAT_ROWS = STAT_ROWS.filter((r) => !r.desktopOnly)
+function DesktopTable({ cards, statRows }: { readonly cards: readonly CardData[]; readonly statRows: readonly StatRow[] }) {
+  const { t } = useDictionary()
 
-function DesktopTable({ cards }: { readonly cards: readonly CardData[] }) {
   return (
     <div className="min-w-[500px]">
       {/* Card headers — sticky */}
@@ -85,7 +89,7 @@ function DesktopTable({ cards }: { readonly cards: readonly CardData[] }) {
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-[10px] text-moic-blue hover:text-moic-blue-light transition-colors"
                 >
-                  Visit <ExternalLink className="w-2.5 h-2.5" />
+                  {t.compare.visit} <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </div>
             </div>
@@ -94,7 +98,7 @@ function DesktopTable({ cards }: { readonly cards: readonly CardData[] }) {
       </div>
 
       {/* Stat rows */}
-      {STAT_ROWS.map((row) => (
+      {statRows.map((row) => (
         <div
           key={row.label}
           className="grid border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors"
@@ -119,15 +123,16 @@ function DesktopTable({ cards }: { readonly cards: readonly CardData[] }) {
   )
 }
 
-function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
+function MobileTable({ cards, statRows }: { readonly cards: readonly CardData[]; readonly statRows: readonly StatRow[] }) {
+  const { t } = useDictionary()
   const [hasScrolled, setHasScrolled] = useState(false)
 
   const handleScroll = useCallback(() => {
     if (!hasScrolled) setHasScrolled(true)
   }, [hasScrolled])
 
-  const totalCols = MOBILE_STAT_ROWS.length + 1
-  const gridCols = `120px repeat(${MOBILE_STAT_ROWS.length}, 100px)`
+  const mobileStatRows = statRows.filter((r) => !r.desktopOnly)
+  const gridCols = `120px repeat(${mobileStatRows.length}, 100px)`
   const rowHeight = "calc((100dvh - 120px) * 0.25)"
 
   return (
@@ -136,16 +141,16 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
       {!hasScrolled && (
         <div className="flex items-center justify-center gap-2 py-2 text-[10px] text-white/30 animate-pulse">
           <ChevronLeft className="w-3 h-3" />
-          <span>Swipe to explore</span>
+          <span>{t.compare.swipeToExplore}</span>
           <ChevronRight className="w-3 h-3" />
         </div>
       )}
 
       <div className="flex-1 overflow-auto custom-scrollbar" onScroll={handleScroll}>
-        <div className="grid" style={{ gridTemplateColumns: gridCols, width: `${120 + MOBILE_STAT_ROWS.length * 100}px` }}>
+        <div className="grid" style={{ gridTemplateColumns: gridCols, width: `${120 + mobileStatRows.length * 100}px` }}>
           {/* Header row */}
           <div className="sticky left-0 z-20 bg-moic-navy h-[40px] border-b border-white/10 border-r border-r-white/10" />
-          {MOBILE_STAT_ROWS.map((row) => (
+          {mobileStatRows.map((row) => (
             <div key={row.label} className="h-[40px] flex items-center justify-center px-2 border-b border-white/10">
               <span className="text-[10px] text-white/40 font-semibold uppercase tracking-wider text-center leading-tight">
                 {row.label}
@@ -170,12 +175,12 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
                   rel="noopener noreferrer"
                   className="text-[10px] text-moic-blue"
                 >
-                  Visit →
+                  {t.compare.visit} →
                 </a>
               </div>
 
               {/* Stat cells */}
-              {MOBILE_STAT_ROWS.map((row) => {
+              {mobileStatRows.map((row) => {
                 const value = row.getValue(card)
                 const colorClass = row.highlight ? row.highlight(value) : "text-white"
                 return (
@@ -202,8 +207,11 @@ function MobileTable({ cards }: { readonly cards: readonly CardData[] }) {
 }
 
 export default function CompareDrawer({ cards, onClose }: CompareDrawerProps) {
+  const { t } = useDictionary()
   const [closing, setClosing] = useState(false)
   const drawerRef = useRef<HTMLDivElement>(null)
+
+  const statRows = buildStatRows(t)
 
   const handleClose = useCallback(() => {
     setClosing(true)
@@ -234,7 +242,7 @@ export default function CompareDrawer({ cards, onClose }: CompareDrawerProps) {
   }, [handleKeyDown])
 
   return (
-    <div className="fixed inset-0 z-50 flex" role="dialog" aria-modal="true" aria-label="Compare cards">
+    <div className="fixed inset-0 z-50 flex" role="dialog" aria-modal="true" aria-label={t.compare.compareCards}>
       {/* Backdrop — desktop only */}
       <div
         className={`hidden sm:block sm:w-[35%] bg-black/60 backdrop-blur-sm ${closing ? "animate-fade-out" : "animate-fade-in"}`}
@@ -250,7 +258,7 @@ export default function CompareDrawer({ cards, onClose }: CompareDrawerProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-white/10 shrink-0">
           <h2 className="text-lg font-bold text-white tracking-tight font-display">
-            Compare Cards
+            {t.compare.compareCards}
           </h2>
           <button
             onClick={handleClose}
@@ -265,12 +273,12 @@ export default function CompareDrawer({ cards, onClose }: CompareDrawerProps) {
         <div className="flex-1 overflow-hidden relative">
           {/* Desktop: original layout (stats as rows, cards as columns) */}
           <div className="hidden sm:block h-full overflow-auto custom-scrollbar">
-            <DesktopTable cards={cards} />
+            <DesktopTable cards={cards} statRows={statRows} />
           </div>
 
           {/* Mobile: transposed layout (cards as rows, stats as columns) */}
           <div className="sm:hidden h-full">
-            <MobileTable cards={cards} />
+            <MobileTable cards={cards} statRows={statRows} />
           </div>
         </div>
       </div>

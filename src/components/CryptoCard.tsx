@@ -1,9 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { Check, Flame } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming, isNewCard } from "@/utils/card"
 import CardLogo from "@/components/CardLogo"
 import NewBadge from "@/components/NewBadge"
+import { useDictionary } from "@/i18n/use-dictionary"
 
 interface CryptoCardProps {
   readonly card: CardData
@@ -20,6 +23,7 @@ export default function CryptoCard({
   highlightRecommended = false,
   onToggleCompare,
 }: CryptoCardProps) {
+  const { t, locale } = useDictionary()
   const isNeonActive = card.recommended && highlightRecommended
   const showNew = isNewCard(card.addedDate)
   const cashbackLabel = card.cashbackMax > 0 ? `${card.cashbackMax}%` : "N/A"
@@ -91,7 +95,7 @@ export default function CryptoCard({
       <div className="grid grid-cols-3 gap-2 py-3 border-t border-b border-white/[0.06]">
         <div className="text-center">
           <p className="text-[9px] text-white/40 uppercase tracking-wider mb-0.5">
-            Age
+            {t.card.age}
           </p>
           <p className="text-xs font-semibold text-white/80">
             {card.age ? `${new Date().getFullYear() - parseInt(card.age)} yr` : "N/A"}
@@ -99,7 +103,7 @@ export default function CryptoCard({
         </div>
         <div className="text-center border-x border-white/[0.06]">
           <p className="text-[9px] text-moic-blue uppercase tracking-wider mb-0.5">
-            Max CB
+            {t.card.maxCB}
           </p>
           <p className="text-sm font-bold text-moic-blue">
             {cashbackLabel}
@@ -116,7 +120,7 @@ export default function CryptoCard({
                 : "text-amber-400"
             }`}
           >
-            {card.kyc === "Required" ? "YES" : card.kyc === "Light" ? "LIGHT" : "NO"}
+            {card.kyc === "Required" ? t.card.kycYes : card.kyc === "Light" ? t.card.kycLight : t.card.kycNo}
           </p>
         </div>
       </div>
@@ -135,11 +139,11 @@ export default function CryptoCard({
       <div className={`flex items-center mt-3 ${compareMode ? "invisible" : ""}`}>
         {showAirdrop && (
           <span className="text-[9px] font-semibold uppercase tracking-wider bg-moic-green text-black px-2 py-0.5 rounded-sm">
-            Airdrop
+            {t.card.airdrop}
           </span>
         )}
         <p className="text-[10px] text-white/25 group-hover:text-white/60 text-right transition-colors duration-300 ml-auto">
-          View details →
+          {t.card.viewDetails} →
         </p>
       </div>
     </div>
@@ -154,7 +158,7 @@ export default function CryptoCard({
   }
 
   return (
-    <Link href={`/cards/${card.id}`} className="block group">
+    <Link href={`/${locale}/cards/${card.id}`} className="block group">
       {cardContent}
     </Link>
   )

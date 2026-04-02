@@ -3,28 +3,30 @@
 import { useState, useCallback, useEffect } from "react"
 import { Plus, MessageCircle, ClipboardCheck, Globe, CheckCircle, XCircle, X } from "lucide-react"
 import AddNeobankModal from "@/components/AddNeobankModal"
-
-const STEPS = [
-  {
-    icon: MessageCircle,
-    title: "Submit",
-    description: "Tell us about your neobank and card details",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Review",
-    description: "We reach out, gather info, and evaluate your card",
-  },
-  {
-    icon: Globe,
-    title: "Publish",
-    description: "Your neobank goes live on the Radar",
-  },
-] as const
+import { useDictionary } from "@/i18n/use-dictionary"
 
 export default function AddNeobankSection() {
+  const { t } = useDictionary()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [toast, setToast] = useState<"success" | "error" | null>(null)
+
+  const steps = [
+    {
+      icon: MessageCircle,
+      title: t.addNeobank.stepSubmitTitle,
+      description: t.addNeobank.stepSubmitDesc,
+    },
+    {
+      icon: ClipboardCheck,
+      title: t.addNeobank.stepReviewTitle,
+      description: t.addNeobank.stepReviewDesc,
+    },
+    {
+      icon: Globe,
+      title: t.addNeobank.stepPublishTitle,
+      description: t.addNeobank.stepPublishDesc,
+    },
+  ]
 
   useEffect(() => {
     if (!toast) return
@@ -48,23 +50,22 @@ export default function AddNeobankSection() {
       <div className="relative max-w-3xl mx-auto">
         <div className="text-center">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-moic-blue mb-5">
-            Get Listed
+            {t.addNeobank.getListed}
           </span>
 
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
-            <span className="text-white">Didn&apos;t find your </span>
+            <span className="text-white">{t.addNeobank.title}</span>
             <span className="bg-gradient-to-r from-moic-blue to-moic-blue-light bg-clip-text text-transparent">
-              neobank
+              {t.addNeobank.titleHighlight}
             </span>
-            <span className="text-white"> here?</span>
+            <span className="text-white">{t.addNeobank.titleEnd}</span>
           </h2>
 
           <p className="text-white/50 text-base sm:text-lg leading-relaxed mt-5 max-w-xl mx-auto">
-            Submit your neobank and our team will reach out to gather more
-            details, review your card, and publish it on the platform.
+            {t.addNeobank.description}
           </p>
         </div>
 
@@ -73,7 +74,7 @@ export default function AddNeobankSection() {
           {/* Connector line (desktop only) */}
           <div className="hidden sm:block absolute top-6 left-[calc(16.67%+20px)] right-[calc(16.67%+20px)] h-px border-t border-dashed border-white/12" />
 
-          {STEPS.map((step, index) => (
+          {steps.map((step, index) => (
             <div key={step.title} className="relative flex flex-col items-center text-center gap-3 px-4">
               <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-moic-blue/10 border border-moic-blue/25">
                 <step.icon className="w-5 h-5 text-moic-blue" />
@@ -99,7 +100,7 @@ export default function AddNeobankSection() {
             style={{ fontFamily: "'Clash Grotesk', sans-serif" }}
           >
             <Plus className="w-5 h-5 transition-transform group-hover:rotate-90" />
-            Add Your Neobank
+            {t.addNeobank.cta}
           </button>
         </div>
       </div>
@@ -125,13 +126,13 @@ export default function AddNeobankSection() {
           <div>
             <p className="text-white text-sm font-semibold">
               {toast === "success"
-                ? "Thank you for your submission!"
-                : "Something went wrong"}
+                ? t.addNeobank.successTitle
+                : t.addNeobank.errorTitle}
             </p>
             <p className="text-white/70 text-xs mt-0.5">
               {toast === "success"
-                ? "We will be in touch soon."
-                : "Please try again later."}
+                ? t.addNeobank.successMessage
+                : t.addNeobank.errorMessage}
             </p>
           </div>
           <button
