@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { LOCALES, LOCALE_FLAGS, type Locale } from "@/i18n/config"
 import { useDictionary } from "@/i18n/use-dictionary"
 
@@ -9,6 +9,7 @@ export default function LanguageSwitcher() {
   const { locale } = useDictionary()
   const pathname = usePathname()
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleChange = useCallback(
     (newLocale: Locale) => {
@@ -16,11 +17,12 @@ export default function LanguageSwitcher() {
       const segments = pathname.split("/")
       segments[1] = newLocale
       const newPath = segments.join("/")
+      const qs = searchParams.toString()
 
       document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000;SameSite=Lax`
-      router.push(newPath)
+      router.push(qs ? `${newPath}?${qs}` : newPath)
     },
-    [pathname, router, locale]
+    [pathname, router, locale, searchParams]
   )
 
   return (

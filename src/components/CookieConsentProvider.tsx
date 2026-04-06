@@ -25,12 +25,13 @@ interface CookieConsentProviderProps {
 export default function CookieConsentProvider({ children }: CookieConsentProviderProps) {
   const { consent, showBanner, acceptAll, rejectAll, savePreferences, resetConsent } = useConsent()
 
+  const hasConsented = consent !== null
   const analyticsConsented = consent?.categories.analytics ?? false
 
   return (
     <ConsentContext.Provider value={{ resetConsent }}>
       {children}
-      <GoogleTagManager analyticsConsented={analyticsConsented} />
+      {hasConsented && <GoogleTagManager analyticsConsented={analyticsConsented} />}
       {showBanner && (
         <CookieConsentBanner
           initialCategories={consent?.categories}

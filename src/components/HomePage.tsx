@@ -164,11 +164,23 @@ export default function HomePage({ cards }: HomePageProps) {
     []
   )
 
+  function buildUrl(extra?: Record<string, string>) {
+    const params = new URLSearchParams()
+    searchParams.forEach((value, key) => {
+      if (key !== "compare") params.set(key, value)
+    })
+    if (extra) {
+      Object.entries(extra).forEach(([k, v]) => params.set(k, v))
+    }
+    const qs = params.toString()
+    return qs ? `/${locale}?${qs}` : `/${locale}`
+  }
+
   function updateCompareUrl(ids: readonly string[]) {
     if (ids.length >= 2) {
-      router.replace(`/${locale}?compare=${ids.join(",")}`, { scroll: false })
+      router.replace(buildUrl({ compare: ids.join(",") }), { scroll: false })
     } else {
-      router.replace(`/${locale}`, { scroll: false })
+      router.replace(buildUrl(), { scroll: false })
     }
   }
 
@@ -179,14 +191,14 @@ export default function HomePage({ cards }: HomePageProps) {
 
   function handleCloseDrawer() {
     setDrawerOpen(false)
-    router.replace(`/${locale}`, { scroll: false })
+    router.replace(buildUrl(), { scroll: false })
   }
 
   function handleExitCompareMode() {
     setCompareMode(false)
     setSelectedIds([])
     setDrawerOpen(false)
-    router.replace(`/${locale}`, { scroll: false })
+    router.replace(buildUrl(), { scroll: false })
   }
 
   function handleRemoveFromCompare(id: string) {
@@ -194,7 +206,7 @@ export default function HomePage({ cards }: HomePageProps) {
     setSelectedIds(newIds)
     if (newIds.length < 2 && drawerOpen) {
       setDrawerOpen(false)
-      router.replace(`/${locale}`, { scroll: false })
+      router.replace(buildUrl(), { scroll: false })
     } else if (drawerOpen) {
       updateCompareUrl(newIds)
     }

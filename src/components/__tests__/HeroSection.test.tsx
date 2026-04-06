@@ -25,6 +25,7 @@ jest.mock("@/components/LogoRain", () => ({
 jest.mock("next/navigation", () => ({
   usePathname: () => "/en",
   useRouter: () => ({ push: jest.fn() }),
+  useSearchParams: () => new URLSearchParams(),
 }))
 
 const mockOnCompare = jest.fn()
