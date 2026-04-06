@@ -73,7 +73,7 @@ export function buildRejectAllConsent(): ConsentState {
 export function buildDefaultCategories(): ConsentCategories {
   return {
     necessary: true,
-    analytics: false,
+    analytics: true,
     marketing: false,
   }
 }

@@ -8,6 +8,12 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   es: "Espanol",
 }
 
+export const LOCALE_FLAGS: Record<Locale, string> = {
+  en: "\u{1F1FA}\u{1F1F8}",
+  pt: "\u{1F1E7}\u{1F1F7}",
+  es: "\u{1F1EA}\u{1F1F8}",
+}
+
 const COUNTRY_TO_LOCALE: Record<string, Locale> = {
   BR: "pt",
   PT: "pt",
