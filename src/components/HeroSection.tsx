@@ -44,18 +44,17 @@ export default function HeroSection({ onCompare }: HeroSectionProps) {
 
   return (
     <section className="relative grid grid-cols-1 md:grid-cols-[25%_50%_25%] h-auto md:h-[500px] overflow-hidden gap-0">
-      {/* Language Switcher */}
-      <div className="absolute top-4 right-4 z-20">
-        <LanguageSwitcher />
-      </div>
-
       {/* Left panel */}
       <div className="hidden md:block h-full overflow-hidden">
         <LogoPanel seed={7919} side="left" />
       </div>
 
       {/* Center content */}
-      <div className="flex flex-col items-center justify-center py-14 sm:py-18 md:py-0 px-4">
+      <div className="relative flex flex-col items-center justify-center py-14 sm:py-18 md:py-0 px-4">
+        {/* Language Switcher */}
+        <div className="absolute top-3 right-3 z-20">
+          <LanguageSwitcher />
+        </div>
         <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px]">
           <Lottie
             animationData={animationData}

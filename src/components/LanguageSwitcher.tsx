@@ -2,8 +2,7 @@
 
 import { useCallback } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import { Globe } from "lucide-react"
-import { LOCALES, LOCALE_NAMES, type Locale } from "@/i18n/config"
+import { LOCALES, LOCALE_FLAGS, type Locale } from "@/i18n/config"
 import { useDictionary } from "@/i18n/use-dictionary"
 
 export default function LanguageSwitcher() {
@@ -13,6 +12,7 @@ export default function LanguageSwitcher() {
 
   const handleChange = useCallback(
     (newLocale: Locale) => {
+      if (newLocale === locale) return
       const segments = pathname.split("/")
       segments[1] = newLocale
       const newPath = segments.join("/")
@@ -20,33 +20,26 @@ export default function LanguageSwitcher() {
       document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000;SameSite=Lax`
       router.push(newPath)
     },
-    [pathname, router]
+    [pathname, router, locale]
   )
 
   return (
-    <div className="relative group">
-      <button
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 transition-colors text-xs text-white/60 hover:text-white/80 cursor-pointer"
-        aria-label="Change language"
-      >
-        <Globe className="w-3.5 h-3.5" />
-        <span className="uppercase font-medium">{locale}</span>
-      </button>
-      <div className="absolute right-0 top-full mt-1 min-w-[120px] bg-moic-surface border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-        {LOCALES.map((l) => (
-          <button
-            key={l}
-            onClick={() => handleChange(l)}
-            className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer first:rounded-t-lg last:rounded-b-lg ${
-              l === locale
-                ? "text-moic-blue bg-moic-blue/10"
-                : "text-white/60 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            {LOCALE_NAMES[l]}
-          </button>
-        ))}
-      </div>
+    <div className="flex items-center gap-1">
+      {LOCALES.map((l) => (
+        <button
+          key={l}
+          onClick={() => handleChange(l)}
+          className={`flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+            l === locale
+              ? "bg-white/10 text-white border border-white/20"
+              : "text-white/40 hover:text-white/70 hover:bg-white/5"
+          }`}
+          aria-label={`Switch to ${l}`}
+        >
+          <span className="text-sm">{LOCALE_FLAGS[l]}</span>
+          <span className="uppercase">{l}</span>
+        </button>
+      ))}
     </div>
   )
 }
