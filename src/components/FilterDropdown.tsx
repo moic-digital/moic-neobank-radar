@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, ArrowDown, ArrowUp } from "lucide-react"
 
 interface DropdownOption {
   readonly value: string
   readonly label: string
+  readonly hasDirection?: boolean
 }
 
 interface DropdownGroup {
@@ -28,6 +29,8 @@ interface FilterDropdownProps {
   readonly items: readonly DropdownItem[]
   readonly onChange: (value: string) => void
   readonly scrollHint?: boolean
+  readonly activeDirection?: "desc" | "asc"
+  readonly onDirectionToggle?: () => void
 }
 
 export default function FilterDropdown({
@@ -38,6 +41,8 @@ export default function FilterDropdown({
   items,
   onChange,
   scrollHint = false,
+  activeDirection,
+  onDirectionToggle,
 }: FilterDropdownProps) {
   const [open, setOpen] = useState(false)
   const [showScrollHint, setShowScrollHint] = useState(true)
@@ -95,22 +100,47 @@ export default function FilterDropdown({
   const isActive = value !== ""
   const displayResetLabel = resetLabel ?? placeholder
 
+  function findSelectedHasDirection(): boolean {
+    for (const item of items) {
+      if (!isGroup(item) && item.value === value && item.hasDirection) return true
+    }
+    return false
+  }
+
+  const showDirectionOnButton = findSelectedHasDirection() && activeDirection !== undefined
+
   return (
     <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen((prev) => !prev)}
-        className={`flex items-center gap-2 w-full px-3 py-2.5 sm:py-3 border rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer ${
-          isActive
-            ? "bg-moic-blue/10 border-moic-blue/50 text-white"
-            : "bg-white/5 border-white/10 text-white hover:border-white/20"
-        }`}
-      >
-        {icon}
-        <span className="truncate flex-1 text-left">{selectedLabel}</span>
-        <ChevronDown
-          className={`w-4 h-4 shrink-0 text-white/40 transition-transform ${open ? "rotate-180" : ""}`}
-        />
-      </button>
+      <div className="flex">
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className={`flex items-center gap-2 w-full px-3 py-2.5 sm:py-3 border text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+            showDirectionOnButton ? "rounded-l-lg border-r-0" : "rounded-lg"
+          } ${
+            isActive
+              ? "bg-moic-blue/10 border-moic-blue/50 text-white"
+              : "bg-white/5 border-white/10 text-white hover:border-white/20"
+          }`}
+        >
+          {icon}
+          <span className="truncate flex-1 text-left">{selectedLabel}</span>
+          <ChevronDown
+            className={`w-4 h-4 shrink-0 text-white/40 transition-transform ${open ? "rotate-180" : ""}`}
+          />
+        </button>
+        {showDirectionOnButton && onDirectionToggle && (
+          <button
+            onClick={onDirectionToggle}
+            className="flex items-center justify-center px-2 py-2.5 sm:py-3 border border-moic-blue/50 rounded-r-lg bg-moic-blue/10 text-moic-blue hover:bg-moic-blue/20 transition-all cursor-pointer"
+            aria-label={activeDirection === "desc" ? "Sort ascending" : "Sort descending"}
+          >
+            {activeDirection === "desc"
+              ? <ArrowDown className="w-3.5 h-3.5" />
+              : <ArrowUp className="w-3.5 h-3.5" />
+            }
+          </button>
+        )}
+      </div>
 
       {open && (
         <div ref={listRef} onScroll={checkScrollEnd} className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto custom-scrollbar">
@@ -174,17 +204,33 @@ export default function FilterDropdown({
             }
 
             return (
-              <button
-                key={item.value}
-                onClick={() => handleSelect(item.value)}
-                className={`w-full text-left px-3 py-2 text-xs sm:text-sm font-bold transition-colors ${
-                  value === item.value
-                    ? "text-moic-blue bg-moic-blue/10"
-                    : "text-white/50 hover:bg-white/5 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </button>
+              <div key={item.value} className="flex items-center">
+                <button
+                  onClick={() => handleSelect(item.value)}
+                  className={`flex-1 text-left px-3 py-2 text-xs sm:text-sm font-bold transition-colors ${
+                    value === item.value
+                      ? "text-moic-blue bg-moic-blue/10"
+                      : "text-white/50 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </button>
+                {item.hasDirection && value === item.value && activeDirection !== undefined && onDirectionToggle && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onDirectionToggle()
+                    }}
+                    className="px-2 py-2 text-moic-blue hover:text-white transition-colors cursor-pointer"
+                    aria-label={activeDirection === "desc" ? "Sort ascending" : "Sort descending"}
+                  >
+                    {activeDirection === "desc"
+                      ? <ArrowDown className="w-3.5 h-3.5" />
+                      : <ArrowUp className="w-3.5 h-3.5" />
+                    }
+                  </button>
+                )}
+              </div>
             )
           })}
         </div>

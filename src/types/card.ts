@@ -41,4 +41,4 @@ export interface Filters {
   readonly airdrop: string
 }
 
-export type SortOption = "featured" | "cashbackHigh" | "nameAZ" | "newest"
+export type SortOption = "cashbackHigh" | "nameAZ" | "age"

@@ -73,9 +73,11 @@ const CURRENCY_ITEMS = [
 
 interface FilterBarProps {
   readonly filters: Filters
-  readonly sort: SortOption
+  readonly sort: SortOption | ""
+  readonly sortDirection: "desc" | "asc"
   readonly onFilterChange: (filters: Filters) => void
-  readonly onSortChange: (sort: SortOption) => void
+  readonly onSortChange: (sort: SortOption | "") => void
+  readonly onSortDirectionToggle: () => void
   readonly resultsCount: number
 }
 
@@ -125,17 +127,18 @@ function TriStateDots({ state }: { readonly state: TriState }) {
 export default function FilterBar({
   filters,
   sort,
+  sortDirection,
   onFilterChange,
   onSortChange,
+  onSortDirectionToggle,
   resultsCount,
 }: FilterBarProps) {
   const { t } = useDictionary()
 
   const sortItems = [
     { value: "nameAZ", label: t.filter.sortAZ },
-    { value: "featured", label: t.filter.sortAll },
     { value: "cashbackHigh", label: t.filter.sortTopCashback },
-    { value: "newest", label: t.filter.sortNewest },
+    { value: "age", label: t.filter.sortAge, hasDirection: true },
   ] as const
 
   const hasActiveFilters =
@@ -301,8 +304,11 @@ export default function FilterBar({
           icon={<ArrowDownAZ className="w-4 h-4 text-moic-blue shrink-0" />}
           value={sort}
           placeholder={t.filter.sort}
+          resetLabel={t.filter.clear}
           items={sortItems}
-          onChange={(val) => onSortChange(val as SortOption)}
+          onChange={(val) => onSortChange(val as SortOption | "")}
+          activeDirection={sort === "age" ? sortDirection : undefined}
+          onDirectionToggle={onSortDirectionToggle}
         />
       </div>
 

@@ -26,9 +26,8 @@
     "showingAll": "Mostrando las {count} tarjetas",
     "clear": "Limpiar",
     "sortAZ": "A-Z",
-    "sortAll": "Todos",
     "sortTopCashback": "Mayor Cashback",
-    "sortNewest": "Más Recientes"
+    "sortAge": "Edad"
   },
   "card": {
     "age": "Edad",

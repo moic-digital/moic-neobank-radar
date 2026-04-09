@@ -26,9 +26,8 @@
     "showingAll": "Showing all {count} cards",
     "clear": "Clear",
     "sortAZ": "A-Z",
-    "sortAll": "All",
     "sortTopCashback": "Top Cashback",
-    "sortNewest": "Newest"
+    "sortAge": "Age"
   },
   "card": {
     "age": "Age",

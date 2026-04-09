@@ -26,9 +26,8 @@ export interface Dictionary {
     readonly showingAll: string
     readonly clear: string
     readonly sortAZ: string
-    readonly sortAll: string
     readonly sortTopCashback: string
-    readonly sortNewest: string
+    readonly sortAge: string
   }
   readonly card: {
     readonly age: string

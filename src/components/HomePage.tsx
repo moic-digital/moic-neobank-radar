@@ -41,7 +41,8 @@ export default function HomePage({ cards }: HomePageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const [sort, setSort] = useState<SortOption>("nameAZ")
+  const [sort, setSort] = useState<SortOption | "">("")
+  const [sortDirection, setSortDirection] = useState<"desc" | "asc">("desc")
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS)
 
   const [compareMode, setCompareMode] = useState(false)
@@ -131,20 +132,20 @@ export default function HomePage({ cards }: HomePageProps) {
       const bRec = b.recommended ? 0 : 1
       if (aRec !== bRec) return aRec - bRec
 
-      if (sort === "featured") {
-        return (a.rank ?? 999) - (b.rank ?? 999)
-      }
       if (sort === "cashbackHigh") {
-        const aVal = a.cashbackMax
-        const bVal = b.cashbackMax
-        return bVal - aVal
+        return b.cashbackMax - a.cashbackMax
       }
       if (sort === "nameAZ") {
         return a.name.localeCompare(b.name)
       }
+      if (sort === "age") {
+        const aYear = parseInt(a.age) || 0
+        const bYear = parseInt(b.age) || 0
+        return sortDirection === "desc" ? bYear - aYear : aYear - bYear
+      }
       return 0
     })
-  }, [cards, filters, sort])
+  }, [cards, filters, sort, sortDirection])
 
   const selectedCards = useMemo(
     () => cards.filter((c) => selectedIds.includes(c.id)),
@@ -225,8 +226,10 @@ export default function HomePage({ cards }: HomePageProps) {
         <FilterBar
           filters={filters}
           sort={sort}
+          sortDirection={sortDirection}
           onFilterChange={setFilters}
           onSortChange={setSort}
+          onSortDirectionToggle={() => setSortDirection((d) => d === "desc" ? "asc" : "desc")}
           resultsCount={filteredCards.length}
         />
 
