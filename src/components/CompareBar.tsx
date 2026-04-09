@@ -25,9 +25,9 @@ export default function CompareBar({
   if (cards.length === 0) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 animate-slide-up">
+    <div className="fixed bottom-0 left-0 right-0 z-40 animate-slide-up pointer-events-none">
       <div className="mx-auto max-w-3xl px-4 pb-4">
-        <div className="bg-moic-surface/95 backdrop-blur-md border border-white/10 rounded-2xl p-3 sm:p-4 shadow-[0_-8px_32px_rgba(0,0,0,0.5)]">
+        <div className="bg-moic-surface/95 backdrop-blur-md border border-white/10 rounded-2xl p-3 sm:p-4 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] pointer-events-auto">
           <div className="flex items-center gap-3">
             {/* Selected cards */}
             <div className="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto no-scrollbar">
