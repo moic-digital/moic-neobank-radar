@@ -335,7 +335,32 @@ export default async function CardPage({ params }: CardPageProps) {
           </div>
         </section>
 
-        {/* Block 4 - Insights */}
+        {/* Block 4 - Highlights */}
+        {translatedPerks.length > 0 && (
+          <section aria-label="Card highlights" className="relative overflow-hidden border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl hover:shadow-[0_0_24px_rgba(0,237,79,0.12),0_0_48px_rgba(0,237,79,0.06)] transition-shadow duration-300">
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-moic-blue via-moic-green to-moic-blue" />
+            <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
+              {t.cardDetail.highlights}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {translatedPerks.map((perk, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 hover:border-moic-green/30 hover:bg-moic-green/[0.03] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-moic-green/10 shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-moic-green" />
+                  </span>
+                  <span className="text-xs sm:text-sm text-white/80 leading-relaxed">
+                    {perk}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Block 5 - Insights */}
         {insights.length > 0 && (
           <section aria-label="Card insights" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
             <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4 sm:mb-6" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
@@ -364,7 +389,7 @@ export default async function CardPage({ params }: CardPageProps) {
           </section>
         )}
 
-        {/* Block 5 - Key Facts */}
+        {/* Block 6 - Key Facts */}
         <section aria-label="Key facts" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
           <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
             {t.cardDetail.keyFacts}
@@ -391,25 +416,6 @@ export default async function CardPage({ params }: CardPageProps) {
             })}
           </div>
         </section>
-
-        {/* Block 6 - Highlights */}
-        {translatedPerks.length > 0 && (
-          <section aria-label="Card highlights" className="border border-white/[0.08] bg-moic-surface p-4 sm:p-6 rounded-2xl">
-            <h2 className="text-sm sm:text-base font-bold tracking-wide mb-4" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-              {t.cardDetail.highlights}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {translatedPerks.map((perk, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-moic-green mt-0.5 shrink-0" />
-                  <span className="text-[11px] sm:text-xs text-white/70 leading-relaxed">
-                    {perk}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
       </article>
       </main>
     </div>
