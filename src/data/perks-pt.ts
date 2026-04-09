@@ -152,4 +152,8 @@ export const PERKS_PT: Readonly<Record<string, readonly string[]>> = {
     "Nim - Seu agente pessoal de IA",
     "Preços simples e transparentes, taxas e custos de assinatura são publicados no app",
   ],
+  "uglycash-card": [
+    "Ganhe 15% nas taxas de trading do seu amigo ou 10% se alguém negociar da sua posição",
+    "7% APY",
+  ],
 }
