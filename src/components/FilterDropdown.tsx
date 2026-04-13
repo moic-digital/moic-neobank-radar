@@ -114,7 +114,7 @@ export default function FilterDropdown({
       <div className="flex">
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className={`flex items-center gap-2 w-full px-3 py-2.5 sm:py-3 border text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+          className={`flex items-center justify-center gap-2 w-full px-3 py-2.5 sm:py-3 border text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
             showDirectionOnButton ? "rounded-l-lg border-r-0" : "rounded-lg"
           } ${
             isActive
@@ -123,7 +123,7 @@ export default function FilterDropdown({
           }`}
         >
           {icon}
-          <span className="truncate flex-1 text-left">{selectedLabel}</span>
+          <span className="truncate">{selectedLabel}</span>
           <ChevronDown
             className={`w-4 h-4 shrink-0 text-white/40 transition-transform ${open ? "rotate-180" : ""}`}
           />
