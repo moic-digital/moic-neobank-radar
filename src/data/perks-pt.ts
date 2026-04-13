@@ -156,4 +156,13 @@ export const PERKS_PT: Readonly<Record<string, readonly string[]>> = {
     "Ganhe 15% nas taxas de trading do seu amigo ou 10% se alguém negociar da sua posição",
     "7% APY",
   ],
+  "kleos-card": [
+    "Descontos exclusivos em taxas",
+    "c.5%-15% de rendimento dependendo do vault",
+    "Taxas de conversão crypto mais baixas",
+    "Acesso a eventos exclusivos",
+    "Associação ao Kleos Circle",
+    "Planos de alocação premium",
+    "Benefícios exclusivos de viagem e estilo de vida",
+  ],
 }

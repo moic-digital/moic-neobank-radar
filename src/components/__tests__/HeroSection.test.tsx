@@ -38,6 +38,10 @@ beforeEach(() => {
   mockOnCompare.mockClear()
 })
 
+afterEach(() => {
+  jest.restoreAllMocks()
+})
+
 describe("HeroSection - CTA Buttons", () => {
   describe("Rendering", () => {
     it("should render the Compare Cards button", () => {
@@ -78,8 +82,6 @@ describe("HeroSection - CTA Buttons", () => {
 
       expect(document.getElementById).toHaveBeenCalledWith("add-neobank")
       expect(mockScrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" })
-
-      jest.restoreAllMocks()
     })
   })
 
