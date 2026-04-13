@@ -1245,7 +1245,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD", "EUR", "GBP", "BRL"],
     age: "2025",
     airdropFarming: "False",
-    addedDate: "2026-03-27",
+    addedDate: "2026-04-06",
   },
   {
     id: "uglycash-card",
