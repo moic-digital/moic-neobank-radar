@@ -46,6 +46,7 @@ export const cardLogos: Readonly<Record<string, string>> = {
   "liminal-card": "/logos/liminal-logo.png",
   "uglycash-card": "/logos/uglycash.png",
   "kleos-card": "/logos/kleos-logo.png",
+  "picnic-card": "/logos/picnic-logo.jpeg",
 }
 
 export function getCardLogo(cardId: string): string {

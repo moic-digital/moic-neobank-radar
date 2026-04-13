@@ -165,4 +165,14 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
     "Planes de asignación premium",
     "Beneficios exclusivos de viaje y estilo de vida",
   ],
+  "picnic-card": [
+    "Billetera Smart con autocustodia powered by Safe (asegurando $70B+ en activos digitales)",
+    "Cero IOF (impuesto cambiario brasileño) en compras con tarjeta en USD",
+    "Aceptado en más de 180 países para compras online y presenciales",
+    "Compra de dólares vía PIX sin spread (incentivo actual)",
+    "Rendimientos DeFi: USD hasta 10% APY, EUR 4-10% APY, BRL 10-20% APY",
+    "PIX on/off-ramp con conversión automática Visa al pagar",
+    "Tarjeta Visa virtual y física",
+    "Tasas de cambio más bajas comparadas con bancos tradicionales brasileños",
+  ],
 }

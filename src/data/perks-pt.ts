@@ -165,4 +165,14 @@ export const PERKS_PT: Readonly<Record<string, readonly string[]>> = {
     "Planos de alocação premium",
     "Benefícios exclusivos de viagem e estilo de vida",
   ],
+  "picnic-card": [
+    "Carteira Smart com autocustódia powered by Safe (protegendo $70B+ em ativos digitais)",
+    "Zero IOF em compras com o cartão em dólar",
+    "Aceito em mais de 180 países para compras online e presenciais",
+    "Compra de dólar via PIX sem spread (incentivo atual)",
+    "Rendimentos DeFi: USD até 10% APY, EUR 4-10% APY, BRL 10-20% APY",
+    "PIX on/off-ramp com conversão automática Visa no checkout",
+    "Cartão Visa virtual e físico",
+    "Taxas de câmbio menores comparadas aos bancos tradicionais brasileiros",
+  ],
 }
