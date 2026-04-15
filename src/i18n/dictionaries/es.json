@@ -161,7 +161,9 @@
     "airdropFarmingDesc": "Marcado para airdrop farming - interesante para usuarios que farmean recompensas de ecosistema o protocolo.",
     "newerProduct": "Producto Más Nuevo",
     "newerProductDesc": "Producto más nuevo - monitorea estabilidad y feedback de la comunidad antes de enrutar grandes volúmenes.",
-    "years": "años"
+    "years": "años",
+    "months": "meses",
+    "month": "mes"
   },
   "noResults": {
     "title": "Ninguna tarjeta coincide con tus filtros",

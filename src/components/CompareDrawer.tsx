@@ -4,6 +4,7 @@ import { useEffect, useCallback, useState, useRef, Fragment } from "react"
 import { X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming } from "@/utils/card"
+import { formatTimeInMarket } from "@/utils/format-time-in-market"
 import CardLogo from "@/components/CardLogo"
 import { useDictionary } from "@/i18n/use-dictionary"
 import type { Dictionary } from "@/i18n/types"
@@ -62,7 +63,7 @@ function buildStatRows(t: Dictionary): readonly StatRow[] {
       label: t.compare.currencies,
       getValue: (c) => c.supportedCurrencies.join(", ") || "N/A",
     },
-    { label: t.compare.age, getValue: (c) => c.age || "N/A" },
+    { label: t.compare.age, getValue: (c) => formatTimeInMarket(c.age, t.cardDetail) },
   ]
 }
 

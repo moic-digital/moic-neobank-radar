@@ -161,7 +161,9 @@
     "airdropFarmingDesc": "Marked for airdrop farming - interesting for users farming ecosystem or protocol rewards.",
     "newerProduct": "Newer Product",
     "newerProductDesc": "Newer product - monitor stability and community feedback before routing large volumes.",
-    "years": "years"
+    "years": "years",
+    "months": "months",
+    "month": "month"
   },
   "noResults": {
     "title": "No cards match your filters",

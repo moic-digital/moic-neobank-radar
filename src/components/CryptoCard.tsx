@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Check, Flame } from "lucide-react"
 import { CardData } from "@/types/card"
 import { isAirdropFarming, isNewCard } from "@/utils/card"
+import { formatTimeInMarketShort } from "@/utils/format-time-in-market"
 import CardLogo from "@/components/CardLogo"
 import NewBadge from "@/components/NewBadge"
 import { useDictionary } from "@/i18n/use-dictionary"
@@ -98,7 +99,7 @@ export default function CryptoCard({
             {t.card.age}
           </p>
           <p className="text-xs font-semibold text-white/80">
-            {card.age ? `${new Date().getFullYear() - parseInt(card.age)} yr` : "N/A"}
+            {formatTimeInMarketShort(card.age, t.cardDetail)}
           </p>
         </div>
         <div className="text-center border-x border-white/[0.06]">
