@@ -236,11 +236,11 @@ export default function FilterBar({
       </div>
 
       {/* Row 2: KYC + Self-Custody + Airdrop (prominent tri-state) + other filters */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {/* KYC tri-state */}
         <button
           onClick={cycleKyc}
-          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all border rounded-xl cursor-pointer ${getTriStateClasses(kycState)}`}
+          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all border rounded-xl cursor-pointer ${getTriStateClasses(kycState)}`}
         >
           <Shield className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(kycState)}`} />
           <span>
@@ -254,7 +254,7 @@ export default function FilterBar({
         {/* Self-Custody tri-state */}
         <button
           onClick={cycleSelfCustody}
-          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all border rounded-xl cursor-pointer ${getTriStateClasses(selfCustodyState)}`}
+          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all border rounded-xl cursor-pointer ${getTriStateClasses(selfCustodyState)}`}
         >
           <KeyRound className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(selfCustodyState)}`} />
           <span>
@@ -268,7 +268,7 @@ export default function FilterBar({
         {/* Airdrop tri-state */}
         <button
           onClick={cycleAirdrop}
-          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all border rounded-xl cursor-pointer ${getTriStateClasses(airdropState)}`}
+          className={`flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all border rounded-xl cursor-pointer ${getTriStateClasses(airdropState)}`}
         >
           <Sparkles className={`w-4 h-4 shrink-0 ${getTriStateIconClasses(airdropState)}`} />
           <span>
