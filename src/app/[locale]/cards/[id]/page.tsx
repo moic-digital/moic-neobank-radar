@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import CardLogo from "@/components/CardLogo"
 import { isAirdropFarming } from "@/utils/card"
+import { formatTimeInMarket } from "@/utils/format-time-in-market"
 import {
   ArrowLeft,
   ExternalLink,
@@ -175,9 +176,7 @@ export default async function CardPage({ params }: CardPageProps) {
   const t = await getDictionary(locale as Locale)
   const translatedPerks = getCardPerks(card.id, locale as Locale, card.perks)
   const insights = buildInsights(card, t)
-  const ageLabel = card.age
-    ? `${new Date().getFullYear() - parseInt(card.age)} ${t.cardDetail.years}`
-    : "N/A"
+  const ageLabel = formatTimeInMarket(card.age, t.cardDetail)
   const cashbackLabel = card.cashbackMax > 0 ? `${card.cashbackMax}%` : "N/A"
   const kycLabel = card.kyc === "Required" ? "Required" : card.kyc === "Light" ? "Light" : "None"
   const showAirdrop = card.airdropFarming && isAirdropFarming(card.airdropFarming)

@@ -80,6 +80,8 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
       onClose("success")
     } catch {
       onClose("error")
+    } finally {
+      setSubmitting(false)
     }
   }
 

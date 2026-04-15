@@ -162,6 +162,8 @@ export interface Dictionary {
     readonly newerProduct: string
     readonly newerProductDesc: string
     readonly years: string
+    readonly months: string
+    readonly month: string
   }
   readonly noResults: {
     readonly title: string

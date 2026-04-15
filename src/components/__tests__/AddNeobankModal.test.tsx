@@ -4,6 +4,7 @@ import AddNeobankModal from "../AddNeobankModal"
 import { renderWithI18n } from "@/test-utils"
 
 const mockOnClose = jest.fn()
+const originalFetch = global.fetch
 
 function renderModal() {
   return renderWithI18n(<AddNeobankModal onClose={mockOnClose} />)
@@ -11,6 +12,11 @@ function renderModal() {
 
 beforeEach(() => {
   mockOnClose.mockClear()
+})
+
+afterEach(() => {
+  global.fetch = originalFetch
+  jest.restoreAllMocks()
 })
 
 describe("AddNeobankModal - Form Sections", () => {
