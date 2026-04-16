@@ -17,7 +17,7 @@ export const FAQ_CATEGORIES_PT: readonly FaqCategory[] = [
       {
         question: "Quais serviços os neobanks normalmente oferecem?",
         answer:
-          "A maioria dos neobanks oferece serviços financeiros essenciais como contas digitais, cartões de débito ou crédito, transferências internacionais, ferramentas de orçamento, contas de poupança ou rendimento, e programas de cashback e recompensas. Esses serviços são tipicamente gerenciados inteiramente por meio de um aplicativo móvel.",
+          "A maioria dos neobanks oferece serviços financeiros essenciais como contas digitais, cartões de débito ou crédito, transferências internacionais, ferramentas de orçamento, contas de poupança ou recompensas, e programas de cashback e recompensas. Esses serviços são tipicamente gerenciados inteiramente por meio de um aplicativo móvel.",
       },
       {
         question: "Por que os neobanks estão crescendo tão rapidamente?",

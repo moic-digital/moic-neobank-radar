@@ -307,7 +307,7 @@ export const cards: readonly CardData[] = [
     perks: [
       "Cashback on every purchase",
       "Referral rewards (1% Cashback on referral purchases + 10% points on their deposits)",
-      "Yield Bearing",
+      "Rewards-Bearing",
       "Airport Companion lounge access",
       "Concierge",
       "Crypto concierge (coming soon)",
@@ -320,7 +320,7 @@ export const cards: readonly CardData[] = [
     cardGradient: "from-violet-900 to-purple-900",
     tierColor: "text-violet-200",
     metal: false,
-    supportedAssets: "USDC (Yielding)",
+    supportedAssets: "USDC (Rewards-Generating)",
     kyc: "Required",
     supportedCurrencies: ["USD"],
     age: "2022",
@@ -557,7 +557,7 @@ export const cards: readonly CardData[] = [
     annualFee: "Free",
     fxFee: "0% on USD spend; 1.5% on non‑USD spend",
     perks: [
-      "Automatic yield (up to 5% everyday, up to 20% fixed-term)",
+      "Automatic rewards (up to 5% everyday, up to 20% fixed-term)",
     ],
     signupBonus: "None",
     custody: "Custodial",
@@ -640,7 +640,7 @@ export const cards: readonly CardData[] = [
     annualFee: "Free",
     fxFee: "0%",
     perks: [
-      "2% cashback in USDC on every eligible purchase, capped at 10 USDC/month. Yield on idle stablecoins (up to ~5% on EUR, ~11% on USD via DeFi‑style pools).",
+      "2% cashback in USDC on every eligible purchase, capped at 10 USDC/month. Rewards on idle stablecoins (up to ~5% on EUR, ~11% on USD via DeFi‑style pools).",
     ],
     signupBonus: "None",
     custody: "Non-Custodial",
@@ -835,7 +835,7 @@ export const cards: readonly CardData[] = [
     fxFee: "0-3%",
     perks: [
       "Up to 6% cashback in TRIA tokens",
-      "Activate higher yields and exclusive opportunities when you hold and use a Tria",
+      "Activate higher rewards and exclusive opportunities when you hold and use a Tria",
     ],
     signupBonus: "None",
     custody: "Non-Custodial",
@@ -1053,7 +1053,7 @@ export const cards: readonly CardData[] = [
     fxFee: "0.5%-1.5%",
     perks: [
       "Exclusive fee discounts",
-      "c.5%-15% yield depending on vault",
+      "c.5%-15% rewards depending on vault",
       "Lower crypto conversion fees",
       "Access to exclusive events",
       "Kleos Circle membership",
@@ -1332,7 +1332,7 @@ export const cards: readonly CardData[] = [
       "Zero IOF (Brazilian foreign-exchange tax) on card purchases in USD",
       "Accepted in 180+ countries for online and in-store purchases",
       "Zero-spread dollar purchases via PIX (current incentive)",
-      "DeFi yields: USD up to 10% APY, EUR 4-10% APY, BRL 10-20% APY",
+      "DeFi rewards: USD up to 10% APY, EUR 4-10% APY, BRL 10-20% APY",
       "PIX on/off-ramp with automatic Visa conversion at checkout",
       "Virtual and physical Visa card",
       "Lower FX rates compared to traditional Brazilian banks",

@@ -123,6 +123,15 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Disclaimer */}
+      <div className="border-t border-white/6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4">
+          <p className="text-[11px] leading-relaxed text-white/25 text-center">
+            {t.footer.disclaimer}
+          </p>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="border-t border-white/6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">

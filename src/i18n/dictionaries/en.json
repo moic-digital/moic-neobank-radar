@@ -106,7 +106,8 @@
     "navRadar": "Radar",
     "navFaq": "FAQ",
     "navContact": "Contact",
-    "navReport": "Neobanks Latam Report"
+    "navReport": "Neobanks Latam Report",
+    "disclaimer": "The information on this site is for comparison purposes only and does not constitute financial advice, an offer, or a solicitation. Rates, rewards, and terms are provided by third-party platforms and may change. Always verify directly with the provider."
   },
   "cookie": {
     "title": "We value your privacy",

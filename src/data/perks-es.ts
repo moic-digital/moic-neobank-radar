@@ -42,7 +42,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
   "etherfi-card": [
     "Cashback en cada compra",
     "Recompensas por referidos (1% de cashback en compras del referido + 10% de puntos en sus depósitos)",
-    "Rendimiento sobre saldo",
+    "Recompensas sobre saldo",
     "Acceso a lounges de aeropuerto",
     "Concierge",
     "Concierge crypto (próximamente)",
@@ -72,7 +72,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
     "Gana cashback en categorías seleccionadas",
   ],
   "wayex-card": [
-    "Rendimiento automático (hasta 5% diario, hasta 20% a plazo fijo)",
+    "Recompensas automáticas (hasta 5% diario, hasta 20% a plazo fijo)",
   ],
   "gnosis-card": [
     "Gana 1-4% de cashback en GNO en cada compra, hasta 5% con OG NFT, entregado semanalmente",
@@ -83,7 +83,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
     "1,5% de vuelta en categorías como gastronomía y viajes",
   ],
   "bleap-card": [
-    "2% de cashback en USDC en cada compra elegible, limitado a 10 USDC/mes. Rendimiento en stablecoins inactivas (hasta ~5% en EUR, ~11% en USD vía pools estilo DeFi).",
+    "2% de cashback en USDC en cada compra elegible, limitado a 10 USDC/mes. Recompensas en stablecoins inactivas (hasta ~5% en EUR, ~11% en USD vía pools estilo DeFi).",
   ],
   "bitpanda-card": [
     "1% de cashback en compras financiadas con crypto. 0% en fiat/EUR, stablecoins, metales y acciones",
@@ -103,7 +103,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
   ],
   "tria-card": [
     "Hasta 6% de cashback en tokens TRIA",
-    "Activa rendimientos mayores y oportunidades exclusivas al mantener y usar un Tria",
+    "Activa recompensas mayores y oportunidades exclusivas al mantener y usar un Tria",
   ],
   "avici-card": [],
   "oobit-card": [
@@ -158,7 +158,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
   ],
   "kleos-card": [
     "Descuentos exclusivos en tarifas",
-    "c.5%-15% de rendimiento dependiendo del vault",
+    "c.5%-15% de recompensas dependiendo del vault",
     "Tarifas de conversión crypto más bajas",
     "Acceso a eventos exclusivos",
     "Membresía del Kleos Circle",
@@ -170,7 +170,7 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
     "Cero IOF (impuesto cambiario brasileño) en compras con tarjeta en USD",
     "Aceptado en más de 180 países para compras online y presenciales",
     "Compra de dólares vía PIX sin spread (incentivo actual)",
-    "Rendimientos DeFi: USD hasta 10% APY, EUR 4-10% APY, BRL 10-20% APY",
+    "Recompensas DeFi: USD hasta 10% APY, EUR 4-10% APY, BRL 10-20% APY",
     "PIX on/off-ramp con conversión automática Visa al pagar",
     "Tarjeta Visa virtual y física",
     "Tasas de cambio más bajas comparadas con bancos tradicionales brasileños",

@@ -20,7 +20,7 @@ export const FAQ_CATEGORIES: readonly FaqCategory[] = [
       {
         question: "What services do neobanks typically offer?",
         answer:
-          "Most neobanks provide core financial services such as digital bank accounts, debit or credit cards, international transfers, budgeting tools, savings or yield accounts, and cashback and rewards programs. These services are typically managed entirely through a mobile application.",
+          "Most neobanks provide core financial services such as digital bank accounts, debit or credit cards, international transfers, budgeting tools, savings or rewards accounts, and cashback and rewards programs. These services are typically managed entirely through a mobile application.",
       },
       {
         question: "Why are neobanks growing so quickly?",
