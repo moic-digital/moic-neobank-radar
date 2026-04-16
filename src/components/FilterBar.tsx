@@ -284,7 +284,6 @@ export default function FilterBar({
           icon={<Globe className="w-4 h-4 text-moic-blue shrink-0" />}
           value={filters.region}
           placeholder={t.filter.region}
-          resetLabel={t.filter.noFilter}
           items={REGION_ITEMS}
           onChange={(val) => onFilterChange({ ...filters, region: val })}
           scrollHint
@@ -304,7 +303,6 @@ export default function FilterBar({
           icon={<ArrowDownAZ className="w-4 h-4 text-moic-blue shrink-0" />}
           value={sort}
           placeholder={t.filter.sort}
-          resetLabel={t.filter.clear}
           items={sortItems}
           onChange={(val) => onSortChange(val as SortOption | "")}
           activeDirection={sort === "age" ? sortDirection : undefined}

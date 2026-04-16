@@ -15,6 +15,7 @@ import AddNeobankSection from "@/components/AddNeobankSection"
 import FaqSection from "@/components/FaqSection"
 import Footer from "@/components/Footer"
 import { getFaqCategories } from "@/data/faq"
+import { trackCompareCards } from "@/lib/gtm"
 
 interface HomePageProps {
   readonly cards: readonly CardData[]
@@ -188,6 +189,9 @@ export default function HomePage({ cards }: HomePageProps) {
   function handleOpenDrawer() {
     setDrawerOpen(true)
     updateCompareUrl(selectedIds)
+
+    const compareCards = cards.filter((c) => selectedIds.includes(c.id))
+    trackCompareCards(compareCards)
   }
 
   function handleCloseDrawer() {
