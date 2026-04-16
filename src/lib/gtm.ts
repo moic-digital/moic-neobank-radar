@@ -5,6 +5,12 @@ export function pushToDataLayer(event: Record<string, unknown>): void {
   window.dataLayer.push(event)
 }
 
+export function trackCompareModeOpen(): void {
+  pushToDataLayer({
+    event: "compare_mode_open",
+  })
+}
+
 export function trackCompareCards(cards: readonly CardData[]): void {
   pushToDataLayer({
     event: "compare_cards",

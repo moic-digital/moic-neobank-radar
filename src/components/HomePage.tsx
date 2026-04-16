@@ -15,7 +15,7 @@ import AddNeobankSection from "@/components/AddNeobankSection"
 import FaqSection from "@/components/FaqSection"
 import Footer from "@/components/Footer"
 import { getFaqCategories } from "@/data/faq"
-import { trackCompareCards } from "@/lib/gtm"
+import { trackCompareCards, trackCompareModeOpen } from "@/lib/gtm"
 
 interface HomePageProps {
   readonly cards: readonly CardData[]
@@ -272,6 +272,7 @@ export default function HomePage({ cards }: HomePageProps) {
             handleExitCompareMode()
           } else {
             setCompareMode(true)
+            trackCompareModeOpen()
           }
         }}
         className={`fixed right-6 bottom-6 z-30 h-12 rounded-full shadow-lg cursor-pointer text-white flex items-center justify-center overflow-hidden ${
