@@ -107,6 +107,7 @@ export interface Dictionary {
     readonly navFaq: string
     readonly navContact: string
     readonly navReport: string
+    readonly disclaimer: string
   }
   readonly cookie: {
     readonly title: string

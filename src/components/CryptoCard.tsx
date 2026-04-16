@@ -7,6 +7,7 @@ import { isAirdropFarming, isNewCard } from "@/utils/card"
 import { formatTimeInMarketShort } from "@/utils/format-time-in-market"
 import CardLogo from "@/components/CardLogo"
 import NewBadge from "@/components/NewBadge"
+import VerifiedBadge from "@/components/VerifiedBadge"
 import { useDictionary } from "@/i18n/use-dictionary"
 
 interface CryptoCardProps {
@@ -83,9 +84,12 @@ export default function CryptoCard({
           size="sm"
         />
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
-            {card.name}
-          </h3>
+          <div className="flex items-center gap-1 min-w-0">
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+              {card.name}
+            </h3>
+            {card.isVerified && <VerifiedBadge />}
+          </div>
           <p className="text-[11px] text-white/40 truncate">
             {card.issuer}
           </p>
