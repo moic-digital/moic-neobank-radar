@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import CardLogo from "@/components/CardLogo"
+import VerifiedBadge from "@/components/VerifiedBadge"
 import { isAirdropFarming } from "@/utils/card"
 import { formatTimeInMarket } from "@/utils/format-time-in-market"
 import {
@@ -242,9 +243,12 @@ export default async function CardPage({ params }: CardPageProps) {
             <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
             {t.cardDetail.back}
           </Link>
-          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight truncate" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-            {card.name}
-          </h1>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <h1 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight truncate" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
+              {card.name}
+            </h1>
+            {card.isVerified && <VerifiedBadge size="md" />}
+          </div>
         </div>
 
         <a
@@ -272,9 +276,12 @@ export default async function CardPage({ params }: CardPageProps) {
             <p className="text-[10px] sm:text-[11px] text-white/40 uppercase tracking-widest">
               {card.issuer}
             </p>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight truncate" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
-              {card.name}
-            </h2>
+            <div className="flex items-center gap-1.5 min-w-0">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight truncate" style={{ fontFamily: "'Clash Grotesk', sans-serif" }}>
+                {card.name}
+              </h2>
+              {card.isVerified && <VerifiedBadge size="md" />}
+            </div>
             <div className="flex flex-wrap items-center gap-2 mt-1.5">
               <span className="text-[10px] font-medium bg-white/5 text-white/60 px-2 py-0.5 rounded border border-white/10">
                 {card.type}

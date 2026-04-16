@@ -25,6 +25,7 @@ export interface CardData {
   readonly rank?: number
   readonly recommended?: boolean
   readonly addedDate?: string
+  readonly isVerified?: boolean
 }
 
 export interface Filters {
