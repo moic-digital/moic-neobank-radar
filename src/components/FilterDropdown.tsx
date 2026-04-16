@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { ChevronDown, ArrowDown, ArrowUp } from "lucide-react"
+import { ChevronDown, ArrowDown, ArrowUp, X } from "lucide-react"
 
 interface DropdownOption {
   readonly value: string
@@ -25,7 +25,6 @@ interface FilterDropdownProps {
   readonly icon?: React.ReactNode
   readonly value: string
   readonly placeholder: string
-  readonly resetLabel?: string
   readonly items: readonly DropdownItem[]
   readonly onChange: (value: string) => void
   readonly scrollHint?: boolean
@@ -37,7 +36,6 @@ export default function FilterDropdown({
   icon,
   value,
   placeholder,
-  resetLabel,
   items,
   onChange,
   scrollHint = false,
@@ -98,7 +96,6 @@ export default function FilterDropdown({
 
   const selectedLabel = findLabel()
   const isActive = value !== ""
-  const displayResetLabel = resetLabel ?? placeholder
 
   function findSelectedHasDirection(): boolean {
     for (const item of items) {
@@ -114,8 +111,8 @@ export default function FilterDropdown({
       <div className="flex">
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className={`flex items-center justify-center gap-2 w-full px-3 py-2.5 sm:py-3 border text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
-            showDirectionOnButton ? "rounded-l-lg border-r-0" : "rounded-lg"
+          className={`flex flex-1 min-w-0 items-center justify-center gap-2 px-3 py-2.5 sm:py-3 border text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
+            isActive || showDirectionOnButton ? "rounded-l-lg border-r-0" : "rounded-lg"
           } ${
             isActive
               ? "bg-moic-blue/10 border-moic-blue/50 text-white"
@@ -125,9 +122,21 @@ export default function FilterDropdown({
           {icon}
           <span className="truncate">{selectedLabel}</span>
           <ChevronDown
-            className={`w-4 h-4 shrink-0 text-white/40 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`w-4 h-4 shrink-0 text-white/40 transition-transform ${open ? "rotate-180" : ""} ${isActive ? "hidden" : ""}`}
           />
         </button>
+        {isActive && !showDirectionOnButton && (
+          <button
+            onClick={() => {
+              onChange("")
+              setOpen(false)
+            }}
+            aria-label="Clear filter"
+            className="flex items-center justify-center px-2 py-2.5 sm:py-3 border border-l-0 border-moic-blue/50 rounded-r-lg bg-moic-blue/10 hover:bg-moic-blue/20 transition-all cursor-pointer"
+          >
+            <X className="w-3.5 h-3.5 shrink-0 text-white/40" />
+          </button>
+        )}
         {showDirectionOnButton && onDirectionToggle && (
           <button
             onClick={onDirectionToggle}
@@ -144,26 +153,12 @@ export default function FilterDropdown({
 
       {open && (
         <div ref={listRef} onScroll={checkScrollEnd} className="absolute top-full mt-1 left-0 w-full min-w-[180px] bg-moic-surface border border-white/10 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-50 py-1 max-h-64 overflow-y-auto custom-scrollbar">
-          {/* Reset option */}
-          <button
-            onClick={() => handleSelect("")}
-            className={`w-full text-left px-3 py-2 text-xs sm:text-sm transition-colors ${
-              value === ""
-                ? "text-moic-blue bg-moic-blue/10"
-                : "text-white/50 hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            {displayResetLabel}
-          </button>
-
           {/* Fixed scroll hint */}
           {scrollHint && (
             <span className="block px-3 py-1 text-[9px] text-white/20 tracking-wide">
               Swipe down to see more
             </span>
           )}
-
-          <div className="h-px bg-white/5 mx-2 my-1" />
 
           {items.map((item) => {
             if (isGroup(item)) {
