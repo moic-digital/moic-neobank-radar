@@ -31,6 +31,8 @@ import type { Dictionary } from "@/i18n/types"
 import {
   BASE_URL,
   SITE_NAME,
+  getOgLocale,
+  buildHreflangAlternates,
   buildCardDescription,
   buildFinancialProductJsonLd,
   buildBreadcrumbJsonLd,
@@ -52,7 +54,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: CardPageProps): Promise<Metadata> {
-  const { id } = await params
+  const { id, locale } = await params
   const card = cards.find((c) => c.id === id)
 
   if (!card) {
@@ -68,9 +70,9 @@ export async function generateMetadata({
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
       description,
-      url: `${BASE_URL}/cards/${card.id}`,
+      url: `${BASE_URL}/${locale}/cards/${card.id}`,
       siteName: SITE_NAME,
-      locale: "en_US",
+      locale: getOgLocale(locale),
       type: "article",
     },
     twitter: {
@@ -79,7 +81,8 @@ export async function generateMetadata({
       description,
     },
     alternates: {
-      canonical: `${BASE_URL}/cards/${card.id}`,
+      canonical: `${BASE_URL}/${locale}/cards/${card.id}`,
+      languages: buildHreflangAlternates(`/cards/${card.id}`),
     },
   }
 }
@@ -194,7 +197,7 @@ export default async function CardPage({ params }: CardPageProps) {
   ]
 
   const financialProductJsonLd = buildFinancialProductJsonLd(card)
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd(card.name, card.id)
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(card.name, card.id, locale)
   const faqJsonLd = buildFAQJsonLd(card)
 
   return (

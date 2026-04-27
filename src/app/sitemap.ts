@@ -1,15 +1,7 @@
 import type { MetadataRoute } from "next"
 import { cards } from "@/data/cards"
-import { BASE_URL } from "@/lib/seo"
+import { BASE_URL, buildHreflangAlternates } from "@/lib/seo"
 import { LOCALES, DEFAULT_LOCALE } from "@/i18n/config"
-
-function buildAlternates(path: string): Record<string, string> {
-  const alternates: Record<string, string> = {}
-  for (const locale of LOCALES) {
-    alternates[locale] = `${BASE_URL}/${locale}${path}`
-  }
-  return alternates
-}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const homeEntries: MetadataRoute.Sitemap = LOCALES.map((locale) => ({
@@ -17,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "daily",
     priority: locale === DEFAULT_LOCALE ? 1.0 : 0.9,
-    alternates: { languages: buildAlternates("") },
+    alternates: { languages: buildHreflangAlternates("") },
   }))
 
   const faqEntries: MetadataRoute.Sitemap = LOCALES.map((locale) => ({
@@ -25,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
-    alternates: { languages: buildAlternates("/neobank-faq") },
+    alternates: { languages: buildHreflangAlternates("/neobank-faq") },
   }))
 
   const cardEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
@@ -34,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
-      alternates: { languages: buildAlternates(`/cards/${card.id}`) },
+      alternates: { languages: buildHreflangAlternates(`/cards/${card.id}`) },
     }))
   )
 

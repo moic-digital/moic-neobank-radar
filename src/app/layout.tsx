@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_NAME,
     description: DEFAULT_DESCRIPTION,
-    url: BASE_URL,
     siteName: SITE_NAME,
-    locale: "en_US",
     type: "website",
     images: [
       {
         url: "/neobank-radar-image-rs.png",
+        width: 1200,
+        height: 630,
         alt: `${SITE_NAME} - Compare Crypto Cards`,
       },
     ],
@@ -60,9 +60,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: BASE_URL,
-  },
 }
 
 interface RootLayoutProps {
@@ -81,6 +78,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} className="dark" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
