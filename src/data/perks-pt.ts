@@ -180,6 +180,6 @@ export const PERKS_PT: Readonly<Record<string, readonly string[]>> = {
     "Concierge VIP e descontos em hotéis de luxo + voos",
     "Créditos de viagem e acesso a lounges de aeroporto",
     "Benefícios Visa Infinite: concierge, proteção em viagens, seguro, consultas médicas",
-    "Usuários iniciais serão recompensados",
+    "Benefícios exclusivos em breve",
   ],
 }
