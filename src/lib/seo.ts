@@ -1,5 +1,6 @@
 import type { CardData } from "@/types/card"
 import type { FaqItem } from "@/types/faq"
+import { LOCALES, DEFAULT_LOCALE, type Locale } from "@/i18n/config"
 
 export function safeJsonLdStringify(data: unknown): string {
   return JSON.stringify(data)
@@ -12,6 +13,27 @@ export const BASE_URL = "https://neobankradar.xyz"
 export const SITE_NAME = "Neobank Radar"
 export const DEFAULT_DESCRIPTION =
   "Compare fees, cashback, perks and custody models across 40+ crypto debit and credit cards. Find the best neobank card for your needs."
+
+const OG_LOCALE_MAP: Record<Locale, string> = {
+  en: "en_US",
+  pt: "pt_BR",
+  es: "es_ES",
+}
+
+export function getOgLocale(locale: string): string {
+  return OG_LOCALE_MAP[locale as Locale] ?? "en_US"
+}
+
+export function buildHreflangAlternates(
+  path: string
+): Record<string, string> {
+  const languages: Record<string, string> = {}
+  for (const locale of LOCALES) {
+    languages[locale] = `${BASE_URL}/${locale}${path}`
+  }
+  languages["x-default"] = `${BASE_URL}/${DEFAULT_LOCALE}${path}`
+  return languages
+}
 
 export const DEFAULT_KEYWORDS = [
   "crypto card",
@@ -52,7 +74,10 @@ export function buildWebSiteJsonLd() {
   }
 }
 
-export function buildItemListJsonLd(cards: readonly CardData[]) {
+export function buildItemListJsonLd(
+  cards: readonly CardData[],
+  locale: string = DEFAULT_LOCALE
+) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -64,7 +89,7 @@ export function buildItemListJsonLd(cards: readonly CardData[]) {
       "@type": "ListItem",
       position: index + 1,
       name: card.name,
-      url: `${BASE_URL}/cards/${card.id}`,
+      url: `${BASE_URL}/${locale}/cards/${card.id}`,
     })),
   }
 }
@@ -121,7 +146,11 @@ export function buildFinancialProductJsonLd(card: CardData) {
   }
 }
 
-export function buildBreadcrumbJsonLd(cardName: string, cardId: string) {
+export function buildBreadcrumbJsonLd(
+  cardName: string,
+  cardId: string,
+  locale: string = DEFAULT_LOCALE
+) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -130,13 +159,13 @@ export function buildBreadcrumbJsonLd(cardName: string, cardId: string) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: BASE_URL,
+        item: `${BASE_URL}/${locale}`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: cardName,
-        item: `${BASE_URL}/cards/${cardId}`,
+        item: `${BASE_URL}/${locale}/cards/${cardId}`,
       },
     ],
   }

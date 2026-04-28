@@ -175,4 +175,11 @@ export const PERKS_PT: Readonly<Record<string, readonly string[]>> = {
     "Cartão Visa virtual e físico",
     "Taxas de câmbio menores comparadas aos bancos tradicionais brasileiros",
   ],
+  "moto-card": [
+    "Até 5% de cashback nos primeiros $1.000 em gastos",
+    "Concierge VIP e descontos em hotéis de luxo + voos",
+    "Créditos de viagem e acesso a lounges de aeroporto",
+    "Benefícios Visa Infinite: concierge, proteção em viagens, seguro, consultas médicas",
+    "Benefícios exclusivos em breve",
+  ],
 }
