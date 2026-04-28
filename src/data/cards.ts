@@ -200,6 +200,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["18+ currencies"],
     age: "2024",
     airdropFarming: "True",
+    recommended: true,
   },
   {
     id: "gemini-card",
@@ -985,7 +986,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD"],
     age: "2017",
     airdropFarming: "False",
-    recommended: true,
   },
   {
     id: "tapx-card",
@@ -1288,7 +1288,6 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD", "20+ currencies"],
     age: "2024",
     airdropFarming: "False",
-    recommended: true,
   },
   {
     id: "lemoncash-card",
