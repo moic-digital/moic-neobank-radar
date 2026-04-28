@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { Scale, X } from "lucide-react"
 import { Filters, SortOption, CardData } from "@/types/card"
 import { matchesRegion } from "@/utils/regions/regionUtils"
+import { matchesCurrencyFilter } from "@/utils/card"
 import { useDictionary } from "@/i18n/use-dictionary"
 import HeroSection from "@/components/HeroSection"
 import CryptoCard from "@/components/CryptoCard"
@@ -104,10 +105,10 @@ export default function HomePage({ cards }: HomePageProps) {
             ? card.kyc === "Required" || card.kyc === "Light"
             : card.kyc === "None"
 
-      const matchesCurrency =
-        filters.currency === "" ||
-        card.supportedCurrencies.includes(filters.currency) ||
-        card.supportedCurrencies.includes("Global")
+      const matchesCurrency = matchesCurrencyFilter(
+        card.supportedCurrencies,
+        filters.currency,
+      )
 
       const matchesAirdrop =
         filters.airdrop === ""
