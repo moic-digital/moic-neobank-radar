@@ -42,6 +42,7 @@ export interface Dictionary {
   readonly compare: {
     readonly compare: string
     readonly compareCards: string
+    readonly compareHint: string
     readonly swipeToExplore: string
     readonly visit: string
     readonly type: string

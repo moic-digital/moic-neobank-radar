@@ -824,6 +824,7 @@ export const cards: readonly CardData[] = [
     supportedCurrencies: ["USD", "HKD", "Global"],
     age: "2023",
     airdropFarming: "False",
+    recommended: true,
   },
   {
     id: "tria-card",
