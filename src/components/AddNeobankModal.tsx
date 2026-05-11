@@ -10,8 +10,7 @@ interface AddNeobankModalProps {
   readonly onClose: (result?: SubmitResult) => void
 }
 
-const WEBHOOK_URL =
-  "https://hook.us2.make.com/9yw7vlvqzgns7c0tcara5pyfjmekekep"
+const SUBMIT_ENDPOINT = "/api/add-neobank"
 
 interface FormData {
   readonly contactName: string
@@ -67,7 +66,7 @@ export default function AddNeobankModal({ onClose }: AddNeobankModalProps) {
     setSubmitting(true)
 
     try {
-      const response = await fetch(WEBHOOK_URL, {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

@@ -238,6 +238,13 @@ export default function HomePage({ cards }: HomePageProps) {
           resultsCount={filteredCards.length}
         />
 
+        <div className="mb-6 sm:mb-8 flex justify-center">
+          <div className="inline-flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl border border-moic-blue/30 bg-gradient-to-r from-moic-blue/10 via-moic-blue/5 to-moic-blue/10 text-white/85 text-xs sm:text-sm text-center shadow-[0_0_20px_rgba(42,96,251,0.15)] backdrop-blur-sm">
+            <Scale className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-moic-blue shrink-0" />
+            <span>{t.compare.compareHint}</span>
+          </div>
+        </div>
+
         <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 ${compareMode && selectedIds.length > 0 ? "pb-24" : ""}`}>
           {filteredCards.length > 0 ? (
             filteredCards.map((card) => (
