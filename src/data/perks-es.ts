@@ -54,7 +54,9 @@ export const PERKS_ES: Readonly<Record<string, readonly string[]>> = {
   "bitpay-card": [],
   "coca-card": [
     "Hasta 8% de cashback",
-    "6% APY sobre saldos",
+    "5% APY sobre saldos disponibles, sin bloqueos, sin staking",
+    "50% de reembolso en Claude, Netflix, Spotify y 10 suscripciones más",
+    "Cuenta IBAN personal para recibir salario y transferencias",
   ],
   "brighty-card": [
     "Intereses diarios",
